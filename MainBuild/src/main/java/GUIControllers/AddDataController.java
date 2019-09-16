@@ -7,7 +7,6 @@ import dataHandler.*;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -465,7 +464,7 @@ public class AddDataController extends Controller implements Initializable {
                 dialogStage.show();
 
                 RouteDataHandler handler = new RouteDataHandler(db);
-                Task<Void> task = new CSVImporter(db, file.toString(), handler);
+                CSVImporter task = new CSVImporter(db, file.toString(), handler);
                 controller.activateProgressBar(task);
                 Thread thread = new Thread(task);
                 thread.start();
@@ -531,7 +530,7 @@ public class AddDataController extends Controller implements Initializable {
                 dialogStage.show();
 
                 RetailerDataHandler handler = new RetailerDataHandler(db);
-                Task<Void> task = new CSVImporter(db, file.toString(), handler);
+                CSVImporter task = new CSVImporter(db, file.toString(), handler);
                 controller.activateProgressBar(task);
                 Thread thread = new Thread(task);
                 thread.start();
@@ -597,7 +596,7 @@ public class AddDataController extends Controller implements Initializable {
                 dialogStage.show();
 
                 WifiDataHandler handler = new WifiDataHandler(db);
-                Task<Void> task = new CSVImporter(db, file.toString(), handler);
+                CSVImporter task = new CSVImporter(db, file.toString(), handler);
                 controller.activateProgressBar(task);
                 Thread thread = new Thread(task);
                 thread.start();

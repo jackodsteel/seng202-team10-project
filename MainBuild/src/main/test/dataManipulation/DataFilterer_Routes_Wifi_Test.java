@@ -4,14 +4,12 @@ import dataHandler.*;
 import dataObjects.Cyclist;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ApplicationTest.launch(Main.class);
+        Main.initDB();
 
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
@@ -60,16 +58,14 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         RouteDataHandler routeDataHandler = new RouteDataHandler(db);
 
         ClassLoader loader = DataFilterer_Routes_Wifi_Test.class.getClassLoader();
-        CSVImporter task;
 
-        task = new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler)
+                .enableTestMode().call();
 
-        System.out.println(db.executeQuerySQL("select count(*) from route_information").getInt(1));
-
+        db.executeQuerySQL("select count(*) from route_information").getInt(1);
     }
 
     @After
@@ -85,9 +81,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("18702");
         bikeID.add("17199");
         bikeID.add("19256");
-        Task task = new RouteFiltererTask(db, 0, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db, 0, null, null, null, null,
                 null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), routes.get(i).getBikeID());
@@ -110,9 +106,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("18503");
         bikeID.add("21488");
         bikeID.add("21585");
-        Task task = new RouteFiltererTask(db,2, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,2, null, null, null, null,
                 null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), routes.get(i).getBikeID());
@@ -146,9 +142,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("15517");
         bikeID.add("22211");
 
-        Task task = new RouteFiltererTask(db,1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,1, null, null, null, null,
                 null, null, null, null, this);
-        task.run();
+        task.call();
         for (int i = 0; i < 10; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
         }
@@ -167,9 +163,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("24256");
         bikeID.add("19651");
 
-        Task task = new RouteFiltererTask(db,3, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,3, null, null, null, null,
                 null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -189,9 +185,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("23160");
         bikeID.add("23095");
         bikeID.add("23453");
-        Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016", null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016", null,
                 null, null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -205,9 +201,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("19818");
         bikeID.add("15517");
         bikeID.add("22211");
-        Task task = new RouteFiltererTask(db,-1, "30/01/2016", "31/01/2016", null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "30/01/2016", "31/01/2016", null,
                 null, null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -220,9 +216,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("22285");
         bikeID.add("16498");
-        Task task = new RouteFiltererTask(db,-1, "01/01/2016", "01/01/2016", null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "01/01/2016", "01/01/2016", null,
                 null, null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -237,9 +233,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("19605");
         bikeID.add("23507");
         bikeID.add("20759");
-        Task task = new RouteFiltererTask(db,-1, null, null, "15:36:10",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, "15:36:10",
                 "16:17:39", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++) {
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -251,9 +247,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestTime000000_000100() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("22285");
-        Task task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
                 "00:01:00", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++) {
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -265,9 +261,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestTime230000_245959() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("22211");
-        Task task = new RouteFiltererTask(db,-1, null, null, "23:00:00",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, "23:00:00",
                 "24:59:59", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++) {
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -278,9 +274,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     @Test
     public void filterRoutesTestTime000000_000000() {
         List<String> bikeID = new ArrayList<>();
-        Task task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
                 "00:00:00", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++) {
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -299,9 +295,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("23114");
         bikeID.add("23160");
         bikeID.add("23095");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "broad", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -313,9 +309,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestStartAddress_pershing_square_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("23130");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "pershing square", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -327,9 +323,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestStartAddress_q_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("23130");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "q", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -339,9 +335,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestStartAddress_a_() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "a", null, null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(46 ,  size);
     }
@@ -349,9 +345,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestStartAddress__() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "", null, null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(50 ,  size);
     }
@@ -359,9 +355,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestStartAddress_test_() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "test", null, null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(0 ,  size);
     }
@@ -376,9 +372,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("21639");
         bikeID.add("21488");
         bikeID.add("23557");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "broad", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -391,9 +387,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
         bikeID.add("23114");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "pershing square", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -407,9 +403,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("24256");
         bikeID.add("17199");
         bikeID.add("23114");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "q", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -419,9 +415,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestEndAddress_a_() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "a", null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(43 ,  size);
     }
@@ -429,9 +425,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestEndAddress_test_() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "test", null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(0 ,  size);
     }
@@ -439,9 +435,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestEndAddress__() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "", null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(50 ,  size);
     }
@@ -451,9 +447,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestBikeID_24042_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("24042");
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, "24042", null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -463,9 +459,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestBikeID_0_() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, "", null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(size ,  0);
 
@@ -474,9 +470,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestList_foo() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "foo", this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(size ,  0);
 
@@ -485,9 +481,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestList_test_list() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "test list", this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(size ,  50);
 
@@ -496,9 +492,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestList__() {
-        Task task = new RouteFiltererTask(db,-1, null, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "", this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(size ,  0);
 
@@ -513,9 +509,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("23160");
         bikeID.add("23095");
         bikeID.add("23453");
-        Task task = new RouteFiltererTask(db,1, "10/01/2016", "20/01/2016", null,
+        RouteFiltererTask task = new RouteFiltererTask(db,1, "10/01/2016", "20/01/2016", null,
                 null, null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -527,9 +523,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestGender_2_Time_100000_150000_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("21585");
-        Task task = new RouteFiltererTask(db,2, null, null, "10:00:00",
+        RouteFiltererTask task = new RouteFiltererTask(db,2, null, null, "10:00:00",
                 "15:00:00", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -542,9 +538,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("16278");
         bikeID.add("19240");
-        Task task = new RouteFiltererTask(db,2, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,2, null, null, null,
                 null, "broad", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -556,9 +552,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestGender_3_EndName_pershing_square_south_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
-        Task task = new RouteFiltererTask(db,3, null, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,3, null, null, null,
                 null, null, "Pershing Square South", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -570,9 +566,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestDate_20160101_20160120_Time_100000_150000_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("23453");
-        Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
                 "10:00:00", "15:00:00", null, null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -588,9 +584,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("23114");
         bikeID.add("23160");
         bikeID.add("23095");
-        Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
                 null, null, "broad", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -602,9 +598,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestDate_20160101_20160120_EndAddress_broad_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("19240");
-        Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
                 null, null, null, "broad", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -616,9 +612,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     public void filterRoutesTestDate_20160101_201601200_BikeID_18503_() {
         List<String> bikeID = new ArrayList<>();
         bikeID.add("18503");
-        Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
                 null, null, null, null, "18503", null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -632,9 +628,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("15971");
         bikeID.add("23453");
         bikeID.add("21410");
-        Task task = new RouteFiltererTask(db,-1, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null,
                 "10:00:00", "15:00:00", "st", null, null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -648,9 +644,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         bikeID.add("15971");
         bikeID.add("23453");
         bikeID.add("21585");
-        Task task = new RouteFiltererTask(db,-1, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null,
                 "10:00:00", "15:00:00", null, "ave", null, null, this);
-        task.run();
+        task.call();
         int size = bikeID.size();
         for (int i = 0; i < size; i++){
             assertEquals(bikeID.get(i), (routes.get(i).getBikeID()));
@@ -660,9 +656,9 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     @Test
     public void filterRoutesTestStartAddress_st_EndAddress_ave_() {
-        Task task = new RouteFiltererTask(db,-1, null, null,
+        RouteFiltererTask task = new RouteFiltererTask(db,-1, null, null,
                 null, null, "st", "ave", null, null, this);
-        task.run();
+        task.call();
         int size = routes.size();
         assertEquals(size ,  27);
     }

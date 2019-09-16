@@ -4,13 +4,11 @@ package dataManipulation;
 import dataHandler.*;
 import dataObjects.Cyclist;
 import dataObjects.RetailLocation;
-import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -35,8 +33,8 @@ public class DataFilterer_Retailers_Test {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        ApplicationTest.launch(Main.class);
-        System.out.println("here");
+        Main.initDB();
+
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
@@ -51,9 +49,9 @@ public class DataFilterer_Retailers_Test {
         databaseUser.addUser("Tester", 1, 1, 2017, 1);
 
         RetailerDataHandlerFake handler = new RetailerDataHandlerFake(db);
-        Task<Void> task = new CSVImporter(db, DataFilterer_Retailers_Test.class.getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler);
-        task.run();
-    }
+        new CSVImporter(db, DataFilterer_Retailers_Test.class.getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
+                .enableTestMode().call();
+}
 
     @Test
     public void filterRetailersTestName_Pizza_() {

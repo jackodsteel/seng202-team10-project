@@ -2,7 +2,6 @@ package dataManipulation;
 
 import dataHandler.*;
 import dataObjects.Cyclist;
-import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
 import org.junit.AfterClass;
@@ -10,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 
@@ -32,7 +30,7 @@ public class DeleteDataTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ApplicationTest.launch(Main.class);
+        Main.initDB();
         // creates all needed tables, users and populates tables.
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
@@ -52,21 +50,20 @@ public class DeleteDataTest {
         listDataHandler.addList(testList2);
 
         ClassLoader loader = DatabaseUserTest.class.getClassLoader();
-        Task<Void> task;
 
         WifiDataHandler wifiDataHandler = new WifiDataHandler(db);
         RouteDataHandler routeDataHandler = new RouteDataHandler(db);
         RetailerDataHandlerFake retailDataHandler = new RetailerDataHandlerFake(db);
 
-        task = new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), retailDataHandler);
-        task.run();
-        System.out.println("here");
+        new CSVImporter(db, loader.getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), retailDataHandler)
+                .enableTestMode().call();
+
 
         FavouriteRouteData favouriteRouteData = new FavouriteRouteData(db);
         TakenRoutes takenRoutes = new TakenRoutes(db);

@@ -10,7 +10,6 @@ import main.Main;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class FindNearbyLocationsTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ApplicationTest.launch(Main.class);
+        Main.initDB();
 
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");

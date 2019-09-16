@@ -2,7 +2,6 @@ package dataHandler;
 
 import dataManipulation.AddRouteCallback;
 import dataObjects.Cyclist;
-import javafx.concurrent.Task;
 import main.HandleUsers;
 import org.junit.*;
 import org.mockito.ArgumentCaptor;
@@ -160,21 +159,20 @@ public class DatabaseUserTest {
         l.addList(testList);
 
         ClassLoader loader = DatabaseUserTest.class.getClassLoader();
-        Task<Void> task;
 
         WifiDataHandler wifiDataHandler = new WifiDataHandler(db);
         RouteDataHandler routeDataHandler = new RouteDataHandler(db);
         RetailerDataHandlerFake retailerDataHandler = new RetailerDataHandlerFake(db);
 
-        task = new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), retailerDataHandler);
-        task.run();
-        System.out.println("here");
+        new CSVImporter(db, loader.getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), retailerDataHandler)
+                .enableTestMode().call();
+
 
         databaseUser.addUser("Tester", 1, 1, 2017, 1);
         databaseUser.removeUserFromDatabase("Tester", hu);
@@ -195,6 +193,5 @@ public class DatabaseUserTest {
         assertEquals("0", resultWifi);
         assertEquals("0", resultRetail);
     }
-
 
 }

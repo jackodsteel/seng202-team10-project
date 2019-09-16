@@ -4,16 +4,13 @@ import dataHandler.CSVImporter;
 import dataHandler.RouteDataHandler;
 import dataHandler.SQLiteDB;
 import dataHandler.WifiDataHandler;
-import javafx.concurrent.Task;
 import main.Main;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,9 +28,8 @@ public class UpdateData_Routes_Wifi_Test {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ApplicationTest.launch(Main.class);
+        Main.initDB();
         ClassLoader loader = UpdateData_Routes_Wifi_Test.class.getClassLoader();
-        Task<Void> task;
 
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
@@ -44,18 +40,13 @@ public class UpdateData_Routes_Wifi_Test {
         WifiDataHandler wifiDataHandler = new WifiDataHandler(db);
         RouteDataHandler routeDataHandler = new RouteDataHandler(db);
 
-        task = new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler);
-        task.run();
+        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler);
-        System.out.println(1);
-        task.run();
-        System.out.println(2);
-        try {
-            System.out.println(db.executeQuerySQL("select count(*) from route_information").getInt(1));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler)
+                .enableTestMode().call();
+
+        db.executeQuerySQL("select count(*) from route_information").getInt(1);
     }
 
     @Test

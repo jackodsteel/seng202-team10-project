@@ -21,13 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        db = new SQLiteDB();
-        Geocoder.init();
-        hu = new HandleUsers();
-        hu.init(db);
-        UpdateData.init(db);
-        new DatabaseUser(db);
+        initDB();
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/startUp.fxml"));
 
@@ -40,6 +34,15 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root, 1100, 650));
         primaryStage.show();
+    }
+
+    public static void initDB() {
+        db = new SQLiteDB();
+        Geocoder.init();
+        hu = new HandleUsers();
+        hu.init(db);
+        UpdateData.init(db);
+        new DatabaseUser(db);
     }
 
 }

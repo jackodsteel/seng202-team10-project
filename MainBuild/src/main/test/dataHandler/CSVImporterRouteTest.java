@@ -1,10 +1,8 @@
 package dataHandler;
 
 
-import javafx.concurrent.Task;
 import main.Main;
 import org.junit.*;
-import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
@@ -27,7 +25,7 @@ public class CSVImporterRouteTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ApplicationTest.launch(Main.class);
+        Main.initDB();
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
@@ -45,37 +43,35 @@ public class CSVImporterRouteTest {
 
     @Test
     public void processCSVIncorrectFormat() throws Exception {
-        Task<Void> task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler);
-        task.run();
+        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
+                .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(0, rs.getInt(1));
     }
 
     @Test
     public void processCSVInvalidFile() throws Exception {
-        Task<Void> task = new CSVImporter(db, "NotARealFile.csv", handler);
-        task.run();
+        new CSVImporter(db, "NotARealFile.csv", handler)
+                .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(0, rs.getInt(1));
     }
 
     @Test
     public void processCSVValid() throws Exception {
-        Task<Void> task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler);
-        task.run();
+        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+                .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(50, rs.getInt(1));
     }
 
     @Test
     public void processCSVValidTwice() throws Exception {
-        Task<Void> task;
+        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+                .enableTestMode().call();
 
-        task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler);
-        task.run();
-
-        task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler);
-        task.run();
+        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+                .enableTestMode().call();
 
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(50, rs.getInt(1));
@@ -83,10 +79,10 @@ public class CSVImporterRouteTest {
 
     @Ignore
     @Test
-    public void testImportSpeed() {
-        Task task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata.csv").getFile(), handler);
+    public void testImportSpeed() throws Exception {
+        CSVImporter task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata.csv").getFile(), handler).enableTestMode();
         long startTime = System.currentTimeMillis();
-        task.run();
+        task.call();
 
         long endTime = System.currentTimeMillis();
         long timeTaken = endTime - startTime;
