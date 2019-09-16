@@ -1,8 +1,6 @@
 package main;
 
-import dataHandler.DatabaseUser;
-import dataHandler.Geocoder;
-import dataHandler.SQLiteDB;
+import dataHandler.*;
 import dataManipulation.UpdateData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +41,10 @@ public class Main extends Application {
         hu.init(db);
         UpdateData.init(db);
         new DatabaseUser(db);
+        new TakenRoutes(db);
+        new FavouriteRouteData(db);
+        new FavouriteWifiData(db);
+        new FavouriteRetailData(db);
     }
 
 }
