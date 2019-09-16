@@ -39,7 +39,7 @@ public class FavouritesController extends Controller implements Initializable {
     private GridPane gridPane;
 
     @FXML
-    private TableColumn<Route, String> FavRoutes;
+    private TableView<Route> tableViewRoutes;
 
     @FXML
     private TableColumn<Route, String> StartAddress;
@@ -48,7 +48,7 @@ public class FavouritesController extends Controller implements Initializable {
     private TableColumn<Route, String> Rating;
 
     @FXML
-    private TableColumn<WifiLocation, String> FavWifi;
+    private TableView<WifiLocation> tableViewWifi;
 
     @FXML
     private TableColumn<WifiLocation, String> SSID;
@@ -57,23 +57,13 @@ public class FavouritesController extends Controller implements Initializable {
     private TableColumn<WifiLocation, String> WifiAddress;
 
     @FXML
-    private TableColumn<RetailLocation, String> FavRetailers;
+    private TableView<RetailLocation> tableViewRetailers;
 
     @FXML
     private TableColumn<RetailLocation, String> RetailerName;
 
     @FXML
     private TableColumn<RetailLocation, String> RetailerAddress;
-
-    @FXML
-    private TableView<Route> tableViewRoutes;
-
-    @FXML
-    private TableView<WifiLocation> tableViewWifi;
-
-    @FXML
-    private TableView<RetailLocation> tableViewRetailers;
-
 
     private ObservableList<Route> routeList = FXCollections.observableArrayList();
 
@@ -96,21 +86,18 @@ public class FavouritesController extends Controller implements Initializable {
         StartAddress.setCellValueFactory(new PropertyValueFactory<>("StartAddress"));
         Rating.setCellValueFactory(new PropertyValueFactory<>("Rank"));
         tableViewRoutes.setItems(routeList);
-        tableViewRoutes.getColumns().setAll(FavRoutes);
 
         SSID.setCellValueFactory(new PropertyValueFactory<>("SSID"));
         WifiAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tableViewWifi.setItems(wifiList);
-        tableViewWifi.getColumns().setAll(FavWifi);
 
         RetailerName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         RetailerAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tableViewRetailers.setItems(retailerList);
-        tableViewRetailers.getColumns().setAll(FavRetailers);
 
-        tableViewRoutesSelectionListener();
-        tableViewWifiSelectionListener();
-        tableViewRetailerSelectionListener();
+        setupTableViewSelectionListener(tableViewRoutes);
+        setupTableViewSelectionListener(tableViewWifi);
+        setupTableViewSelectionListener(tableViewRetailers);
     }
 
 
@@ -152,24 +139,19 @@ public class FavouritesController extends Controller implements Initializable {
             frd.deleteFavouriteRetail(tableViewRetailers.getSelectionModel().getSelectedItem(), hu);
             Main.hu.currentCyclist.getFavouriteRetailLocations().remove(tableViewRetailers.getSelectionModel().getSelectedItem());
             retailerList.remove(tableViewRetailers.getSelectionModel().getSelectedItem());
-
-
         } else {
             makeErrorDialogueBox("No favourite selected", "No route was selected to delete." +
                     " You must\nchoose which favourite you want to delete.");
         }
     }
 
-
     /**
-     * tableViewRoutesSelectionListener will deselect the selected cell in tableViewRoutes if the mouse is clicked
-     * anywhere else.
+     * This will enable deselecting a selected cell in the given TableView if the mouse is clicked anywhere else.
      */
-    private void tableViewRoutesSelectionListener() {
-        ObjectProperty<TableRow<Route>> lastSelectedRow = new SimpleObjectProperty<>();
-        tableViewRoutes.setRowFactory(tableView -> {
-            TableRow<Route> row = new TableRow<>();
-
+    private <T> void setupTableViewSelectionListener(TableView<T> tableView) {
+        final ObjectProperty<TableRow<T>> lastSelectedRow = new SimpleObjectProperty<>();
+        tableView.setRowFactory(tv -> {
+            TableRow<T> row = new TableRow<>();
             row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
                 if (isNowSelected) {
                     lastSelectedRow.set(row);
@@ -178,70 +160,11 @@ public class FavouritesController extends Controller implements Initializable {
             return row;
         });
 
-        GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+        gridPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             if (lastSelectedRow.get() != null) {
                 Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
                 if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                    tableViewRoutes.getSelectionModel().clearSelection();
-                }
-            }
-        });
-    }
-
-
-    /**
-     * tableViewRoutesSelectionListener will deselect the selected cell in tableViewWifi if the mouse is clicked
-     * anywhere else.
-     */
-    private void tableViewWifiSelectionListener() {
-        ObjectProperty<TableRow<WifiLocation>> lastSelectedRow = new SimpleObjectProperty<>();
-        tableViewWifi.setRowFactory(tableView -> {
-            TableRow<WifiLocation> row = new TableRow<>();
-
-            row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-                if (isNowSelected) {
-                    lastSelectedRow.set(row);
-                }
-            });
-            return row;
-        });
-
-        GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (lastSelectedRow.get() != null) {
-                Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
-                if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                    tableViewWifi.getSelectionModel().clearSelection();
-                }
-            }
-        });
-    }
-
-
-    /**
-     * tableViewRoutesSelectionListener will deselect the selected cell in tableViewRetailers if the mouse is clicked
-     * anywhere else.
-     */
-    private void tableViewRetailerSelectionListener() {
-        ObjectProperty<TableRow<RetailLocation>> lastSelectedRow = new SimpleObjectProperty<>();
-        tableViewRetailers.setRowFactory(tableView -> {
-            TableRow<RetailLocation> row = new TableRow<>();
-
-            row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-                if (isNowSelected) {
-                    lastSelectedRow.set(row);
-                }
-            });
-            return row;
-        });
-
-        GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (lastSelectedRow.get() != null) {
-                Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
-                if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                    tableViewRetailers.getSelectionModel().clearSelection();
+                    tableView.getSelectionModel().clearSelection();
                 }
             }
         });
