@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles all of the taken routes data for every user in the database.
@@ -92,10 +93,10 @@ public class TakenRoutes {
      * @param hu the current HandleUsers object that is accessing the cyclists information
      * @return up to five of the most recently taken routes in the string format "year month day time|distance"
      */
-    public ArrayList<String> findFiveRecentRoutes(HandleUsers hu) {
+    public List<String> findFiveRecentRoutes(HandleUsers hu) {
         RouteDataHandler rdh = new RouteDataHandler(db);
         ResultSet rs;
-        ArrayList<String> recentRoutes = new ArrayList<>();
+        List<String> recentRoutes = new ArrayList<>();
         rs = db.executeQuerySQL("SELECT start_year, start_month, start_day, start_time, start_time, distance FROM taken_routes " +
                 "WHERE name = '" + hu.currentCyclist.getName() + "' " +
                 "ORDER BY start_year DESC, start_month DESC, start_day DESC, start_time DESC, start_time DESC;");

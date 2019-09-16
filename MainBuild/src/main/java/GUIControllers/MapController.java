@@ -29,7 +29,9 @@ import netscape.javascript.JSObject;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -55,10 +57,10 @@ public class MapController extends Controller implements Initializable, MapCompo
     private GoogleMap map;
     private StringProperty startAddress = new SimpleStringProperty();
     private StringProperty endAddress = new SimpleStringProperty();
-    private ArrayList<Marker> wifiMarkers = new ArrayList<>();
-    private ArrayList<Marker> retailerMarkers = new ArrayList<>();
-    private ArrayList<Marker> tripMarkers = new ArrayList<>();
-    private ArrayList<Polyline> tripLines = new ArrayList<>();
+    private List<Marker> wifiMarkers = new ArrayList<>();
+    private List<Marker> retailerMarkers = new ArrayList<>();
+    private List<Marker> tripMarkers = new ArrayList<>();
+    private List<Polyline> tripLines = new ArrayList<>();
     private DecimalFormat numberFormat = new DecimalFormat("0.00");
     private FindNearbyLocations nearbyFinder;
     private LatLong currentPoint;
@@ -460,7 +462,7 @@ public class MapController extends Controller implements Initializable, MapCompo
             makeErrorDialogueBox("Error", "Please select a point");
         } else {
             boolean newPoint = false;
-            ArrayList<WifiLocation> locations = nearbyFinder.findNearbyWifi(currentPoint.getLatitude(), currentPoint.getLongitude());
+            List<WifiLocation> locations = nearbyFinder.findNearbyWifi(currentPoint.getLatitude(), currentPoint.getLongitude());
             for (WifiLocation location : locations) {
                 if (wifiLocations.add(location)) {
                     renderWifiMarker(location);
@@ -485,7 +487,7 @@ public class MapController extends Controller implements Initializable, MapCompo
             makeErrorDialogueBox("Error", "Please select a point.");
         } else {
             boolean newPoint = false;
-            ArrayList<RetailLocation> locations = nearbyFinder.findNearbyRetail(currentPoint.getLatitude(), currentPoint.getLongitude());
+            List<RetailLocation> locations = nearbyFinder.findNearbyRetail(currentPoint.getLatitude(), currentPoint.getLongitude());
             for (RetailLocation location : locations) {
                 if (retailLocations.add(location)) {
                     renderRetailerMarker(location);

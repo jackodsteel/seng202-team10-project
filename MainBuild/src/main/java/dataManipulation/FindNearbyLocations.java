@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,8 +17,8 @@ import java.util.ArrayList;
  */
 public class FindNearbyLocations {
 
-    private ArrayList<WifiLocation> nearbyWifi = new ArrayList<>();
-    private ArrayList<RetailLocation> nearbyRetail = new ArrayList<>();
+    private List<WifiLocation> nearbyWifi = new ArrayList<>();
+    private List<RetailLocation> nearbyRetail = new ArrayList<>();
     private SQLiteDB db;
 
 
@@ -33,7 +34,7 @@ public class FindNearbyLocations {
 
     /**
      * generateWifiArray takes a result set, rs of wifi data entries from the database, it converts each one into a
-     * WifiLocation object and adds them to and ArrayList.
+     * WifiLocation object and adds them to a List.
      *
      * @param rs result set of data entries from the wifi_location table of the database
      */
@@ -55,7 +56,7 @@ public class FindNearbyLocations {
 
     /**
      * generateRetailArray takes a result set, rs of retail data entries from the database, it converts each one into a
-     * RetailLocation object and adds them to and ArrayList.
+     * RetailLocation object and adds them to a List.
      *
      * @param rs result set of data entries from the retailer table of the database
      */
@@ -99,13 +100,13 @@ public class FindNearbyLocations {
 
     /**
      * findNearbyWifi finds wifi data entries that are nearby the coordinates given as the parameters, lat and lon.
-     * Returns all found wifi entries as WifiLocation objects in an ArrayList.
+     * Returns all found wifi entries as WifiLocation objects in a List.
      *
      * @param lat of type Double. A number describing a latitude value
      * @param lon of type Double. A number describing a longitude value
-     * @return ArrayList<WifiLocation>, contains all results from the query.
+     * @return List<WifiLocation>, contains all results from the query.
      */
-    public ArrayList<WifiLocation> findNearbyWifi(double lat, double lon) {
+    public List<WifiLocation> findNearbyWifi(double lat, double lon) {
 
         double dist = 0.01;
         double fudge = Math.pow(Math.cos(Math.toRadians(lat)), 2);
@@ -131,13 +132,13 @@ public class FindNearbyLocations {
 
     /**
      * findNearbyRetail finds retail data entries that are nearby the coordinates given as the parameters, lat and lon.
-     * Returns all found retail entries as RetailLocation objects in an ArrayList.
+     * Returns all found retail entries as RetailLocation objects in a List.
      *
      * @param lat of type Double. A number describing a latitude value
      * @param lon of type Double. A number describing a longitude value
-     * @return ArrayList<RetailLocation>, contains all results from the query.
+     * @return List<RetailLocation>, contains all results from the query.
      */
-    public ArrayList<RetailLocation> findNearbyRetail(double lat, double lon) {
+    public List<RetailLocation> findNearbyRetail(double lat, double lon) {
 
         double dist = 0.01;
         double fudge = Math.pow(Math.cos(Math.toRadians(lat)), 2);

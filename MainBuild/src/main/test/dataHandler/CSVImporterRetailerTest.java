@@ -8,6 +8,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -77,7 +78,7 @@ public class DataFilterer {
         listCommand = "list_name = ?";
         andCommand = " AND ";
         commandEnd = ";";
-        ArrayList<Route> routes = new ArrayList<>();
+        List<Route> routes = new ArrayList<>();
         filterVariables = new ArrayList<>();
         filterVariableStrings = new ArrayList<>();
         wifiLocations = new ArrayList<>();
@@ -159,7 +160,7 @@ public class DataFilterer {
      * @param list     of type String. It is the list name of the list the user wants to filter by
      * @return ArrayList<WifiLocation>, an ArrayList that contains WifiLocation objects
      */
-    public ArrayList<WifiLocation> filterWifi(String name, String suburb, String type, String provider, String list) {
+    public List<WifiLocation> filterWifi(String name, String suburb, String type, String provider, String list) {
         setVariables();
         int queryLen = 0;
         String queryString = wifiCommand;
@@ -273,7 +274,7 @@ public class DataFilterer {
      * @param list    of type String. It is the list name of the list the user wants to filter by
      * @return ArrayList<RetailLocation>, this is an ArrayList of RetailLocations objects
      */
-    public ArrayList<RetailLocation> filterRetailers(String name, String address, String primary, int zip, String list) {
+    public List<RetailLocation> filterRetailers(String name, String address, String primary, int zip, String list) {
         setVariables();
         int queryLen = 0;
         String queryString = retailerCommand;

@@ -7,6 +7,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -156,7 +157,7 @@ public class HelperFunctions {
      * @return the total distance the cyclist has travelled
      */
     public static double calculateDistanceCycled(Cyclist cyclist) {
-        ArrayList<Route> takenList = new ArrayList<>();
+        List<Route> takenList = new ArrayList<>();
         takenList.addAll(cyclist.getTakenRoutes());
         double distanceCycled = 0;
         for (Route route : takenList) {
@@ -173,7 +174,7 @@ public class HelperFunctions {
      * @return average distance travelled
      */
     public static double cacluateAverageDistance(Cyclist cyclist, HandleUsers hu) {
-        ArrayList<Route> takenList = new ArrayList<>();
+        List<Route> takenList = new ArrayList<>();
         takenList.addAll(hu.currentCyclist.getTakenRoutes());
         double averageDistance = 0;
         if (takenList.size() == 0) { // Avoid divide by 0 error.
@@ -192,7 +193,7 @@ public class HelperFunctions {
      * @return shortest distance out of all taken routes
      */
     public static double calculateShortestRoute(Cyclist cyclist) {
-        ArrayList<Route> takenList = new ArrayList<>();
+        List<Route> takenList = new ArrayList<>();
         takenList.addAll(cyclist.getTakenRoutes());
         double shortestDistance = 9999999; // No routes will be of a size greater than this.
         for (int i = 0; i < cyclist.getTakenRoutes().size(); i++) {
@@ -211,7 +212,7 @@ public class HelperFunctions {
      * @return shortest distance out of all taken routes
      */
     public static double calculateLongestRoute(Cyclist cyclist) {
-        ArrayList<Route> takenList = new ArrayList<>();
+        List<Route> takenList = new ArrayList<>();
         takenList.addAll(cyclist.getTakenRoutes());
         double longestDistance = -1;
         for (Route route : takenList) {

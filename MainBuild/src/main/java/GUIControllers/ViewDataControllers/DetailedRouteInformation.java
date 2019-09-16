@@ -6,7 +6,6 @@ import dataHandler.SQLiteDB;
 import dataManipulation.DeleteData;
 import dataObjects.Route;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ import main.Main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.scene.paint.Color.*;
@@ -95,7 +94,7 @@ public class DetailedRouteInformation extends RouteDataViewerController {
     public void initialize(URL location, ResourceBundle resources) {
         db = Main.getDB();
         listDataHandler = new ListDataHandler(db, Main.hu.currentCyclist.getName());
-        ArrayList<String> listNames = listDataHandler.getLists();
+        List<String> listNames = listDataHandler.getLists();
         list.getItems().addAll(listNames);
 
         currentRoute = RouteDataViewerController.getRoute();
@@ -139,7 +138,7 @@ public class DetailedRouteInformation extends RouteDataViewerController {
         listListener();
 
         list.getEditor().setOnMouseClicked(event -> {
-            ArrayList<String> lists = listDataHandler.getLists();
+            List<String> lists = listDataHandler.getLists();
             if (!lists.contains(currentRoute.getListName()) && currentRoute.getListName() != null) {
                 makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
                         "list and\ncannot be changed");
@@ -196,7 +195,7 @@ public class DetailedRouteInformation extends RouteDataViewerController {
      */
     @FXML
     void checkIfEditable() {
-        ArrayList<String> lists = listDataHandler.getLists();
+        List<String> lists = listDataHandler.getLists();
         if (!lists.contains(currentRoute.getListName()) && currentRoute.getListName() != null) {
             makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
                     "list and\ncannot be changed");

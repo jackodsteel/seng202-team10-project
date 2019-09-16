@@ -29,7 +29,7 @@ import main.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static dataObjects.Cyclist.name;
@@ -89,7 +89,7 @@ public class AddDataController extends Controller implements Initializable {
      * populates the list combobox.
      */
     public void initListComboboxes() {
-        ArrayList<String> listNames = listDataHandler.getLists();
+        List<String> listNames = listDataHandler.getLists();
         listInput.getItems().clear();
         listInput.getItems().addAll(listNames);
         manualListInput.getItems().clear();

@@ -9,7 +9,6 @@ import dataObjects.Route;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
@@ -29,6 +27,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.scene.paint.Color.GREEN;
@@ -98,7 +97,7 @@ public class RouteDataViewerController extends DataViewerController implements A
 
     private ObservableList<Route> routeList = FXCollections.observableArrayList();
 
-    private ArrayList<Route> routes = new ArrayList<>();
+    private List<Route> routes = new ArrayList<>();
 
     static public Route getRoute() {
         return route;
@@ -117,11 +116,7 @@ public class RouteDataViewerController extends DataViewerController implements A
      */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            initialiseEditListener();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        initialiseEditListener();
         SQLiteDB db = Main.getDB();
         try {
             ResultSet rs = db.executeQuerySQL("SELECT list_name FROM lists");
@@ -538,7 +533,7 @@ public class RouteDataViewerController extends DataViewerController implements A
     }
 
     @Override
-    public void addRoutes(ArrayList<Route> routes) {
+    public void addRoutes(List<Route> routes) {
         routeList.addAll(routes);
     }
 }

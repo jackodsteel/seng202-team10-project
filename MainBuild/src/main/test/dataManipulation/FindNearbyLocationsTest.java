@@ -15,6 +15,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -86,15 +87,15 @@ public class FindNearbyLocationsTest {
     }
 
     /**
-     * Helper function that takes a lat long and runs FindNearbyLocations, and converts the ArrayList of Retailer objects to an ArrayList of distances
+     * Helper function that takes a lat long and runs FindNearbyLocations, and converts the List of Retailer objects to a List of distances
      * @param lat
      * @param lon
-     * @return ArrayList<Double> of the distances of the returned route, in same order
+     * @return list of the distances of the returned route, in same order
      */
-    private ArrayList<Double> getRetailerDistances(double lat, double lon) {
-        ArrayList<Double> distances = new ArrayList<>();
+    private List<Double> getRetailerDistances(double lat, double lon) {
+        List<Double> distances = new ArrayList<>();
         FindNearbyLocations nearbyLocations = new FindNearbyLocations(db);
-        ArrayList<RetailLocation> retailers = nearbyLocations.findNearbyRetail(lat, lon);
+        List<RetailLocation> retailers = nearbyLocations.findNearbyRetail(lat, lon);
         for (RetailLocation retailer : retailers) {
             distances.add(HelperFunctions.getDistance(lat, lon, retailer.getLatitude(), retailer.getLongitude()));
         }
@@ -102,15 +103,15 @@ public class FindNearbyLocationsTest {
     }
 
     /**
-     * Helper function that takes a lat long and runs FindNearbyLocations, and converts the ArrayList of Wifi objects to an ArrayList of distances
+     * Helper function that takes a lat long and runs FindNearbyLocations, and converts the List of Wifi objects to a List of distances
      * @param lat
      * @param lon
-     * @return ArrayList<Double> of the distances of the returned route, in same order
+     * @return list of the distances of the returned route, in same order
      */
-    private ArrayList<Double> getWifiDistances(double lat, double lon) {
-        ArrayList<Double> distances = new ArrayList<>();
+    private List<Double> getWifiDistances(double lat, double lon) {
+        List<Double> distances = new ArrayList<>();
         FindNearbyLocations nearbyLocations = new FindNearbyLocations(db);
-        ArrayList<WifiLocation> wifi = nearbyLocations.findNearbyWifi(lat, lon);
+        List<WifiLocation> wifi = nearbyLocations.findNearbyWifi(lat, lon);
         for (WifiLocation wifiLocation : wifi) {
             distances.add(HelperFunctions.getDistance(lat, lon, wifiLocation.getLatitude(), wifiLocation.getLongitude()));
         }
@@ -123,13 +124,13 @@ public class FindNearbyLocationsTest {
         double lat = 0.001;
         double lon = 0.001;
 
-        ArrayList<Double> wifiDistances = getWifiDistances(lat, lon);
-        ArrayList<Double> retailDistance = getRetailerDistances(lat, lon);
+        List<Double> wifiDistances = getWifiDistances(lat, lon);
+        List<Double> retailDistance = getRetailerDistances(lat, lon);
 
-        ArrayList<Double> sortedWifi = new ArrayList<>(wifiDistances);
+        List<Double> sortedWifi = new ArrayList<>(wifiDistances);
         Collections.sort(sortedWifi);
 
-        ArrayList<Double> sortedRetail = new ArrayList<>(retailDistance);
+        List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
         assertTrue(wifiDistances.equals(sortedWifi));
@@ -142,13 +143,13 @@ public class FindNearbyLocationsTest {
         double lat = 0.001;
         double lon = -0.001;
 
-        ArrayList<Double> wifiDistances = getWifiDistances(lat, lon);
-        ArrayList<Double> retailDistance = getRetailerDistances(lat, lon);
+        List<Double> wifiDistances = getWifiDistances(lat, lon);
+        List<Double> retailDistance = getRetailerDistances(lat, lon);
 
-        ArrayList<Double> sortedWifi = new ArrayList<>(wifiDistances);
+        List<Double> sortedWifi = new ArrayList<>(wifiDistances);
         Collections.sort(sortedWifi);
 
-        ArrayList<Double> sortedRetail = new ArrayList<>(retailDistance);
+        List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
         assertTrue(wifiDistances.equals(sortedWifi));
@@ -161,13 +162,13 @@ public class FindNearbyLocationsTest {
         double lat = -0.001;
         double lon = 0.001;
 
-        ArrayList<Double> wifiDistances = getWifiDistances(lat, lon);
-        ArrayList<Double> retailDistance = getRetailerDistances(lat, lon);
+        List<Double> wifiDistances = getWifiDistances(lat, lon);
+        List<Double> retailDistance = getRetailerDistances(lat, lon);
 
-        ArrayList<Double> sortedWifi = new ArrayList<>(wifiDistances);
+        List<Double> sortedWifi = new ArrayList<>(wifiDistances);
         Collections.sort(sortedWifi);
 
-        ArrayList<Double> sortedRetail = new ArrayList<>(retailDistance);
+        List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
         assertTrue(wifiDistances.equals(sortedWifi));
@@ -179,13 +180,13 @@ public class FindNearbyLocationsTest {
         double lat = -0.001;
         double lon = -0.001;
 
-        ArrayList<Double> wifiDistances = getWifiDistances(lat, lon);
-        ArrayList<Double> retailDistance = getRetailerDistances(lat, lon);
+        List<Double> wifiDistances = getWifiDistances(lat, lon);
+        List<Double> retailDistance = getRetailerDistances(lat, lon);
 
-        ArrayList<Double> sortedWifi = new ArrayList<>(wifiDistances);
+        List<Double> sortedWifi = new ArrayList<>(wifiDistances);
         Collections.sort(sortedWifi);
 
-        ArrayList<Double> sortedRetail = new ArrayList<>(retailDistance);
+        List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
         assertTrue(wifiDistances.equals(sortedWifi));

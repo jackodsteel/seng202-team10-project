@@ -8,6 +8,7 @@ import org.junit.*;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -91,10 +92,10 @@ public class TakenRoutesTest {
                 "00:00:00", "10000", 1, hu);
         takenRoutes.addTakenRoute("Tester", "2016", "01", "04",
                 "00:00:00", "10000", 1, hu);
-        ArrayList<String> result = takenRoutes.findFiveRecentRoutes(hu);
+        List<String> result = takenRoutes.findFiveRecentRoutes(hu);
 
         // Setting up the expected result.
-        ArrayList<String> expected = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
         expected.add("2016 01 06 00:00:00|1.0");
         expected.add("2016 01 05 00:00:00|1.0");
         expected.add("2016 01 04 00:00:00|1.0");
@@ -108,8 +109,8 @@ public class TakenRoutesTest {
         RouteDataHandler rdh = new RouteDataHandler(db);
         takenRoutes.addTakenRoute("Tester", "2016", "01", "01",
                 "00:00:00", "10000", 1, hu);
-        ArrayList<String> result = takenRoutes.findFiveRecentRoutes(hu);
-        ArrayList<String> expected = new ArrayList<>();
+        List<String> result = takenRoutes.findFiveRecentRoutes(hu);
+        List<String> expected = new ArrayList<>();
         expected.add("2016 01 01 00:00:00|1.0");
 
         assertEquals(expected, result);
@@ -117,8 +118,8 @@ public class TakenRoutesTest {
 
     @Test
     public void findFiveRecentRoutesEmpty() {
-        ArrayList<String> result = takenRoutes.findFiveRecentRoutes(hu);
-        ArrayList<String> expected = new ArrayList<>();
+        List<String> result = takenRoutes.findFiveRecentRoutes(hu);
+        List<String> expected = new ArrayList<>();
         assertEquals(expected, result);
     }
 }

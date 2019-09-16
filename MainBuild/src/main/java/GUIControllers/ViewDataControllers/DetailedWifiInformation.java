@@ -6,19 +6,17 @@ import dataHandler.SQLiteDB;
 import dataManipulation.DeleteData;
 import dataObjects.WifiLocation;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.scene.paint.Color.*;
@@ -75,7 +73,7 @@ public class DetailedWifiInformation extends DataViewerController {
     public void initialize(URL location, ResourceBundle resources) {
         db = Main.getDB();
         listDataHandler = new ListDataHandler(db, Main.hu.currentCyclist.getName());
-        ArrayList<String> listNames = listDataHandler.getLists();
+        List<String> listNames = listDataHandler.getLists();
         list.getItems().addAll(listNames);
 
         currentWifi = WifiDataViewerController.getWifi();
@@ -102,7 +100,7 @@ public class DetailedWifiInformation extends DataViewerController {
         listListener();
 
         list.getEditor().setOnMouseClicked(event -> {
-            ArrayList<String> lists = listDataHandler.getLists();
+            List<String> lists = listDataHandler.getLists();
             if (!lists.contains(currentWifi.getListName()) && currentWifi.getListName() != null) {
                 makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
                         "list and\ncannot be changed");
@@ -151,7 +149,7 @@ public class DetailedWifiInformation extends DataViewerController {
      */
     @FXML
     void checkIfEditable() {
-        ArrayList<String> lists = listDataHandler.getLists();
+        List<String> lists = listDataHandler.getLists();
         if (!lists.contains(currentWifi.getListName()) && currentWifi.getListName() != null) {
             makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
                     "list and\ncannot be changed");

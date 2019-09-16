@@ -14,6 +14,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -57,9 +58,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestName_Pizza_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
 
-        retailLocations = dataFilterer.filterRetailers("pizza", null, null, -1, null);
+        List<RetailLocation> retailLocations = dataFilterer.filterRetailers("pizza", null, null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 2);
     }
@@ -68,8 +68,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestName__() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        retailLocations = dataFilterer.filterRetailers("", null, null, -1, null);
+        List<RetailLocation> retailLocations = dataFilterer.filterRetailers("", null, null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 50);
     }
@@ -78,8 +77,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress_broad_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        retailLocations = dataFilterer.filterRetailers(null, "broad", null, -1, null);
+        List<RetailLocation> retailLocations = dataFilterer.filterRetailers(null, "broad", null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 8);
     }
@@ -88,7 +86,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress_a_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "a", null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 38);
@@ -98,7 +96,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress_q_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "q", null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 1);
@@ -108,7 +106,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress__() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "", null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 50);
@@ -118,8 +116,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestPrimary_Nightlife_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("The Iron Horse");
         retailName.add("The Hook & Ladder Bar");
         retailLocations = dataFilterer.filterRetailers(null, null, "Nightlife", -1, null);
@@ -133,8 +131,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestPrimary_Casual_Eating_Takeout_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        retailLocations = dataFilterer.filterRetailers(null, null, "Casual Eating & Takeout", -1, null);
+        List<RetailLocation> retailLocations = dataFilterer.filterRetailers(null, null, "Casual Eating & Takeout", -1, null);
         int size = retailLocations.size();
         assertTrue(size == 19);
     }
@@ -142,8 +139,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestPrimary__() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailLocations = dataFilterer.filterRetailers(null, null, "", -1, null);
         int size = retailLocations.size();
         assertTrue(size == 50);
@@ -153,8 +150,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestZip_10005_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Eastern Newsstands");
         retailName.add("Fed Ex Kinko's");
         retailName.add("Hale and Hearty Soup");
@@ -171,7 +168,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestZip_10038_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, 10038, null);
         int size = retailLocations.size();
         assertTrue(size == 24);
@@ -181,8 +178,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestZip_99999999_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailLocations = dataFilterer.filterRetailers(null, null, null, 99999999, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
@@ -194,8 +191,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestZip_0_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailLocations = dataFilterer.filterRetailers(null, null, null, 0, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
@@ -207,7 +204,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestList_foo() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "foo");
         int size = retailLocations.size();
         assertTrue(size == 0);
@@ -217,7 +214,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestList_test_list() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "test list");
         int size = retailLocations.size();
         assertTrue(size == 50);
@@ -227,7 +224,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestList__() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "");
         int size = retailLocations.size();
         assertTrue(size == 0);
@@ -237,8 +234,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestName_soup_Zip_10005_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Hale and Hearty Soup");
         retailLocations = dataFilterer.filterRetailers("soup", null, null, 10005, null);
         int size = retailName.size();
@@ -251,7 +248,7 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestName_cafe_Address_broad_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
+        List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers("cafe", "broad", null, -1, null);
         int size = retailLocations.size();
         assertTrue(size == 2);
@@ -261,8 +258,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestName_burrito_Primary_Causal_eating_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Burritoville");
         retailLocations = dataFilterer.filterRetailers("burrito", null, "Casual Eating & Takeout", -1, null);
         int size = retailName.size();
@@ -275,8 +272,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress_broad_Primary_Causal_eating_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Variety Cafe On Broadway");
         retailName.add("Bento Nouveau Sushi");
         retailName.add("McDonald's");
@@ -292,8 +289,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestAddress_b_Zip_10004_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Trader's Cafe");
         retailName.add("Perfect Copy Center");
         retailName.add("New York Lottery");
@@ -310,8 +307,8 @@ public class DataFilterer_Retailers_Test {
     @Test
     public void filterRetailersTestPrimary_shopping_Zip_10007_() {
         DataFilterer dataFilterer = new DataFilterer(db);
-        ArrayList<RetailLocation> retailLocations;
-        ArrayList<String> retailName = new ArrayList();
+        List<RetailLocation> retailLocations;
+        List<String> retailName = new ArrayList<>();
         retailName.add("Duane Reade");
         retailName.add("AT&T");
         retailLocations = dataFilterer.filterRetailers(null, null, "Shopping", 10007, null);

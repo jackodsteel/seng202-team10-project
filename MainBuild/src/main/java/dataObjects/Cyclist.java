@@ -4,6 +4,7 @@ import dataHandler.*;
 import main.HandleUsers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,10 +15,10 @@ public class Cyclist {
     static public String name;
     static private int birthDay, birthMonth, birthYear;
     static private int gender;   // gender either 0 other, 1 male, or 2 female.
-    private ArrayList<Route> favouriteRouteList = new ArrayList<>();
-    private ArrayList<RetailLocation> favouriteRetailLocations = new ArrayList<>();
-    private ArrayList<WifiLocation> favouriteWifiLocations = new ArrayList<>();
-    private ArrayList<Route> takenRoutesList = new ArrayList<>();
+    private List<Route> favouriteRouteList = new ArrayList<>();
+    private List<RetailLocation> favouriteRetailLocations = new ArrayList<>();
+    private List<WifiLocation> favouriteWifiLocations = new ArrayList<>();
+    private List<Route> takenRoutesList = new ArrayList<>();
 
     public Cyclist() {
     }
@@ -74,19 +75,19 @@ public class Cyclist {
         birthYear = year;
     }
 
-    public ArrayList<WifiLocation> getFavouriteWifiLocations() {
+    public List<WifiLocation> getFavouriteWifiLocations() {
         return favouriteWifiLocations;
     }
 
-    public ArrayList<RetailLocation> getFavouriteRetailLocations() {
+    public List<RetailLocation> getFavouriteRetailLocations() {
         return favouriteRetailLocations;
     }
 
-    public ArrayList<Route> getFavouriteRouteList() {
+    public List<Route> getFavouriteRouteList() {
         return favouriteRouteList;
     }
 
-    public ArrayList<Route> getTakenRoutes() {return takenRoutesList;}
+    public List<Route> getTakenRoutes() {return takenRoutesList;}
 
 
     /**

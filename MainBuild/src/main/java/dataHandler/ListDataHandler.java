@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ListDataHandler creates the lists table in the database and adds list details to the table.
@@ -75,12 +76,12 @@ public class ListDataHandler {
     }
 
     /**
-     * Creates a ArrayList of all the lists that the user had created.
+     * Creates a List of all the lists that the user had created.
      *
-     * @return lists of type ArrayList
+     * @return list of Strings
      */
-    public ArrayList getLists() {
-        ArrayList<String> lists = new ArrayList<>();
+    public List<String> getLists() {
+        List<String> lists = new ArrayList<>();
         System.out.println(userName);
         try {
             ResultSet rs = db.executeQuerySQL("SELECT list_name FROM lists WHERE list_owner = '" + userName + "';");
@@ -100,21 +101,18 @@ public class ListDataHandler {
      * @param listName type String. The name of the new list to be added to the database.
      */
     public void addList(String listName) {
-        if (listName == null) {
+        if (listName == null || listName.equals("")) {
             return;
-        } else if (listName.equals("")) {
-            return;
-        } else {
-            try {
-                String addListCommand = "insert or fail into lists values(?,?)";
-                PreparedStatement pstmt = db.getPreparedStatement(addListCommand);
-                pstmt.setString(1, listName);
-                pstmt.setString(2, userName);
-                pstmt.executeUpdate();
-                db.commit();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        }
+        try {
+            String addListCommand = "insert or fail into lists values(?,?)";
+            PreparedStatement pstmt = db.getPreparedStatement(addListCommand);
+            pstmt.setString(1, listName);
+            pstmt.setString(2, userName);
+            pstmt.executeUpdate();
+            db.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

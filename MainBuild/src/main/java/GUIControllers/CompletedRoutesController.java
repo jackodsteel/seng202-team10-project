@@ -22,6 +22,7 @@ import main.Main;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -69,7 +70,7 @@ public class CompletedRoutesController extends Controller implements Initializab
     @FXML
     private TableColumn<Route, String> completedRoutes;
 
-    private ArrayList<Route> routeList = new ArrayList<>();
+    private List<Route> routeList = new ArrayList<>();
     private ObservableList<Route> routeListObservable = FXCollections.observableArrayList();
 
 
@@ -135,7 +136,7 @@ public class CompletedRoutesController extends Controller implements Initializab
 
 
         TakenRoutes t = new TakenRoutes(Main.getDB());
-        ArrayList<String> recentRoutes = t.findFiveRecentRoutes(Main.hu);
+        List<String> recentRoutes = t.findFiveRecentRoutes(Main.hu);
         XYChart.Series<String,Number> series1 = new XYChart.Series();
 
         if (recentRoutes.size() >= 3) {

@@ -4,7 +4,7 @@ import main.HandleUsers;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles all of the user data, ensuring that each username is unique when adding names.
@@ -93,7 +93,7 @@ public class DatabaseUser {
      */
     public void removeUserFromDatabase(String username, HandleUsers hu) {
         ListDataHandler listDataHandler = new ListDataHandler(db, hu.currentCyclist.getName());
-        ArrayList<String> userLists = listDataHandler.getLists();
+        List<String> userLists = listDataHandler.getLists();
         for (String userList : userLists) {
             db.executeQuerySQL("UPDATE route_information SET list_name = null WHERE list_name = '" + userList + "';");
             db.executeQuerySQL("UPDATE wifi_location SET list_name = null WHERE list_name = '" + userList + "';");

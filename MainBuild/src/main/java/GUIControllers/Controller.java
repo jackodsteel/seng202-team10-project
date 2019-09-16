@@ -23,6 +23,7 @@ import main.Main;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class Controller {
@@ -283,7 +284,7 @@ public abstract class Controller {
      */
     @FXML
     public void openRouteRankStage(Route routeToAdd, String name) {
-        ArrayList<Integer> a = new ArrayList<>();
+        List<Integer> a = new ArrayList<>();
         a.add(5);
         a.add(4);
         a.add(3);

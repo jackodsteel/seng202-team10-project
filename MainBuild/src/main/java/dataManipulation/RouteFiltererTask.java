@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,8 +29,8 @@ public class RouteFiltererTask extends Task<Void> {
     private String andCommand;
     private String commandEnd;
 
-    private ArrayList<Integer> filterVariables;
-    private ArrayList<String> filterVariableStrings;
+    private List<Integer> filterVariables;
+    private List<String> filterVariableStrings;
 
 
     private SQLiteDB db;
@@ -126,7 +127,7 @@ public class RouteFiltererTask extends Task<Void> {
 
 
     /**
-     * generates ArrayList of Routes using the results from the Result Set.
+     * generates List of Routes using the results from the Result Set.
      *
      * @param rs Result Set of Routes from database
      * @param callback
@@ -134,7 +135,7 @@ public class RouteFiltererTask extends Task<Void> {
     private void generateRoutesWithCallback(ResultSet rs, AddRouteCallback callback) {
         try {
             int scalefactor = 1;
-            ArrayList<Route> routes = new ArrayList<>();
+            List<Route> routes = new ArrayList<>();
             while (rs.next()) {
                 if (isCancelled()) {
                     routes.clear();
@@ -283,7 +284,7 @@ public class RouteFiltererTask extends Task<Void> {
 
 
     /**
-     * setQueryParameters takes a PreparedStatement as a parameter and uses the values in class ArrayList variables,
+     * setQueryParameters takes a PreparedStatement as a parameter and uses the values in class List variables,
      * filterVariables and filterVariableStrings, to set the parameters of the PreparedStatement.
      *
      * @param pstmt of type PreparedStatement. This is the query statement to be called to the database

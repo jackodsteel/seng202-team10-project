@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.List;
 
 import static main.Main.hu;
 import static org.junit.Assert.assertEquals;
@@ -104,7 +104,7 @@ public class ListDataHandlerTest {
 
     @Test
     public void getLists() {
-        ArrayList<String> lists = listDataHandler.getLists();
+        List<String> lists = listDataHandler.getLists();
         assertTrue(lists.contains("test list"));
     }
 }
