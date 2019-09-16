@@ -98,7 +98,7 @@ public class RouteDataViewerController extends DataViewerController implements A
 
     private ObservableList<Route> routeList = FXCollections.observableArrayList();
 
-    private ArrayList<Route> routes = new ArrayList<Route>();
+    private ArrayList<Route> routes = new ArrayList<>();
 
     static public Route getRoute() {
         return route;
@@ -160,24 +160,20 @@ public class RouteDataViewerController extends DataViewerController implements A
 
     /**
      * Starts listener for double clicking an item in the table.
-     * @throws IOException Handles errors caused by an fxml not loading correctly
      */
-    private void initialiseEditListener() throws IOException {
-        tableView.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                    try {
-                        ActionEvent ae = new ActionEvent(event.getSource(), null);
-                        editData(ae);
-                    } catch (IOException e) {
-                        //do nothing
-                        System.out.println("Failed to load detailed route information scene");
-                    }
-
-                } else {
-                    System.out.println("j");
+    private void initialiseEditListener() {
+        tableView.setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                try {
+                    ActionEvent ae = new ActionEvent(event.getSource(), null);
+                    editData(ae);
+                } catch (IOException e) {
+                    //do nothing
+                    System.out.println("Failed to load detailed route information scene");
                 }
+
+            } else {
+                System.out.println("j");
             }
         });
     }
@@ -188,10 +184,9 @@ public class RouteDataViewerController extends DataViewerController implements A
      * of data.
      *
      * @param event Created when the method is called
-     * @throws IOException Handles errors caused by an fxml not loading correctly
      */
     @FXML
-    void displayData(ActionEvent event) throws IOException {
+    void displayData(ActionEvent event) {
 
         int gender = checkGenderInput();
         String[] dates = checkIfDateInputValid();
@@ -364,7 +359,7 @@ public class RouteDataViewerController extends DataViewerController implements A
      * Adds the route to the users favourites list if it is not already in their favourites, otherwise it
      * creates an error dialogue box telling them it has already been added to their favourites.
      */
-    public void addFavouriteRoute(ActionEvent event) throws IOException {
+    public void addFavouriteRoute(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() == null) {
             makeSuccessDialogueBox("Select which route to add.", "");
         } else {
@@ -383,7 +378,7 @@ public class RouteDataViewerController extends DataViewerController implements A
     /**
      * Adds the selected route to the completed routes.---------------------------------test
      */
-    public void addTakenRoute(ActionEvent event)  throws IOException {
+    public void addTakenRoute(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() == null) {
             makeSuccessDialogueBox("Select a route to add.", "");
         } else {

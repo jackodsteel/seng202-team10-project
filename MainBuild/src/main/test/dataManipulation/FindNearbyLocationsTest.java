@@ -119,7 +119,7 @@ public class FindNearbyLocationsTest {
 
 
     @Test
-    public void FindNearbyPosPos() throws Exception {
+    public void FindNearbyPosPos() {
         double lat = 0.001;
         double lon = 0.001;
 
@@ -138,7 +138,7 @@ public class FindNearbyLocationsTest {
 
 
     @Test
-    public void FindNearbyPosNeg() throws Exception {
+    public void FindNearbyPosNeg() {
         double lat = 0.001;
         double lon = -0.001;
 
@@ -157,7 +157,7 @@ public class FindNearbyLocationsTest {
 
 
     @Test
-    public void FindNearbyNegPos() throws Exception {
+    public void FindNearbyNegPos() {
         double lat = -0.001;
         double lon = 0.001;
 
@@ -175,7 +175,7 @@ public class FindNearbyLocationsTest {
     }
 
     @Test
-    public void FindNearbyNegNeg() throws Exception {
+    public void FindNearbyNegNeg() {
         double lat = -0.001;
         double lon = -0.001;
 

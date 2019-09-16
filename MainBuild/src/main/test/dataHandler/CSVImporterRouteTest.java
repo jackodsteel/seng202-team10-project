@@ -34,12 +34,12 @@ public class CSVImporterRouteTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE route_information");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         handler = new RouteDataHandler(db);
     }
 
@@ -83,7 +83,7 @@ public class CSVImporterRouteTest {
 
     @Ignore
     @Test
-    public void testImportSpeed() throws Exception {
+    public void testImportSpeed() {
         Task task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata.csv").getFile(), handler);
         long startTime = System.currentTimeMillis();
         task.run();

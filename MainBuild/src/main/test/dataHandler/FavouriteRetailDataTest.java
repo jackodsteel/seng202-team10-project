@@ -27,7 +27,7 @@ public class FavouriteRetailDataTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());        hu = new HandleUsers();
@@ -37,12 +37,12 @@ public class FavouriteRetailDataTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE favourite_retail");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         favouriteRetailData = new FavouriteRetailData(db);
     }
 

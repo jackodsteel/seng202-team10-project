@@ -4,9 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class WifiDataHandler implements DataHandler {
-    private SQLiteDB db;
 
-    private String[] fields =
+    private static final String[] fields =
             {"WIFI_ID    VARCHAR(20) NOT NULL",
                     "COST       VARCHAR(12)",
                     "PROVIDER   VARCHAR(20)",
@@ -19,9 +18,10 @@ public class WifiDataHandler implements DataHandler {
                     "SUBURB     VARCHAR(20)",
                     "ZIP        VARCHAR(8)",
                     "list_name  VARCHAR(25)"};
+    private static final String primaryKey = "WIFI_ID";
+    private static final String tableName = "wifi_location";
 
-    private String primaryKey = "WIFI_ID";
-    private String tableName = "wifi_location";
+    private final SQLiteDB db;
 
     private PreparedStatement addData;
     private String addDataStatement = "insert or fail into wifi_location values(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -42,7 +42,7 @@ public class WifiDataHandler implements DataHandler {
     /**
      * Processes a CSV line and adds to the database if valid.
      *
-     * @param record A string array of object corresponding to the CSV
+     * @param record   A string array of object corresponding to the CSV
      * @param callback Used to callback a bool stating the success state of the process.
      */
     public void processLine(String[] record, Callback callback) {

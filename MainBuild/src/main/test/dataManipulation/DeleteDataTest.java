@@ -95,7 +95,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRouteDeletionStatus_in_other_user_list() throws Exception {
+    public void checkRouteDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
         int deletionStatus = deleteData.checkRouteDeletionStatus("18:02:29", "03", "01",
                 "2016", "18702");
@@ -104,7 +104,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRouteDeletionStatus_in_other_user_fav() throws Exception {
+    public void checkRouteDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkRouteDeletionStatus("00:00:41", "01", "01",
                 "2016", "22285");
@@ -113,7 +113,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRouteDeletionStatus_in_other_user_completed() throws Exception {
+    public void checkRouteDeletionStatus_in_other_user_completed() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkRouteDeletionStatus("00:26:55", "01", "01",
                 "2016", "16498");
@@ -122,7 +122,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRouteDeletionStatus_clear_to_delete() throws Exception {
+    public void checkRouteDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkRouteDeletionStatus("18:15:55", "03", "01",
                 "2016", "21416");
@@ -152,7 +152,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkWifiDeletionStatus_in_other_user_list() throws Exception {
+    public void checkWifiDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
         int deletionStatus = deleteData.checkWifiDeletionStatus("3");
         assertEquals(1, deletionStatus);
@@ -160,7 +160,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkWifiDeletionStatus_in_other_user_fav() throws Exception {
+    public void checkWifiDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkWifiDeletionStatus("998");
         assertEquals(2, deletionStatus);
@@ -168,7 +168,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkWifiDeletionStatus_clear_to_delete() throws Exception {
+    public void checkWifiDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkWifiDeletionStatus("1020");
         assertEquals(0, deletionStatus);
@@ -191,7 +191,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRetailDeletionStatus_in_other_user_list() throws Exception {
+    public void checkRetailDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
         int deletionStatus = deleteData.checkRetailDeletionStatus("Yip's Oriental Express",
                 "136 William Street");
@@ -200,7 +200,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRetailDeletionStatus_in_other_user_fav() throws Exception {
+    public void checkRetailDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkRetailDeletionStatus("Starbucks Coffee",
                 "3 New York Plaza");
@@ -209,7 +209,7 @@ public class DeleteDataTest {
 
 
     @Test
-    public void checkRetailDeletionStatus_clear_to_delete() throws Exception {
+    public void checkRetailDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
         int deletionStatus = deleteData.checkRetailDeletionStatus("WirelessRUS",
                 "200 Water Street");

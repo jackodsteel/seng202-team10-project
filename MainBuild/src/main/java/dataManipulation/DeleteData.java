@@ -45,7 +45,7 @@ public class DeleteData {
                 "start_day = ? AND start_month = ? AND start_year = ? AND name = ?;";
         String deleteRouteCompleted = "DELETE FROM taken_routes WHERE bikeid = ? AND start_time = ? AND " +
                 "start_day = ? AND start_month = ? AND start_year = ? AND name = ?;";
-        String deleteCommands[] = {deleteRouteString, deleteRouteFavourite, deleteRouteCompleted};
+        String[] deleteCommands = {deleteRouteString, deleteRouteFavourite, deleteRouteCompleted};
 
         try {
             for (int i = 0; i < numLists; i++) {

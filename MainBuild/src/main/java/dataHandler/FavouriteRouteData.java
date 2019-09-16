@@ -11,17 +11,19 @@ import java.sql.SQLException;
  */
 public class FavouriteRouteData {
 
-    private SQLiteDB db;
-    private String[] fields =
-            {"name         VARCHAR(12)",
-                    "start_year   VARCHAR(4)",
-                    "start_month  VARCHAR(2)",
-                    "start_day    VARCHAR(2)",
-                    "start_time   VARCHAR(19)",
-                    "bikeid       VARCHAR(20)",
-                    "rank         INTEGER"};
-    private String primaryKey = "name, start_year, start_month, start_day, start_time, bikeid";
-    private String tableName = "favourite_routes";
+    private static final String[] fields = {
+            "name         VARCHAR(12)",
+            "start_year   VARCHAR(4)",
+            "start_month  VARCHAR(2)",
+            "start_day    VARCHAR(2)",
+            "start_time   VARCHAR(19)",
+            "bikeid       VARCHAR(20)",
+            "rank         INTEGER"};
+    private static final String primaryKey = "name, start_year, start_month, start_day, start_time, bikeid";
+    private static final String tableName = "favourite_routes";
+
+    private final SQLiteDB db;
+
     private PreparedStatement addRoute;
     private String addRouteStatement = "insert or fail into favourite_routes values(?,?,?,?,?,?,?)";
 
@@ -73,8 +75,9 @@ public class FavouriteRouteData {
 
     /**
      * Deletes the given route from the favourite_routes table.
+     *
      * @param route the route to be deleted
-     * @param hu the current HandleUsers object that is accessing the cyclists information
+     * @param hu    the current HandleUsers object that is accessing the cyclists information
      */
     public void deleteFavouriteRoute(Route route, HandleUsers hu) {
         db.executeQuerySQL("DELETE FROM favourite_routes WHERE name = '" + hu.currentCyclist.name + "' " +

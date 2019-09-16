@@ -22,30 +22,30 @@ public class CSVImporterTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE route_information");
         db.executeUpdateSQL("DROP TABLE retailer");
         db.executeUpdateSQL("DROP TABLE wifi_location");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
     }
 
     @Test
-    public void call() throws Exception {
+    public void call() {
 
     }
 
     @Test
-    public void result() throws Exception {
+    public void result() {
 
     }
 

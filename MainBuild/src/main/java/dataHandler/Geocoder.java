@@ -45,8 +45,8 @@ public class Geocoder {
         results = GeocodingApi.geocode(context, address).await();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        Double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
-        Double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
+        double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
+        double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
         return new double[]{lat, lon};
     }
 

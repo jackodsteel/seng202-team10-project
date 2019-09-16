@@ -30,19 +30,19 @@ public class RetailerDataHandlerTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE retailer");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         retailerDataHandler = new RetailerDataHandlerFake(db);
     }
 
@@ -53,13 +53,13 @@ public class RetailerDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntry() throws Exception {
+    public void addSingleEntry() {
         Boolean success = retailerDataHandler.addSingleEntry("name", "address", 0.0, 0.0, "city", "state", "zip", "type1", "type2");
         assertTrue(success);
     }
 
     @Test
-    public void addSingleEntryAlreadyExists() throws Exception {
+    public void addSingleEntryAlreadyExists() {
         retailerDataHandler.addSingleEntry("name", "address", 0.0, 0.0, "city", "state", "zip", "type1", "type2");
         Boolean success = retailerDataHandler.addSingleEntry("name", "address", 0.0, 0.0, "city", "state", "zip", "type1", "type2");
 
@@ -67,13 +67,13 @@ public class RetailerDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntryNullPrimaryKeys() throws Exception {
+    public void addSingleEntryNullPrimaryKeys() {
         Boolean success = retailerDataHandler.addSingleEntry(null, "address", 0.0, 0.0, "city", "state", "zip", "type1", "type2");
         assertFalse(success);
     }
 
     @Test
-    public void processLineValidOld() throws Exception {
+    public void processLineValidOld() {
 
         String[] list = {"Starbucks Coffee","3 New York Plaza","","New York","NY","10004","8-32","Casual Eating & Takeout","F-Coffeehouse"};
         CSVImporter importer = mock(CSVImporter.class);
@@ -82,7 +82,7 @@ public class RetailerDataHandlerTest {
     }
 
     @Test
-    public void processLineValidNew() throws Exception {
+    public void processLineValidNew() {
 
         String[] list = {"New York Health & Racquet Club","39 Whitehall Street","","New York","NY","10004","Aug-32","Personal and Professional Services","P-Athletic Clubs/Fitness","MANHATTAN","40.703037","-74.012969","1","1","9","1087700","1000087501","Battery Park City-Lower Manhattan"};
         CSVImporter importer = mock(CSVImporter.class);
@@ -91,7 +91,7 @@ public class RetailerDataHandlerTest {
     }
 
     @Test
-    public void processLineInvalidFieldCount() throws Exception {
+    public void processLineInvalidFieldCount() {
         String[] list = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         CSVImporter importer = mock(CSVImporter.class);
         retailerDataHandler.processLine(list, importer);

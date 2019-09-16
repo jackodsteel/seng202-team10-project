@@ -30,19 +30,19 @@ public class RouteDataHandlerTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE route_information");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         routeDataHandler = new RouteDataHandler(db);
     }
 
@@ -53,7 +53,7 @@ public class RouteDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntry() throws Exception {
+    public void addSingleEntry() {
         Boolean success = routeDataHandler.addSingleEntry(5,
                 "2017", "01", "01", "00:00:00",
                 "2017", "01", "01", "00:05:00",
@@ -64,7 +64,7 @@ public class RouteDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntryAlreadyExists() throws Exception {
+    public void addSingleEntryAlreadyExists() {
         routeDataHandler.addSingleEntry(5,
                 "2017", "01", "01", "00:00:00",
                 "2017", "01", "01", "00:05:00",
@@ -82,7 +82,7 @@ public class RouteDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntryNullPrimaryKeys() throws Exception {
+    public void addSingleEntryNullPrimaryKeys() {
         Boolean success = routeDataHandler.addSingleEntry(5,
                 null, "01", "01", "00:00:00",
                 "2017", "01", "01", "00:05:00",
@@ -93,7 +93,7 @@ public class RouteDataHandlerTest {
     }
 
     @Test
-    public void processLineValid() throws Exception {
+    public void processLineValid() {
 
         String[] list = {"349","1/4/2016 15:45:52","1/4/2016 15:51:41","305","E 58 St & 3 Ave","40.76095756","-73.96724467","510","W 51 St & 6 Ave","40.7606597","-73.98042047","23483","Subscriber","1983","1"};
         CSVImporter importer = mock(CSVImporter.class);
@@ -102,7 +102,7 @@ public class RouteDataHandlerTest {
     }
 
     @Test
-    public void processLineTooShort() throws Exception {
+    public void processLineTooShort() {
         String[] list = {"349","1/4/2016 15:45:52","1/4/2016 15:51:41","305","E 58 St & 3 Ave","40.76095756","-73.96724467","510","W 51 St & 6 Ave","40.7606597","-73.98042047","23483","Subscriber","1983"};
         CSVImporter importer = mock(CSVImporter.class);
         routeDataHandler.processLine(list, importer);

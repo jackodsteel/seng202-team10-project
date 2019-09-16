@@ -11,19 +11,22 @@ import java.sql.SQLException;
  */
 public class FavouriteRetailData {
 
-    private SQLiteDB db;
-    private String[] fields =
-            {"name         VARCHAR(12)",
-                    "RETAILER_NAME    VARCHAR(50) NOT NULL",
-                    "ADDRESS            VARCHAR(50)"};
-    private String primaryKey = "name, RETAILER_NAME, ADDRESS";
-    private String tableName = "favourite_retail";
+    private static final String[] fields = {
+            "name               VARCHAR(12)",
+            "RETAILER_NAME      VARCHAR(50) NOT NULL",
+            "ADDRESS            VARCHAR(50)"};
+    private static final String primaryKey = "name, RETAILER_NAME, ADDRESS";
+    private static final String tableName = "favourite_retail";
+
+    private final SQLiteDB db;
+
     private PreparedStatement addRetail;
     private String addRetailStatement = "insert or fail into favourite_retail values(?,?,?)";
 
 
     /**
      * Initializes the database when creating an instance of the FavouriteRetailData.
+     *
      * @param db database the retail data is added to
      */
     public FavouriteRetailData(SQLiteDB db) {
@@ -35,6 +38,7 @@ public class FavouriteRetailData {
 
     /**
      * Adds the given name, retail name and address to the table.
+     *
      * @param name        name of the user
      * @param retail_name name of the retail store
      * @param address     address of the retail store
@@ -55,8 +59,9 @@ public class FavouriteRetailData {
 
     /**
      * Deletes the given store from the database.
+     *
      * @param store retail store to be deleted
-     * @param hu the current HandleUsers object that is accessing the cyclists information
+     * @param hu    the current HandleUsers object that is accessing the cyclists information
      */
     public void deleteFavouriteRetail(RetailLocation store, HandleUsers hu) {
         db.executeQuerySQL("DELETE FROM favourite_retail WHERE name = '" + hu.currentCyclist.name + "' AND RETAILER_NAME = '" + store.getName() + "' " +

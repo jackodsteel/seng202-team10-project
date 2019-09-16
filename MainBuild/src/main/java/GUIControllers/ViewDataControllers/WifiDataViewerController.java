@@ -120,21 +120,17 @@ public class WifiDataViewerController extends DataViewerController {
 
     /**
      * Starts listener for double clicking an item in the table.
-     * @throws IOException Handles errors caused by an fxml not loading correctly
      */
-    private void initialiseEditListener() throws IOException {
-        tableView.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                    try {
-                        ActionEvent ae = new ActionEvent(event.getSource(), null);
-                        editData(ae);
-                    } catch (IOException e) {
-                        //do nothing
-                    }
-
+    private void initialiseEditListener() {
+        tableView.setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                try {
+                    ActionEvent ae = new ActionEvent(event.getSource(), null);
+                    editData(ae);
+                } catch (IOException e) {
+                    //do nothing
                 }
+
             }
         });
     }

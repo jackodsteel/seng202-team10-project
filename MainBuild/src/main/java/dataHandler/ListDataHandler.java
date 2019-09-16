@@ -10,13 +10,16 @@ import java.util.ArrayList;
  */
 public class ListDataHandler {
 
+    private static final String tableName = "lists";
+    private static final String[] tableFields = {
+            "list_name    VARCHAR(50)",
+            "list_owner   VARCHAR(12)"};
+    private static final String primaryKey = "list_name";
+
     private static String listName;
-    private SQLiteDB db;
+    private final SQLiteDB db;
+
     private String userName;
-    private String tableName = "lists";
-    private String[] tableFields = {"list_name    VARCHAR(50)",
-                                    "list_owner   VARCHAR(12)"};
-    private String primaryKey = "list_name";
     private String addListCommand = "insert or fail into lists values(?,?)";
 
 
@@ -41,25 +44,6 @@ public class ListDataHandler {
         return listName;
     }
 
-
-    /**
-     * checks name of list to be created hasn't all ready been created by another user.
-     */
-    public boolean checkListName(String listName) {
-        try {
-            ResultSet rs = db.executeQuerySQL("SELECT list_name FROM lists WHERE list_owner != '" + userName + "';");
-            while (rs.next()) {
-                if (rs.getString("list_name").equals(listName)) {
-                    return true;
-                }
-            }
-        }catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
-    }
-
-
     /**
      * sets the listName variable to the given name.
      *
@@ -73,6 +57,22 @@ public class ListDataHandler {
         }
     }
 
+    /**
+     * checks name of list to be created hasn't all ready been created by another user.
+     */
+    public boolean checkListName(String listName) {
+        try {
+            ResultSet rs = db.executeQuerySQL("SELECT list_name FROM lists WHERE list_owner != '" + userName + "';");
+            while (rs.next()) {
+                if (rs.getString("list_name").equals(listName)) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 
     /**
      * Creates a ArrayList of all the lists that the user had created.
@@ -103,9 +103,10 @@ public class ListDataHandler {
         if (listName == null) {
             return;
         } else if (listName.equals("")) {
-           return;
+            return;
         } else {
             try {
+                String addListCommand = "insert or fail into lists values(?,?)";
                 PreparedStatement pstmt = db.getPreparedStatement(addListCommand);
                 pstmt.setString(1, listName);
                 pstmt.setString(2, userName);

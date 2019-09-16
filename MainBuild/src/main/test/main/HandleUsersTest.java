@@ -20,7 +20,7 @@ public class HandleUsersTest {
     private HandleUsers hu;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         currentCyclist = new Cyclist("Tester");
         hu = new HandleUsers();
         hu.init(db);
@@ -40,10 +40,9 @@ public class HandleUsersTest {
      * This creates SQL errors in the command line about missing tables in the database. Dropping all of these tables at
      * the end of each test makes it clearer on what the individual tests are actually doing. The
      * "missing table" messages can be ignored as they are not created for each test.
-     * @throws Exception
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE route_information");
         db.executeUpdateSQL("DROP TABLE wifi_location");
         db.executeUpdateSQL("DROP TABLE retailer");
@@ -65,10 +64,9 @@ public class HandleUsersTest {
     /**
      * Testing the user logged into has had their currentCyclist object created. Valid favourites of the user is being
      * tested below.
-     * @throws Exception
      */
     @Test
-    public void logIn() throws Exception {
+    public void logIn() {
         RouteDataHandler rdh = new RouteDataHandler(db);
         WifiDataHandler wdh = new WifiDataHandler(db);
         RetailerDataHandler rDh = new RetailerDataHandler(db);
@@ -85,7 +83,7 @@ public class HandleUsersTest {
     }
 
     @Test
-    public void getUserDetailsBirthDetails() throws Exception {
+    public void getUserDetailsBirthDetails() {
         DatabaseUser d = new DatabaseUser(db);
         Cyclist testCyclist = new Cyclist();
         testCyclist.setBirthday(0, 0, 0);
@@ -96,7 +94,7 @@ public class HandleUsersTest {
 
 
     @Test
-    public void getUserDetailsGender() throws Exception {
+    public void getUserDetailsGender() {
         DatabaseUser d = new DatabaseUser(db);
         Cyclist testCyclist = new Cyclist();
         testCyclist.setBirthday(0, 0, 0);
@@ -109,10 +107,9 @@ public class HandleUsersTest {
      * Creating a test route and then adding parameters with identical values to the database. The method is then
      * called and compared to test equality of the newly found route and the test route. There are no other side cases
      * as routes can only have been added to a users taken routes list if they already existed in the database.
-     * @throws Exception
      */
     @Test
-    public void getUserTakenRoutes() throws Exception {
+    public void getUserTakenRoutes() {
 
         RouteDataHandler rdh = new RouteDataHandler(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
@@ -138,10 +135,9 @@ public class HandleUsersTest {
      * Creating a test route and then adding parameters with identical values to the database. The method is then
      * called and compared to test equality of the newly found route and the test route. There are no other side cases
      * as routes can only have been added to a users favourite route list if they already existed in the database.
-     * @throws Exception
      */
     @Test
-    public void getUserRouteFavourites() throws Exception {
+    public void getUserRouteFavourites() {
 
         RouteDataHandler rdh = new RouteDataHandler(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
@@ -168,10 +164,9 @@ public class HandleUsersTest {
      * Creating a test wifi hotspot and then adding parameters with identical values to the database. The method is then
      * called and compared to test equality of the newly found hotspot and the test hotspot. There are no other side cases
      * as wifi hotspots can only have been added to a users favourite wifi list if they already existed in the database.
-     * @throws Exception
      */
     @Test
-    public void getUserWifiFavourites() throws Exception {
+    public void getUserWifiFavourites() {
         // Init WifiDataHandler and add an entry.
         WifiDataHandler wdh = new WifiDataHandler(db);
         WifiLocation testWifi = new WifiLocation("1", 0.0, 0.0, "1 Test Street", "Guest",
@@ -195,10 +190,9 @@ public class HandleUsersTest {
      * Creating a test retail store and then adding parameters with identical values to the database. The method is then
      * called and compared to test equality of the newly found retailer and the test retailer. There are no other side cases
      * as retail stores can only have been added to a users favourite retail list if they already existed in the database.
-     * @throws Exception
      */
     @Test
-    public void getUserRetailFavourites() throws Exception {
+    public void getUserRetailFavourites() {
 
         // Init RetailerDataHandler and add an entry.
         RetailerDataHandler rdh = new RetailerDataHandler(db);
@@ -219,10 +213,9 @@ public class HandleUsersTest {
 
     /**
      * Testing the currentCyclist is equal to null when logged out.
-     * @throws Exception
      */
     @Test
-    public void logOutOfUser() throws Exception {
+    public void logOutOfUser() {
         RouteDataHandler rdh = new RouteDataHandler(db);
         WifiDataHandler wdh = new WifiDataHandler(db);
         RetailerDataHandler rDh = new RetailerDataHandler(db);
@@ -241,10 +234,9 @@ public class HandleUsersTest {
 
     /**
      * Testing the created users username is correctly set to the currentCyclist.
-     * @throws Exception
      */
     @Test
-    public void createNewUser1() throws Exception {
+    public void createNewUser1() {
         RouteDataHandler rdh = new RouteDataHandler(db);
         WifiDataHandler wdh = new WifiDataHandler(db);
         RetailerDataHandler rDh = new RetailerDataHandler(db);
@@ -284,13 +276,13 @@ public class HandleUsersTest {
     }
 
     @Test
-    public void convertGender1() throws Exception {
+    public void convertGender1() {
         int result = hu.convertGender("Male");
         assertEquals(1, result);
     }
 
     @Test
-    public void convertGender2() throws Exception {
+    public void convertGender2() {
         int result = hu.convertGender("Other");
         assertEquals(0, result);
     }

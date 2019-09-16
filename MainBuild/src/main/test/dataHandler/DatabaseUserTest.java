@@ -29,7 +29,7 @@ public class DatabaseUserTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
@@ -39,7 +39,7 @@ public class DatabaseUserTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE users;");
         db.executeQuerySQL("DROP TABLE taken_routes;");
         db.executeQuerySQL("DROP TABLE favourite_routes;");
@@ -49,7 +49,7 @@ public class DatabaseUserTest {
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         databaseUser = new DatabaseUser(db);
     }
 

@@ -19,7 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class ListDataHandlerTest {
     private static ListDataHandler listDataHandler;
     private static SQLiteDB db;
-    private static String userName;
 
 
     @AfterClass
@@ -31,7 +30,7 @@ public class ListDataHandlerTest {
 
 
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    public static void setUpBeforeClass() {
         System.out.println("here");
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
@@ -40,7 +39,7 @@ public class ListDataHandlerTest {
         hu = new HandleUsers();
         hu.init(db);
         hu.currentCyclist = new Cyclist("Tester");
-        userName = hu.currentCyclist.getName();
+        String userName = hu.currentCyclist.getName();
         listDataHandler = new ListDataHandler(db, "test name");
         ListDataHandler.setListName("test list");
 
@@ -50,7 +49,7 @@ public class ListDataHandlerTest {
     }
 
     @Test
-    public void getListName_setListName() throws Exception {
+    public void getListName_setListName() {
         String string1 = "test list 1";
         String string2 = "test list 2";
         ListDataHandler.setListName(string1);
@@ -87,7 +86,7 @@ public class ListDataHandlerTest {
 
 
     @Test
-    public void checkListName_created_by_current_user() throws Exception {
+    public void checkListName_created_by_current_user() {
         listDataHandler.addList("check list name");
         boolean result = listDataHandler.checkListName("check list name");
         assertTrue(!result);
@@ -95,7 +94,7 @@ public class ListDataHandlerTest {
 
 
     @Test
-    public void checkListName_created_by_other_user() throws Exception {
+    public void checkListName_created_by_other_user() {
         ListDataHandler listDataHandler2 = new ListDataHandler(db, "Tester 2");
         listDataHandler2.addList("test list 2");
         boolean result = listDataHandler.checkListName("test list 2");
@@ -104,7 +103,7 @@ public class ListDataHandlerTest {
 
 
     @Test
-    public void getLists() throws Exception {
+    public void getLists() {
         ArrayList<String> lists = listDataHandler.getLists();
         assertTrue(lists.contains("test list"));
     }

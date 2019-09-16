@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.sql.ResultSet;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Using fake retailerdatahandler as mocks were really complicated as Geocoder is static
@@ -37,12 +36,12 @@ public class CSVImporterRetailerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE retailer");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         handler = new RetailerDataHandlerFake(db);
     }
 

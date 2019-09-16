@@ -17,7 +17,7 @@ public class CyclistTest {
     private HandleUsers hu;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         testCyclist = new Cyclist("Tester");
         hu = new HandleUsers();
         hu.init(db);
@@ -32,7 +32,7 @@ public class CyclistTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE route_information");
         db.executeUpdateSQL("DROP TABLE wifi_location");
         db.executeUpdateSQL("DROP TABLE retailer");
@@ -87,7 +87,7 @@ public class CyclistTest {
 
 
     @Test
-    public void routeAlreadyInFavouritesListFalse() throws Exception {
+    public void routeAlreadyInFavouritesListFalse() {
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",
@@ -98,7 +98,7 @@ public class CyclistTest {
 
 
     @Test
-    public void routeAlreadyInFavouritesListTrue() throws Exception {
+    public void routeAlreadyInFavouritesListTrue() {
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",
@@ -109,7 +109,7 @@ public class CyclistTest {
     }
 
     @Test
-    public void routeAlreadyInTakenListFalse() throws Exception {
+    public void routeAlreadyInTakenListFalse() {
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",
@@ -119,7 +119,7 @@ public class CyclistTest {
     }
 
     @Test
-    public void routeAlreadyInTakenListTrue() throws Exception {
+    public void routeAlreadyInTakenListTrue() {
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",

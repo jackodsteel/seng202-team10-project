@@ -7,22 +7,21 @@ import java.sql.SQLException;
 
 public class RetailerDataHandler implements DataHandler, GeoCallback {
 
-    private SQLiteDB db;
+    private static final String[] fields = {
+            "RETAILER_NAME      VARCHAR(50) NOT NULL",
+            "ADDRESS            VARCHAR(50) NOT NULL",
+            "LAT                NUMERIC(9,6) NOT NULL",
+            "LONG               NUMERIC(9,6) NOT NULL",
+            "CITY               VARCHAR(20)",
+            "STATE              VARCHAR(2)",
+            "ZIP                VARCHAR(8)",
+            "Main_Type          VARCHAR(50)",
+            "Secondary_Type     VARCHAR(50)",
+            "list_name          VARCHAR(25)"};
+    private static final String primaryKey = "RETAILER_NAME, ADDRESS";
+    private static final String tableName = "retailer";
 
-    private String[] fields =
-            {"RETAILER_NAME      VARCHAR(50) NOT NULL",
-                    "ADDRESS            VARCHAR(50) NOT NULL",
-                    "LAT                NUMERIC(9,6) NOT NULL",
-                    "LONG               NUMERIC(9,6) NOT NULL",
-                    "CITY               VARCHAR(20)",
-                    "STATE              VARCHAR(2)",
-                    "ZIP                VARCHAR(8)",
-                    "Main_Type          VARCHAR(50)",
-                    "Secondary_Type     VARCHAR(50)",
-                    "list_name          VARCHAR(25)"};
-
-    private String primaryKey = "RETAILER_NAME, ADDRESS";
-    private String tableName = "retailer";
+    private final SQLiteDB db;
 
     private PreparedStatement addData;
     private String addDataStatement = "insert or fail into retailer values(?,?,?,?,?,?,?,?,?,?)";
@@ -45,7 +44,7 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
      * Has the ability to handle the new and old format of CSV from data.gov
      * To add support for a new format, just add some extra checks, and if there is a different number of fields, add that number to the fieldCounts list
      *
-     * @param record A string array of object corresponding to the CSV
+     * @param record   A string array of object corresponding to the CSV
      * @param callback The callback function to return the success value to
      */
     public void processLine(String[] record, Callback callback) {
@@ -74,7 +73,8 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
 
     /**
      * Querys the database using a perepared statement with the primary keys to check if there is an existing entry.
-     * @param name Retailer Name
+     *
+     * @param name    Retailer Name
      * @param address Retailer Address
      * @return A boolean based on an entry being present
      */
@@ -139,7 +139,7 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
 
     @Override
     public boolean canProcess(int columnCount) {
-        for (int count: fieldCounts) {
+        for (int count : fieldCounts) {
             if (columnCount == count) {
                 return true;
             }
@@ -149,9 +149,9 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
 
     @Override
     public String getFieldCounts() {
-        String out = "";
-        for (int count: fieldCounts) {
-            out += Integer.toString(count) + " or ";
+        StringBuilder out = new StringBuilder();
+        for (int count : fieldCounts) {
+            out.append(count).append(" or ");
         }
         return out.substring(0, out.length() - 4);
     }

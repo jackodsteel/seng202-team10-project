@@ -30,19 +30,19 @@ public class WifiDataHandlerTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE wifi_location");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         wifiDataHandler = new WifiDataHandler(db);
     }
 
@@ -53,13 +53,13 @@ public class WifiDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntry() throws Exception {
+    public void addSingleEntry() {
         Boolean success = wifiDataHandler.addSingleEntry("ID", "cost", "provider", "address", 0.0, 0.0, "remarks", "city", "ssid", "suburb", "zip");
         assertTrue(success);
     }
 
     @Test
-    public void addSingleEntryAlreadyExists() throws Exception {
+    public void addSingleEntryAlreadyExists() {
         wifiDataHandler.addSingleEntry("ID", "cost", "provider", "address", 0.0, 0.0, "remarks", "city", "ssid", "suburb", "zip");
         Boolean success = wifiDataHandler.addSingleEntry("ID", "cost", "provider", "address", 0.0, 0.0, "remarks", "city", "ssid", "suburb", "zip");
 
@@ -67,13 +67,13 @@ public class WifiDataHandlerTest {
     }
 
     @Test
-    public void addSingleEntryNullPrimaryKeys() throws Exception {
+    public void addSingleEntryNullPrimaryKeys() {
         Boolean success = wifiDataHandler.addSingleEntry(null, "cost", "provider", "address", 0.0, 0.0, "remarks", "city", "ssid", "suburb", "zip");
         assertFalse(success);
     }
 
     @Test
-    public void processLineValid() throws Exception {
+    public void processLineValid() {
         String[] list = {"998","POINT (-73.99403913047428 40.745968480330795)","MN","Free","LinkNYC - Citybridge","mn-05-123662","179 WEST 26 STREET","40.745968","-73.994039","985901.695307","211053.130644","Outdoor Kiosk","Tablet Internet -phone "," Free 1 GB Wi-FI Service","New York","LinkNYC Free Wi-Fi","LINK-008695","01/18/2017 12:00:00 AM +0000","1","Manhattan","MN17","Midtown-Midtown South","3","10001","105","95","1009500","0","0","1425"};
         CSVImporter importer = mock(CSVImporter.class);
         wifiDataHandler.processLine(list, importer);

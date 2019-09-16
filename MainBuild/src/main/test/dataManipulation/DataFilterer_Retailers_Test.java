@@ -22,9 +22,6 @@ public class DataFilterer_Retailers_Test {
 
 
     private static SQLiteDB db;
-    private static ListDataHandler listDataHandler;
-    private static HandleUsers hu;
-    private static DatabaseUser databaseUser;
 
 
     @AfterClass
@@ -43,13 +40,13 @@ public class DataFilterer_Retailers_Test {
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
 
-        hu = new HandleUsers();
+        HandleUsers hu = new HandleUsers();
         hu.init(db);
         hu.currentCyclist = new Cyclist("Tester");
-        listDataHandler = new ListDataHandler(db, "test name");
+        ListDataHandler listDataHandler = new ListDataHandler(db, "test name");
         ListDataHandler.setListName("test list");
 
-        databaseUser = new DatabaseUser(db);
+        DatabaseUser databaseUser = new DatabaseUser(db);
         databaseUser.addUser("Tester", 1, 1, 2017, 1);
 
         RetailerDataHandlerFake handler = new RetailerDataHandlerFake(db);
@@ -58,7 +55,7 @@ public class DataFilterer_Retailers_Test {
     }
 
     @Test
-    public void filterRetailersTestName_Pizza_() throws Exception {
+    public void filterRetailersTestName_Pizza_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
 
@@ -69,7 +66,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestName__() throws Exception {
+    public void filterRetailersTestName__() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers("", null, null, -1, null);
@@ -79,7 +76,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress_broad_() throws Exception {
+    public void filterRetailersTestAddress_broad_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "broad", null, -1, null);
@@ -89,7 +86,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress_a_() throws Exception {
+    public void filterRetailersTestAddress_a_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "a", null, -1, null);
@@ -99,7 +96,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress_q_() throws Exception {
+    public void filterRetailersTestAddress_q_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "q", null, -1, null);
@@ -109,7 +106,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress__() throws Exception {
+    public void filterRetailersTestAddress__() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "", null, -1, null);
@@ -119,7 +116,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestPrimary_Nightlife_() throws Exception {
+    public void filterRetailersTestPrimary_Nightlife_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -134,7 +131,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestPrimary_Casual_Eating_Takeout_() throws Exception {
+    public void filterRetailersTestPrimary_Casual_Eating_Takeout_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, "Casual Eating & Takeout", -1, null);
@@ -143,7 +140,7 @@ public class DataFilterer_Retailers_Test {
     }
 
     @Test
-    public void filterRetailersTestPrimary__() throws Exception {
+    public void filterRetailersTestPrimary__() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -154,7 +151,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestZip_10005_() throws Exception {
+    public void filterRetailersTestZip_10005_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -172,7 +169,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestZip_10038_() throws Exception {
+    public void filterRetailersTestZip_10038_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, 10038, null);
@@ -182,7 +179,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestZip_99999999_() throws Exception {
+    public void filterRetailersTestZip_99999999_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -195,7 +192,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestZip_0_() throws Exception {
+    public void filterRetailersTestZip_0_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -208,7 +205,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestList_foo() throws Exception {
+    public void filterRetailersTestList_foo() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "foo");
@@ -218,7 +215,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestList_test_list() throws Exception {
+    public void filterRetailersTestList_test_list() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "test list");
@@ -228,7 +225,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestList__() throws Exception {
+    public void filterRetailersTestList__() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "");
@@ -238,7 +235,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestName_soup_Zip_10005_() throws Exception {
+    public void filterRetailersTestName_soup_Zip_10005_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -252,7 +249,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestName_cafe_Address_broad_() throws Exception {
+    public void filterRetailersTestName_cafe_Address_broad_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers("cafe", "broad", null, -1, null);
@@ -262,7 +259,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestName_burrito_Primary_Causal_eating_() throws Exception {
+    public void filterRetailersTestName_burrito_Primary_Causal_eating_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -276,7 +273,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress_broad_Primary_Causal_eating_() throws Exception {
+    public void filterRetailersTestAddress_broad_Primary_Causal_eating_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -293,7 +290,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestAddress_b_Zip_10004_() throws Exception {
+    public void filterRetailersTestAddress_b_Zip_10004_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();
@@ -311,7 +308,7 @@ public class DataFilterer_Retailers_Test {
 
 
     @Test
-    public void filterRetailersTestPrimary_shopping_Zip_10007_() throws Exception {
+    public void filterRetailersTestPrimary_shopping_Zip_10007_() {
         DataFilterer dataFilterer = new DataFilterer(db);
         ArrayList<RetailLocation> retailLocations;
         ArrayList<String> retailName = new ArrayList();

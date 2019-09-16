@@ -100,7 +100,6 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Text fx:id="address" />
                         <Text fx:id="address" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </HBox>

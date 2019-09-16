@@ -29,7 +29,6 @@ import netscape.javascript.JSObject;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
@@ -48,21 +47,18 @@ public class MapController extends Controller implements Initializable, MapCompo
     protected DirectionsService directionsService;
     protected DirectionsPane directionsPane;
     protected DirectionsRenderer directionsRenderer;
-    private double STARTLAT = 40.745968;
-    private double STARTLON = -73.994039;
     @FXML
     private Button nearbyWifiButton;
     @FXML
     private Button nearbyRetailerButton;
-    private GeocodingService geocodingService;
 
     private GoogleMap map;
     private StringProperty startAddress = new SimpleStringProperty();
     private StringProperty endAddress = new SimpleStringProperty();
-    private ArrayList<Marker> wifiMarkers = new ArrayList<Marker>();
-    private ArrayList<Marker> retailerMarkers = new ArrayList<Marker>();
-    private ArrayList<Marker> tripMarkers = new ArrayList<Marker>();
-    private ArrayList<Polyline> tripLines = new ArrayList<Polyline>();
+    private ArrayList<Marker> wifiMarkers = new ArrayList<>();
+    private ArrayList<Marker> retailerMarkers = new ArrayList<>();
+    private ArrayList<Marker> tripMarkers = new ArrayList<>();
+    private ArrayList<Polyline> tripLines = new ArrayList<>();
     private DecimalFormat numberFormat = new DecimalFormat("0.00");
     private FindNearbyLocations nearbyFinder;
     private LatLong currentPoint;
@@ -81,11 +77,13 @@ public class MapController extends Controller implements Initializable, MapCompo
     @Override
     public void mapInitialized() {
         System.out.println("Init");
-        geocodingService = new GeocodingService();
+        GeocodingService geocodingService = new GeocodingService();
         MapOptions mapOptions = new MapOptions();
 
         currentInfoWindow = new InfoWindow();
 
+        double STARTLON = -73.994039;
+        double STARTLAT = 40.745968;
         mapOptions.center(new LatLong(STARTLAT, STARTLON))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)

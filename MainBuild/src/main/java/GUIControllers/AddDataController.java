@@ -61,9 +61,6 @@ public class AddDataController extends Controller implements Initializable {
     private JFXCheckBox addToFavourites, addToCompletedRoutes;
 
     private SQLiteDB db;
-    private RetailerDataHandler retailerDataHandler;
-    private WifiDataHandler wifiDataHandler;
-    private RouteDataHandler routeDataHandler;
     private ListDataHandler listDataHandler;
     public String startAddress = "";
     public String endAddress = "";
@@ -79,9 +76,9 @@ public class AddDataController extends Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(location);
         db = Main.getDB();
-        retailerDataHandler = new RetailerDataHandler(db);
-        wifiDataHandler = new WifiDataHandler(db);
-        routeDataHandler = new RouteDataHandler(db);
+        new RetailerDataHandler(db);
+        new WifiDataHandler(db);
+        new RouteDataHandler(db);
         listDataHandler = new ListDataHandler(db, Main.hu.currentCyclist.getName());
 
         initListComboboxes();
@@ -116,10 +113,9 @@ public class AddDataController extends Controller implements Initializable {
      * Contains calls to convertDates and routeDataHandler.
      *
      * @param event Clicking the Add to Database button on the manual entry page.
-     * @throws IOException
      */
     @FXML
-    void routeCSVLine(ActionEvent event) throws IOException {
+    void routeCSVLine(ActionEvent event) {
         double SLatitude, SLongitude, ELatitude, ELongitude;
         boolean errorOccurred = false;
         String sTime = "00:00:00";
@@ -258,11 +254,10 @@ public class AddDataController extends Controller implements Initializable {
      * Contains calls to convertDates and retailerDataHandler.
      *
      * @param event Clicking the Add to Database button on the retailer entry page.
-     * @throws IOException
      */
     @FXML
-    void retailerCSVLine(ActionEvent event) throws IOException {
-        Boolean errorOccured = false;
+    void retailerCSVLine(ActionEvent event) {
+        boolean errorOccured = false;
         double[] latLon;
 
         if (listDataHandler.checkListName(manualListInput.getSelectionModel().getSelectedItem())) {
@@ -341,11 +336,10 @@ public class AddDataController extends Controller implements Initializable {
      * Contains calls to convertDates and wifiDataHandler.
      *
      * @param event Clicking the Add to Database button on the wifi entry page.
-     * @throws IOException
      */
     @FXML
-    void wifiCSVLine(ActionEvent event) throws IOException {
-        Boolean errorOccured = false;
+    void wifiCSVLine(ActionEvent event) {
+        boolean errorOccured = false;
         double[] latLon;
         if (listDataHandler.checkListName(manualListInput.getSelectionModel().getSelectedItem())) {
             makeErrorDialogueBox("List name already exists", "This list name has been used by " +

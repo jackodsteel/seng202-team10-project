@@ -14,9 +14,9 @@ public class Cyclist {
     static public String name;
     static private int birthDay, birthMonth, birthYear;
     static private int gender;   // gender either 0 other, 1 male, or 2 female.
-    private ArrayList<Route> favouriteRouteList = new ArrayList<Route>();
-    private ArrayList<RetailLocation> favouriteRetailLocations = new ArrayList<RetailLocation>();
-    private ArrayList<WifiLocation> favouriteWifiLocations = new ArrayList<WifiLocation>();
+    private ArrayList<Route> favouriteRouteList = new ArrayList<>();
+    private ArrayList<RetailLocation> favouriteRetailLocations = new ArrayList<>();
+    private ArrayList<WifiLocation> favouriteWifiLocations = new ArrayList<>();
     private ArrayList<Route> takenRoutesList = new ArrayList<>();
 
     public Cyclist() {

@@ -5,7 +5,6 @@ import dataHandler.SQLiteDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import main.HelperFunctions;
 import main.Main;
 

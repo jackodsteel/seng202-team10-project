@@ -25,7 +25,7 @@ public class TakenRoutesTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
@@ -35,12 +35,12 @@ public class TakenRoutesTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE taken_routes");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         takenRoutes = new TakenRoutes(db);
     }
 
@@ -75,7 +75,7 @@ public class TakenRoutesTest {
     }
 
     @Test
-    public void findFiveRecentRoutesMoreThanFive() throws Exception {
+    public void findFiveRecentRoutesMoreThanFive() {
         RouteDataHandler rdh = new RouteDataHandler(db);
 
         // Adding routes in random order with different days for testing.
@@ -104,7 +104,7 @@ public class TakenRoutesTest {
     }
 
     @Test
-    public void findFiveRecentRoutesLessThanFive() throws Exception {
+    public void findFiveRecentRoutesLessThanFive() {
         RouteDataHandler rdh = new RouteDataHandler(db);
         takenRoutes.addTakenRoute("Tester", "2016", "01", "01",
                 "00:00:00", "10000", 1, hu);
@@ -116,7 +116,7 @@ public class TakenRoutesTest {
     }
 
     @Test
-    public void findFiveRecentRoutesEmpty() throws Exception {
+    public void findFiveRecentRoutesEmpty() {
         ArrayList<String> result = takenRoutes.findFiveRecentRoutes(hu);
         ArrayList<String> expected = new ArrayList<>();
         assertEquals(expected, result);

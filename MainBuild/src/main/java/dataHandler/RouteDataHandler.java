@@ -6,34 +6,34 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class RouteDataHandler implements DataHandler {
-    private SQLiteDB db;
 
-    private String[] fields =
-            {
-                    "tripduration            INTEGER",
-                    "start_year              VARCHAR(4) NOT NULL",
-                    "start_month             VARCHAR(2) NOT NULL",
-                    "start_day               VARCHAR(2) NOT NULL",
-                    "start_time              VARCHAR(19) NOT NULL",
-                    "end_year                VARCHAR(4)",
-                    "end_month               VARCHAR(2)",
-                    "end_day                 VARCHAR(2)",
-                    "end_time                VARCHAR(19)",
-                    "start_station_id        VARCHAR(6)",
-                    "start_station_name      VARCHAR(21)",
-                    "start_latitude          NUMERIC(9,6) NOT NULL",
-                    "start_longitude         NUMERIC(9,6) NOT NULL",
-                    "end_station_id          VARCHAR(6)",
-                    "end_station_name        VARCHAR(21)",
-                    "end_latitude            NUMERIC(9,6) NOT NULL",
-                    "end_longitude           NUMERIC(9,6) NOT NULL",
-                    "bikeid                  VARCHAR(20) NOT NULL",
-                    "usertype                VARCHAR(10)",
-                    "birth_year              INTEGER",
-                    "gender                  INTEGER",
-                    "list_name               VARCHAR(25)"};
-    private String primaryKey = "start_year, start_month, start_day, start_time, bikeid";
-    private String tableName = "route_information";
+    private static final String[] fields = {
+            "tripduration            INTEGER",
+            "start_year              VARCHAR(4) NOT NULL",
+            "start_month             VARCHAR(2) NOT NULL",
+            "start_day               VARCHAR(2) NOT NULL",
+            "start_time              VARCHAR(19) NOT NULL",
+            "end_year                VARCHAR(4)",
+            "end_month               VARCHAR(2)",
+            "end_day                 VARCHAR(2)",
+            "end_time                VARCHAR(19)",
+            "start_station_id        VARCHAR(6)",
+            "start_station_name      VARCHAR(21)",
+            "start_latitude          NUMERIC(9,6) NOT NULL",
+            "start_longitude         NUMERIC(9,6) NOT NULL",
+            "end_station_id          VARCHAR(6)",
+            "end_station_name        VARCHAR(21)",
+            "end_latitude            NUMERIC(9,6) NOT NULL",
+            "end_longitude           NUMERIC(9,6) NOT NULL",
+            "bikeid                  VARCHAR(20) NOT NULL",
+            "usertype                VARCHAR(10)",
+            "birth_year              INTEGER",
+            "gender                  INTEGER",
+            "list_name               VARCHAR(25)"};
+    private static final String primaryKey = "start_year, start_month, start_day, start_time, bikeid";
+    private static final String tableName = "route_information";
+
+    private final SQLiteDB db;
 
     private PreparedStatement addData;
     private String addDataStatement = "insert or fail into route_information values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

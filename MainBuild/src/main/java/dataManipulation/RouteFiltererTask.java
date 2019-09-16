@@ -330,10 +330,9 @@ public class RouteFiltererTask extends Task<Void> {
      * Starts new thread to filter routes.
      *
      * @return null
-     * @throws Exception
      */
     @Override
-    protected Void call() throws Exception {
+    protected Void call() {
         System.out.println(this);
         filterRoutesWithCallback();
         return null;

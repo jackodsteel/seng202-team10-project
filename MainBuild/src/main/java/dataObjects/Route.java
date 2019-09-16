@@ -368,18 +368,23 @@ public class Route {
 
     public void setGender(String newGender) {
         if (!newGender.equals(gender)) {
-            if ("Male".equals(newGender)) {
-                gender = newGender;
-                UpdateData.updateRouteField("gender", 1, bikeid, startYear, startMonth, startDay, startTime);
-            } else if ("Female".equals(newGender)) {
-                gender = newGender;
-                UpdateData.updateRouteField("gender", 2, bikeid, startYear, startMonth, startDay, startTime);
-            } else if ("Other".equals(newGender)) {
-                gender = newGender;
-                UpdateData.updateRouteField("gender", 3, bikeid, startYear, startMonth, startDay, startTime);
-            } else {
-                gender = newGender;
-                UpdateData.updateRouteField("gender", 0, bikeid, startYear, startMonth, startDay, startTime);
+            switch (newGender) {
+                case "Male":
+                    gender = newGender;
+                    UpdateData.updateRouteField("gender", 1, bikeid, startYear, startMonth, startDay, startTime);
+                    break;
+                case "Female":
+                    gender = newGender;
+                    UpdateData.updateRouteField("gender", 2, bikeid, startYear, startMonth, startDay, startTime);
+                    break;
+                case "Other":
+                    gender = newGender;
+                    UpdateData.updateRouteField("gender", 3, bikeid, startYear, startMonth, startDay, startTime);
+                    break;
+                default:
+                    gender = newGender;
+                    UpdateData.updateRouteField("gender", 0, bikeid, startYear, startMonth, startDay, startTime);
+                    break;
             }
         }
     }

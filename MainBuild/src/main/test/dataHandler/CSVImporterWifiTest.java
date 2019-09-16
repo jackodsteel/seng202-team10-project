@@ -34,12 +34,12 @@ public class CSVImporterWifiTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE wifi_location");
     }
 
     @Before
-    public void init() throws Exception {
+    public void init() {
         handler = new WifiDataHandler(db);
     }
 
@@ -82,7 +82,7 @@ public class CSVImporterWifiTest {
 
     @Ignore
     @Test
-    public void testImportSpeed() throws Exception {
+    public void testImportSpeed() {
         Task task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/NYC_Free_Public_WiFi_03292017.csv").getFile(), handler);
         long startTime = System.currentTimeMillis();
         task.run();

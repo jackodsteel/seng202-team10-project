@@ -27,7 +27,7 @@ public class SQLiteDBTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
@@ -46,7 +46,7 @@ public class SQLiteDBTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.executeUpdateSQL("DROP TABLE test_table");
     }
 
@@ -61,18 +61,18 @@ public class SQLiteDBTest {
     }
 
     @Test
-    public void addTableWhenExists() throws Exception {
+    public void addTableWhenExists() {
         create_test_table();
         assertFalse(create_test_table());
     }
 
     @Test
-    public void addTableWhenNotExists() throws Exception {
+    public void addTableWhenNotExists() {
         assertTrue(create_test_table());
     }
 
     @Test
-    public void addTableInvalidFieldExists() throws Exception {
+    public void addTableInvalidFieldExists() {
         String[] fields =
                 { "F1 VARCHAR(5)",
                 "F2 INTEGER NOT NULL"};
@@ -83,14 +83,14 @@ public class SQLiteDBTest {
     }
 
     @Test
-    public void executeUpdateInsertSQL() throws Exception {
+    public void executeUpdateInsertSQL() {
         create_test_table();
         int outcome = db.executeUpdateSQL("insert into test_table values('Hello', 5)");
         assertEquals(1, outcome);
     }
 
     @Test
-    public void executeUpdateInsertDuplicateSQL() throws Exception {
+    public void executeUpdateInsertDuplicateSQL() {
         create_test_table();
         db.executeUpdateSQL("insert into test_table values('Hello', 5)");
         int outcome = db.executeUpdateSQL("insert into test_table values('Hello', 5)");
@@ -114,14 +114,14 @@ public class SQLiteDBTest {
     }
 
     @Test
-    public void getValidPreparedStatement() throws Exception {
+    public void getValidPreparedStatement() {
         create_test_table();
         PreparedStatement ps = db.getPreparedStatement("select * from test_table where F1 = ?");
         assertNotNull(ps);
     }
 
     @Test
-    public void getInvalidPreparedStatement() throws Exception {
+    public void getInvalidPreparedStatement() {
         create_test_table();
         PreparedStatement ps = db.getPreparedStatement("select * from test_table where F4 = ?");
         assertNull(ps);

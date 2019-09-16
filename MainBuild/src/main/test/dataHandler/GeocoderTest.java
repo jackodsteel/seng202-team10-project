@@ -42,7 +42,7 @@ public class GeocoderTest {
     }
 
     @Test
-    public void testConnection() throws Exception {
+    public void testConnection() {
         assertTrue(Geocoder.testConnection());
     }
 

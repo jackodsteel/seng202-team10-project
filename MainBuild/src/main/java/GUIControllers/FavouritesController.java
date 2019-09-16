@@ -133,10 +133,9 @@ public class FavouritesController extends Controller implements Initializable {
      * Deletes the favourite selected from the chosen table.
      *
      * @param event Created when the method is called
-     * @throws IOException
      */
     @FXML
-    public void deleteFavourite(ActionEvent event) throws IOException {
+    public void deleteFavourite(ActionEvent event) {
         if (tableViewRoutes.getSelectionModel().getSelectedItem() != null) {
             FavouriteRouteData frd = new FavouriteRouteData(Main.getDB());
             frd.deleteFavouriteRoute(tableViewRoutes.getSelectionModel().getSelectedItem(), hu);
@@ -181,15 +180,11 @@ public class FavouritesController extends Controller implements Initializable {
         });
 
         GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if (lastSelectedRow.get() != null) {
-                    Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
-                    if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                        tableViewRoutes.getSelectionModel().clearSelection();
-                    }
+        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (lastSelectedRow.get() != null) {
+                Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
+                if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
+                    tableViewRoutes.getSelectionModel().clearSelection();
                 }
             }
         });
@@ -214,15 +209,11 @@ public class FavouritesController extends Controller implements Initializable {
         });
 
         GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if (lastSelectedRow.get() != null) {
-                    Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
-                    if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                        tableViewWifi.getSelectionModel().clearSelection();
-                    }
+        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (lastSelectedRow.get() != null) {
+                Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
+                if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
+                    tableViewWifi.getSelectionModel().clearSelection();
                 }
             }
         });
@@ -247,15 +238,11 @@ public class FavouritesController extends Controller implements Initializable {
         });
 
         GridPane stage = gridPane;
-        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if (lastSelectedRow.get() != null) {
-                    Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
-                    if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
-                        tableViewRetailers.getSelectionModel().clearSelection();
-                    }
+        stage.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (lastSelectedRow.get() != null) {
+                Bounds boundsOfSelectedRow = lastSelectedRow.get().localToScene(lastSelectedRow.get().getLayoutBounds());
+                if (!boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY())) {
+                    tableViewRetailers.getSelectionModel().clearSelection();
                 }
             }
         });

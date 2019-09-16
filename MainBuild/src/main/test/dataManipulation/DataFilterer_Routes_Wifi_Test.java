@@ -24,9 +24,6 @@ import static org.junit.Assert.assertEquals;
 public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
     private static DataFilterer dataFilterer;
-    private static ListDataHandler listDataHandler;
-    private static HandleUsers hu;
-    private static DatabaseUser databaseUser;
     private ArrayList<Route> routes = new ArrayList<>();
     private ArrayList<WifiLocation> wifiLocations = new ArrayList<>();
     private static SQLiteDB db;
@@ -48,13 +45,13 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());
 
-        hu = new HandleUsers();
+        HandleUsers hu = new HandleUsers();
         hu.init(db);
         hu.currentCyclist = new Cyclist("Tester");
-        listDataHandler = new ListDataHandler(db, "test name");
+        ListDataHandler listDataHandler = new ListDataHandler(db, "test name");
         ListDataHandler.setListName("test list");
         dataFilterer = new DataFilterer(db);
-        databaseUser = new DatabaseUser(db);
+        DatabaseUser databaseUser = new DatabaseUser(db);
         databaseUser.addUser("Tester", 1, 1, 2017, 1);
 
 
@@ -81,7 +78,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     }
 
     @Test
-    public void filterRoutesTestGenderNotSpecified() throws Exception {
+    public void filterRoutesTestGenderNotSpecified() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("16498");
         bikeID.add("18702");
@@ -98,7 +95,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGenderFemale() throws Exception {
+    public void filterRoutesTestGenderFemale() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23130");
         bikeID.add("15427");
@@ -123,7 +120,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGenderMale() throws Exception {
+    public void filterRoutesTestGenderMale() {
         //Only testing first and last 10 records from test database with this filter applied
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("22285");
@@ -164,7 +161,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGenderOther() throws Exception {
+    public void filterRoutesTestGenderOther() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
         bikeID.add("19651");
@@ -180,7 +177,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate20160110_201601020() throws Exception {
+    public void filterRoutesTestDate20160110_201601020() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("15747");
         bikeID.add("16278");
@@ -202,7 +199,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate20160131_20160131() throws Exception {
+    public void filterRoutesTestDate20160131_20160131() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("19818");
         bikeID.add("15517");
@@ -218,7 +215,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate20160101_20160101() throws Exception {
+    public void filterRoutesTestDate20160101_20160101() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("22285");
         bikeID.add("16498");
@@ -233,7 +230,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime153610_161739() throws Exception {
+    public void filterRoutesTestTime153610_161739() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23483");
         bikeID.add("19605");
@@ -250,7 +247,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime000000_000100() throws Exception {
+    public void filterRoutesTestTime000000_000100() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("22285");
         Task task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
@@ -264,7 +261,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime230000_245959() throws Exception {
+    public void filterRoutesTestTime230000_245959() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("22211");
         Task task = new RouteFiltererTask(db,-1, null, null, "23:00:00",
@@ -278,7 +275,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime000000_000000() throws Exception {
+    public void filterRoutesTestTime000000_000000() {
         ArrayList<String> bikeID = new ArrayList<>();
         Task task = new RouteFiltererTask(db,-1, null, null, "00:00:00",
                 "00:00:00", null, null, null, null, this);
@@ -291,7 +288,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_broad_() throws Exception {
+    public void filterRoutesTestStartAddress_broad_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24202");
         bikeID.add("24042");
@@ -312,7 +309,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_pershing_square_() throws Exception {
+    public void filterRoutesTestStartAddress_pershing_square_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23130");
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
@@ -326,7 +323,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_q_() throws Exception {
+    public void filterRoutesTestStartAddress_q_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23130");
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
@@ -340,7 +337,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_a_() throws Exception {
+    public void filterRoutesTestStartAddress_a_() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "a", null, null, null, this);
         task.run();
@@ -350,7 +347,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress__() throws Exception {
+    public void filterRoutesTestStartAddress__() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "", null, null, null, this);
         task.run();
@@ -360,7 +357,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_test_() throws Exception {
+    public void filterRoutesTestStartAddress_test_() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 "test", null, null, null, this);
         task.run();
@@ -370,7 +367,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress_broad_() throws Exception {
+    public void filterRoutesTestEndAddress_broad_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("18702");
         bikeID.add("23099");
@@ -389,7 +386,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress_pershing_square_() throws Exception {
+    public void filterRoutesTestEndAddress_pershing_square_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
         bikeID.add("23114");
@@ -404,7 +401,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress_q_() throws Exception {
+    public void filterRoutesTestEndAddress_q_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
         bikeID.add("17199");
@@ -420,7 +417,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress_a_() throws Exception {
+    public void filterRoutesTestEndAddress_a_() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "a", null, null, this);
         task.run();
@@ -430,7 +427,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress_test_() throws Exception {
+    public void filterRoutesTestEndAddress_test_() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "test", null, null, this);
         task.run();
@@ -440,7 +437,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestEndAddress__() throws Exception {
+    public void filterRoutesTestEndAddress__() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, "", null, null, this);
         task.run();
@@ -450,7 +447,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestBikeID_24042_() throws Exception {
+    public void filterRoutesTestBikeID_24042_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24042");
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
@@ -464,7 +461,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestBikeID_0_() throws Exception {
+    public void filterRoutesTestBikeID_0_() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, "", null, this);
         task.run();
@@ -475,7 +472,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestList_foo() throws Exception {
+    public void filterRoutesTestList_foo() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "foo", this);
         task.run();
@@ -486,7 +483,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestList_test_list() throws Exception {
+    public void filterRoutesTestList_test_list() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "test list", this);
         task.run();
@@ -497,7 +494,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestList__() throws Exception {
+    public void filterRoutesTestList__() {
         Task task = new RouteFiltererTask(db,-1, null, null, null, null,
                 null, null, null, "", this);
         task.run();
@@ -508,7 +505,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGender_1_Date_20160101_20160120_() throws Exception {
+    public void filterRoutesTestGender_1_Date_20160101_20160120_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23114");
         bikeID.add("22270");
@@ -526,7 +523,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGender_2_Time_100000_150000_() throws Exception {
+    public void filterRoutesTestGender_2_Time_100000_150000_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("21585");
         Task task = new RouteFiltererTask(db,2, null, null, "10:00:00",
@@ -540,7 +537,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGender_2_StartName_broad_() throws Exception {
+    public void filterRoutesTestGender_2_StartName_broad_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("16278");
         bikeID.add("19240");
@@ -555,7 +552,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestGender_3_EndName_pershing_square_south_() throws Exception {
+    public void filterRoutesTestGender_3_EndName_pershing_square_south_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("24256");
         Task task = new RouteFiltererTask(db,3, null, null, null,
@@ -569,7 +566,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate_20160101_20160120_Time_100000_150000_() throws Exception {
+    public void filterRoutesTestDate_20160101_20160120_Time_100000_150000_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("23453");
         Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
@@ -583,7 +580,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate_20160101_20160120_StartAddress_broad_() throws Exception {
+    public void filterRoutesTestDate_20160101_20160120_StartAddress_broad_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("16278");
         bikeID.add("19240");
@@ -601,7 +598,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate_20160101_20160120_EndAddress_broad_() throws Exception {
+    public void filterRoutesTestDate_20160101_20160120_EndAddress_broad_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("19240");
         Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
@@ -615,7 +612,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestDate_20160101_201601200_BikeID_18503_() throws Exception {
+    public void filterRoutesTestDate_20160101_201601200_BikeID_18503_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("18503");
         Task task = new RouteFiltererTask(db,-1, "10/01/2016", "20/01/2016",
@@ -629,7 +626,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime_100000_150000_StartAddress_st_() throws Exception {
+    public void filterRoutesTestTime_100000_150000_StartAddress_st_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("15971");
         bikeID.add("23453");
@@ -645,7 +642,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestTime_100000_150000_EndAddress_ave_() throws Exception {
+    public void filterRoutesTestTime_100000_150000_EndAddress_ave_() {
         ArrayList<String> bikeID = new ArrayList<>();
         bikeID.add("15971");
         bikeID.add("23453");
@@ -661,7 +658,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterRoutesTestStartAddress_st_EndAddress_ave_() throws Exception {
+    public void filterRoutesTestStartAddress_st_EndAddress_ave_() {
         Task task = new RouteFiltererTask(db,-1, null, null,
                 null, null, "st", "ave", null, null, this);
         task.run();
@@ -674,7 +671,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 ////////////////////////WIFI FILTERING TESTS\\\\\\\\\\\\\\\\\\\\\
 
     @Test
-    public void filterWifiTestName_guest_() throws Exception {
+    public void filterWifiTestName_guest_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("3");
         wifiID.add("27");
@@ -692,7 +689,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName_foo_() throws Exception {
+    public void filterWifiTestName_foo_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiLocations = dataFilterer.filterWifi("foo", null, null, null, null);
         for (int i = 0; i < wifiID.size(); i++) {
@@ -702,7 +699,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName_l_() throws Exception {
+    public void filterWifiTestName_l_() {
         wifiLocations = dataFilterer.filterWifi("l", null, null, null, null);
         int size = wifiLocations.size();
         assertEquals(size ,  42);
@@ -710,7 +707,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName__() throws Exception {
+    public void filterWifiTestName__() {
         wifiLocations = dataFilterer.filterWifi("", null, null, null, null);
         int size = wifiLocations.size();
         assertEquals(size ,  50);
@@ -718,7 +715,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestSuburb_Staten_Island_() throws Exception {
+    public void filterWifiTestSuburb_Staten_Island_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("150");
         wifiID.add("172");
@@ -732,7 +729,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestSuburb__() throws Exception {
+    public void filterWifiTestSuburb__() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiLocations = dataFilterer.filterWifi(null, "", null, null, null);
         for (int i = 0; i < wifiID.size(); i++) {
@@ -742,7 +739,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestType_Free_() throws Exception {
+    public void filterWifiTestType_Free_() {
         wifiLocations = dataFilterer.filterWifi(null, null, "free", null, null);
         int size = wifiLocations.size();
         assertEquals(size, 42);
@@ -750,7 +747,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestType__() throws Exception {
+    public void filterWifiTestType__() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiLocations = dataFilterer.filterWifi(null, null, "", null, null);
         for (int i = 0; i < wifiID.size(); i++) {
@@ -760,7 +757,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestProvider_nycha_() throws Exception {
+    public void filterWifiTestProvider_nycha_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("75");
         wifiID.add("551");
@@ -772,7 +769,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestProvider_foo_() throws Exception {
+    public void filterWifiTestProvider_foo_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiLocations = dataFilterer.filterWifi(null, null, null, "foo", null);
         for (int i = 0; i < wifiID.size(); i++) {
@@ -782,7 +779,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestProvider_l_() throws Exception {
+    public void filterWifiTestProvider_l_() {
         wifiLocations = dataFilterer.filterWifi(null, null, null, "l", null);
         int size = wifiLocations.size();
         assertEquals(size, 44);
@@ -790,7 +787,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestList_foo() throws Exception {
+    public void filterWifiTestList_foo() {
         wifiLocations = dataFilterer.filterWifi(null, null, null, null, "foo");
         int size = wifiLocations.size();
         assertEquals(size, 0);
@@ -798,7 +795,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestList_test_list() throws Exception {
+    public void filterWifiTestList_test_list() {
         wifiLocations = dataFilterer.filterWifi(null, null, null, null, "test list");
         int size = wifiLocations.size();
         assertEquals(size, 50);
@@ -806,7 +803,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestList__() throws Exception {
+    public void filterWifiTestList__() {
         wifiLocations = dataFilterer.filterWifi(null, null, null, null, "");
         int size = wifiLocations.size();
         assertEquals(size, 0);
@@ -814,7 +811,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName_nypl_Suburb_manhattan() throws Exception {
+    public void filterWifiTestName_nypl_Suburb_manhattan() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("247");
         wifiID.add("331");
@@ -827,7 +824,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName_nypl_Type_free_() throws Exception {
+    public void filterWifiTestName_nypl_Type_free_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("247");
         wifiID.add("295");
@@ -841,7 +838,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestName_guest_Provider_spec_() throws Exception {
+    public void filterWifiTestName_guest_Provider_spec_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("458");
         wifiID.add("578");
@@ -856,7 +853,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestSuburb_brooklyn_Type_limited_free_() throws Exception {
+    public void filterWifiTestSuburb_brooklyn_Type_limited_free_() {
         ArrayList<String> wifiID = new ArrayList<>();
         wifiID.add("3");
         wifiID.add("27");
@@ -871,7 +868,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
 
     @Test
-    public void filterWifiTestSuburb_brooklyn_Provider_alticeusa_() throws Exception {
+    public void filterWifiTestSuburb_brooklyn_Provider_alticeusa_() {
         ArrayList<String> wifiID = new ArrayList<>();
         ArrayList<String> wifiIDff = new ArrayList<>();
         wifiID.add("3");
@@ -885,7 +882,7 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
     }
 
     @Test
-    public void filterWifiTestType_limited_free_provider_alticeusa() throws Exception {
+    public void filterWifiTestType_limited_free_provider_alticeusa() {
         ArrayList<String> wifiID = new ArrayList<>();
         ArrayList<String> wifiIDff = new ArrayList<>();
         wifiID.add("3");

@@ -38,7 +38,6 @@ public class DataFilterer {
     private String andCommand;
     private String commandEnd;
 
-    private ArrayList<Route> routes;
     private ArrayList<Integer> filterVariables;
     private ArrayList<String> filterVariableStrings;
 
@@ -78,7 +77,7 @@ public class DataFilterer {
         listCommand = "list_name = ?";
         andCommand = " AND ";
         commandEnd = ";";
-        routes = new ArrayList<>();
+        ArrayList<Route> routes = new ArrayList<>();
         filterVariables = new ArrayList<>();
         filterVariableStrings = new ArrayList<>();
         wifiLocations = new ArrayList<>();

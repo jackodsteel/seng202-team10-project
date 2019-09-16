@@ -138,15 +138,12 @@ public class DetailedRouteInformation extends RouteDataViewerController {
         cyclistBirthYearListener();
         listListener();
 
-        list.getEditor().setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
-                ArrayList<String> lists = listDataHandler.getLists();
-                if (!lists.contains(currentRoute.getListName()) && currentRoute.getListName() != null) {
-                    makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
-                            "list and\ncannot be changed");
-                    list.setDisable(true);
-                }
+        list.getEditor().setOnMouseClicked(event -> {
+            ArrayList<String> lists = listDataHandler.getLists();
+            if (!lists.contains(currentRoute.getListName()) && currentRoute.getListName() != null) {
+                makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
+                        "list and\ncannot be changed");
+                list.setDisable(true);
             }
         });
     }
@@ -157,10 +154,9 @@ public class DetailedRouteInformation extends RouteDataViewerController {
      * correct them.
      *
      * @param event Created when the method is called
-     * @throws IOException Handles errors caused by an fxml not loading correctly
      */
     @FXML
-    void updateValues(ActionEvent event) throws IOException {
+    void updateValues(ActionEvent event) {
         try {
             System.out.println("Update button clicked");
             currentRoute.setStartAddress(startAddress.getText());
@@ -197,10 +193,9 @@ public class DetailedRouteInformation extends RouteDataViewerController {
     /**
      * Checks if list is owned by current user. If not creates an error popup and disables the list field
      *
-     * @throws IOException IOException Handles errors caused by an fxml not loading correctly
      */
     @FXML
-    void checkIfEditable() throws IOException {
+    void checkIfEditable() {
         ArrayList<String> lists = listDataHandler.getLists();
         if (!lists.contains(currentRoute.getListName()) && currentRoute.getListName() != null) {
             makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +

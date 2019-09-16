@@ -101,15 +101,12 @@ public class DetailedWifiInformation extends DataViewerController {
         zipListener();
         listListener();
 
-        list.getEditor().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
-                ArrayList<String> lists = listDataHandler.getLists();
-                if (!lists.contains(currentWifi.getListName()) && currentWifi.getListName() != null) {
-                    makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
-                            "list and\ncannot be changed");
-                    list.setDisable(true);
-                }
+        list.getEditor().setOnMouseClicked(event -> {
+            ArrayList<String> lists = listDataHandler.getLists();
+            if (!lists.contains(currentWifi.getListName()) && currentWifi.getListName() != null) {
+                makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +
+                        "list and\ncannot be changed");
+                list.setDisable(true);
             }
         });
     }
@@ -120,10 +117,9 @@ public class DetailedWifiInformation extends DataViewerController {
      * is informed and expected to update their input.
      *
      * @param event Created when the method is called
-     * @throws IOException Handles errors caused by an fxml not loading correctly
      */
     @FXML
-    void updateValues(ActionEvent event) throws IOException {
+    void updateValues(ActionEvent event) {
         try {
             currentWifi.setAddress(address.getText());
             currentWifi.setProvider(provider.getText());
@@ -152,10 +148,9 @@ public class DetailedWifiInformation extends DataViewerController {
     /**
      * Checks if list is owned by current user. If not creates an error popup and disables the list field
      *
-     * @throws IOException IOException Handles errors caused by an fxml not loading correctly
      */
     @FXML
-    void checkIfEditable() throws IOException {
+    void checkIfEditable() {
         ArrayList<String> lists = listDataHandler.getLists();
         if (!lists.contains(currentWifi.getListName()) && currentWifi.getListName() != null) {
             makeErrorDialogueBox("Cannot edit List", "This Route is part of another users " +

@@ -26,7 +26,7 @@ public class UpdateData_Retailers_Test {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");
         db = new SQLiteDB(path.toString());

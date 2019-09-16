@@ -255,11 +255,7 @@ public abstract class Controller {
         alert.setHeaderText(errorMessage);
         alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.YES) {
-            return true;
-        } else {
-            return false;
-        }
+        return alert.getResult() == ButtonType.YES;
     }
 
     /**
@@ -298,9 +294,7 @@ public abstract class Controller {
         c.setHeaderText("Rank this route!");
         c.setContentText("Rating");
         Optional<Integer> result = c.showAndWait();
-        if (result.isPresent()) {
-            Main.hu.currentCyclist.addFavouriteRoute(routeToAdd, name, result.get(), Main.getDB(), Main.hu);
-        }
+        result.ifPresent(integer -> Main.hu.currentCyclist.addFavouriteRoute(routeToAdd, name, integer, Main.getDB(), Main.hu));
     }
 
     protected void doOnSceneChange() {
