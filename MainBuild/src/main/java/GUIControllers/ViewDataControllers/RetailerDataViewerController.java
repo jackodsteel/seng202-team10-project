@@ -269,9 +269,8 @@ public class RetailerDataViewerController extends DataViewerController {
         if (tableView.getSelectionModel().getSelectedItem() == null) {
             makeSuccessDialogueBox("Select which retail store to add.", "");
         } else {
-            String name = Main.hu.currentCyclist.getName();
             RetailLocation retailToAdd = tableView.getSelectionModel().getSelectedItem();
-            boolean alreadyInList = Main.hu.currentCyclist.addFavouriteRetail(retailToAdd, name, Main.getDB());
+            boolean alreadyInList = Main.hu.currentCyclist.addFavouriteRetail(retailToAdd, Main.getDB());
             if (!alreadyInList) {
                 makeSuccessDialogueBox(retailToAdd.getName() + " successfully added.", "");
             } else {

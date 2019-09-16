@@ -12,9 +12,11 @@ import java.util.List;
  * taken routes, favourite routes, retail stores and wifi locations.
  */
 public class Cyclist {
-    static public String name;
-    static private int birthDay, birthMonth, birthYear;
-    static private int gender;   // gender either 0 other, 1 male, or 2 female.
+    public String name;
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
+    private int gender;   // gender either 0 other, 1 male, or 2 female.
     private List<Route> favouriteRouteList = new ArrayList<>();
     private List<RetailLocation> favouriteRetailLocations = new ArrayList<>();
     private List<WifiLocation> favouriteWifiLocations = new ArrayList<>();
@@ -37,39 +39,39 @@ public class Cyclist {
 
     //Getters
 
-    static public int getBirthYear() {
+    public int getBirthYear() {
         return birthYear;
     }
 
-    static public int getBirthMonth() {
+    public int getBirthMonth() {
         return birthMonth;
     }
 
-    static public int getBirthDay() {
+    public int getBirthDay() {
         return birthDay;
     }
 
-    static public String getBirthDate() {
+    public String getBirthDate() {
         return birthDay + "/" + birthMonth + "/" + birthYear;
     }
 
-    static public int getGender() {
+    public int getGender() {
         return gender;
     }
 
-    static public void setGender(int inputGender) {
+    public void setGender(int inputGender) {
         gender = inputGender;
     }
 
-    static public String getName() {
+    public String getName() {
         return name;
     }
 
-    static public void setName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
 
-    static public void setBirthday(int day, int month, int year) {
+    public void setBirthday(int day, int month, int year) {
         birthDay = day;
         birthMonth = month;
         birthYear = year;
@@ -87,11 +89,14 @@ public class Cyclist {
         return favouriteRouteList;
     }
 
-    public List<Route> getTakenRoutes() {return takenRoutesList;}
+    public List<Route> getTakenRoutes() {
+        return takenRoutesList;
+    }
 
 
     /**
      * Adds a route to the cyclists favouriteRoute list.
+     *
      * @param route the route to be added
      */
     public void addTakenRouteInstance(Route route) {
@@ -101,6 +106,7 @@ public class Cyclist {
 
     /**
      * Adds a route to the cyclists favouriteRoute list.
+     *
      * @param route the route to be added
      */
     public void addFavouriteRouteInstance(Route route) {
@@ -110,6 +116,7 @@ public class Cyclist {
 
     /**
      * Adds a wifi location to the cyclists favouriteWifiLocation list.
+     *
      * @param wifi the wifi location to be added
      */
     public void addWifiInstance(WifiLocation wifi) {
@@ -119,6 +126,7 @@ public class Cyclist {
 
     /**
      * Adds a retail store to the cyclists favouriteRetailLocation list.
+     *
      * @param retail the retail store to be added
      */
     public void addRetailInstance(RetailLocation retail) {
@@ -128,6 +136,7 @@ public class Cyclist {
 
     /**
      * Updates the users favourite routes. This will set the rank variable for the new Route object that has been added.
+     *
      * @param hu the instance of HandleUsers to retrieve favourite_route's from
      */
     public void updateUserRouteFavourites(HandleUsers hu) {
@@ -138,6 +147,7 @@ public class Cyclist {
 
     /**
      * Updates the users taken routes. This will set the rank variable for the new Route object that has been added.
+     *
      * @param hu the instance of HandleUsers to retrieve taken_routes's from
      */
     public void updateUserTakenRoutes(HandleUsers hu) {
@@ -167,10 +177,9 @@ public class Cyclist {
      * Adds a Route to the Users takenRoutesList if it is not already in it.
      *
      * @param route the route to be added
-     * @param name  the username of whose taken route this is
      * @param db    the database's taken_route table that is to have the row added.
      */
-    public void addTakenRoute(Route route, String name, SQLiteDB db, HandleUsers hu) {
+    public void addTakenRoute(Route route, SQLiteDB db, HandleUsers hu) {
         takenRoutesList.add(route);
         TakenRoutes t = new TakenRoutes(db);
         t.addTakenRoute(name, route.getStartYear(), route.getStartMonth(), route.getStartDay(),
@@ -182,7 +191,7 @@ public class Cyclist {
      * Checks to see if a route is already in the cyclists favouriteRoute list.------------------------------test---------
      *
      * @param route the route to be checked if it is already in the list
-     * @param type the type of table to add the route to, either favourite_routes or taken_routes
+     * @param type  the type of table to add the route to, either favourite_routes or taken_routes
      * @return true if it is already in the list, otherwise false
      */
     public boolean routeAlreadyInList(Route route, String type) {
@@ -214,11 +223,10 @@ public class Cyclist {
      * Adds a RetailLocation to the Users favouriteStationLocations.
      *
      * @param retail Retail to be added
-     * @param name   name of the user
-     * @param db the database whose tables are to be accessed
+     * @param db     the database whose tables are to be accessed
      * @return true if the Retail is already in the favouriteRetail list, false otherwise
      */
-    public boolean addFavouriteRetail(RetailLocation retail, String name, SQLiteDB db) {
+    public boolean addFavouriteRetail(RetailLocation retail, SQLiteDB db) {
         boolean alreadyInList = false;
         for (RetailLocation tempRetail : favouriteRetailLocations) {
             if (retail.getName().equals(tempRetail.getName()) && retail.getAddress().equals(tempRetail.getAddress())) {
@@ -239,11 +247,10 @@ public class Cyclist {
      * Adds a WifiLocation to the Users favouriteWifiLocations.
      *
      * @param wifi wifi object to be added to favouriteWifi
-     * @param name name of the user
-     * @param db the database whose tables are to be accessed
+     * @param db   the database whose tables are to be accessed
      * @return true if the Wifi is already in the favouriteWifi, false otherwise
      */
-    public boolean addFavouriteWifi(WifiLocation wifi, String name, SQLiteDB db) {
+    public boolean addFavouriteWifi(WifiLocation wifi, SQLiteDB db) {
         boolean alreadyInList = false;
         for (WifiLocation tempWifi : favouriteWifiLocations) {
             if (wifi.getWifiID().equals(tempWifi.getWifiID())) {

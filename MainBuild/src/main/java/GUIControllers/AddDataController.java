@@ -31,8 +31,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static dataObjects.Cyclist.name;
-
 
 /**
  * Controller class for the add data scene.
@@ -229,7 +227,7 @@ public class AddDataController extends Controller implements Initializable {
                 if (addToFavourites.isSelected() && addToCompletedRoutes.isSelected()) {
                     openRouteRankStage(routeToAdd, Main.hu.currentCyclist.getName());
                     Main.hu.currentCyclist.routeAlreadyInList(routeToAdd, "taken_route");
-                    Main.hu.currentCyclist.addTakenRoute(routeToAdd, name, Main.getDB(), Main.hu);
+                    Main.hu.currentCyclist.addTakenRoute(routeToAdd, Main.getDB(), Main.hu);
                     makeSuccessDialogueBox("Successfully added this route to the database and favourite + completed routes", "You may add more entries");
 
                 } else if (addToFavourites.isSelected()) {
@@ -238,7 +236,7 @@ public class AddDataController extends Controller implements Initializable {
 
                 } else if (addToCompletedRoutes.isSelected()) {
                     Main.hu.currentCyclist.routeAlreadyInList(routeToAdd, "taken_route");
-                    Main.hu.currentCyclist.addTakenRoute(routeToAdd, name, Main.getDB(), Main.hu);
+                    Main.hu.currentCyclist.addTakenRoute(routeToAdd, Main.getDB(), Main.hu);
                     makeSuccessDialogueBox("Successfully added this route to the database and your completed routes", "You may add more entries");
                 } else {
                     makeSuccessDialogueBox("Successfully added this route to the database", "You may add more entries");
@@ -317,7 +315,7 @@ public class AddDataController extends Controller implements Initializable {
                         RetailLocation retailToAdd = new RetailLocation(retailerName.getText(), retailerAddress.getText(), "",
                                 retailerPrim.getSelectionModel().getSelectedItem().toString(), retailerSec.getText(), "",
                                 0, latLon[0], latLon[1], ListDataHandler.getListName());
-                        Main.hu.currentCyclist.addFavouriteRetail(retailToAdd, name, Main.getDB());
+                        Main.hu.currentCyclist.addFavouriteRetail(retailToAdd, Main.getDB());
                         makeSuccessDialogueBox("Successfully added to this retailer to the database and your favourites list.", "You may add more entries");
                     } else {
                         makeSuccessDialogueBox("Successfully added to this retailer to the database", "You may add more entries");
@@ -390,7 +388,7 @@ public class AddDataController extends Controller implements Initializable {
                         WifiLocation wifiToAdd = new WifiLocation(wifiName.getText(), latLon[0], latLon[1], wifiAddress.getText(),
                                 wifiName.getText(), "", "", wifiComments.getText(), "", "",
                                 0, ListDataHandler.getListName());
-                        Main.hu.currentCyclist.addFavouriteWifi(wifiToAdd, name, Main.getDB());
+                        Main.hu.currentCyclist.addFavouriteWifi(wifiToAdd, Main.getDB());
                         makeSuccessDialogueBox("Successfully added this entry to the database and your favourite Wifi list.", "You may add more entries");
                     } else {
                         makeSuccessDialogueBox("Successfully added this entry to the database", "You may add more entries");

@@ -256,9 +256,8 @@ public class WifiDataViewerController extends DataViewerController {
         if (tableView.getSelectionModel().getSelectedItem() == null) {
             makeSuccessDialogueBox("Select which wifi hotspot to add.", "");
         } else {
-            String name = Main.hu.currentCyclist.getName();
             WifiLocation wifiToAdd = tableView.getSelectionModel().getSelectedItem();
-            boolean alreadyInList = Main.hu.currentCyclist.addFavouriteWifi(wifiToAdd, name, Main.getDB());
+            boolean alreadyInList = Main.hu.currentCyclist.addFavouriteWifi(wifiToAdd, Main.getDB());
             if (!alreadyInList) {
                 makeSuccessDialogueBox(wifiToAdd.getProvider() + " successfully added.", "");
             } else {

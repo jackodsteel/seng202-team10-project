@@ -77,7 +77,7 @@ public class CyclistTest {
                 0.0, 0.0, 1, 2, "Test Street",
                 "Test2 Street", "10000", 1, "Subscriber", 0, "20");
         hu.currentCyclist = testCyclist;
-        testCyclist.addTakenRoute(testRoute, testCyclist.getName(), db, hu);
+        testCyclist.addTakenRoute(testRoute, db, hu);
         ResultSet rs;
 
         rs = db.executeQuerySQL("SELECT * FROM taken_routes WHERE name = '" + testCyclist.getName() + "' AND  start_year = '2016'" +
@@ -134,7 +134,7 @@ public class CyclistTest {
         FavouriteRetailData frd = new FavouriteRetailData(db);
         RetailLocation testRetail = new RetailLocation("Test Shop", "1 Test Street", "NY",
                 "Casual Eating", "F-Pizza", "NY", 10000, 0.0, 0.0, null);
-        testCyclist.addFavouriteRetail(testRetail, testCyclist.getName(), db);
+        testCyclist.addFavouriteRetail(testRetail, db);
         ResultSet rs;
 
         rs = db.executeQuerySQL("SELECT * FROM favourite_retail WHERE name = '" + testCyclist.getName() + "' AND " +
@@ -148,7 +148,7 @@ public class CyclistTest {
         WifiLocation testWifi = new WifiLocation("1", 0.0, 0.0, "1 Test Street", "Guest",
                 "Free", "BPL", "free", "NY", "Manhattan",
                 10000, null);
-        testCyclist.addFavouriteWifi(testWifi, testCyclist.getName(), db);
+        testCyclist.addFavouriteWifi(testWifi, db);
         ResultSet rs;
 
         rs = db.executeQuerySQL("SELECT * FROM favourite_wifi WHERE name = '" + testCyclist.getName() + "' AND " +
