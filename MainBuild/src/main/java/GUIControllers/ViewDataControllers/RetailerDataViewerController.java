@@ -96,7 +96,6 @@ public class RetailerDataViewerController extends DataViewerController {
         Zip.setCellValueFactory(new PropertyValueFactory<>("Zip"));
         PrimaryType.setCellValueFactory(new PropertyValueFactory<>("MainType"));
         tableView.setItems(retailList);
-        tableView.getColumns().setAll(Name, Address, Zip, PrimaryType);
 
         nameInputListener();
         streetInputListener();
@@ -217,13 +216,13 @@ public class RetailerDataViewerController extends DataViewerController {
             if (zipInput.getText().equals("")) {
                 return -1;
             } else {
-                if (Integer.valueOf(zipInput.getText()) <= 0) {
+                if (Integer.parseInt(zipInput.getText()) <= 0) {
                     throw new NumberFormatException();
                 }
-                if (Integer.valueOf(zipInput.getText()) >= 100000000) {
+                if (Integer.parseInt(zipInput.getText()) >= 100000000) {
                     throw new NumberFormatException();
                 }
-                zip = Integer.valueOf(zipInput.getText());
+                zip = Integer.parseInt(zipInput.getText());
             }
         } catch (NumberFormatException e) {
             makeErrorDialogueBox("Incorrect input for zip number", "Please enter a positive number between 1 and 8\ndigits long.");

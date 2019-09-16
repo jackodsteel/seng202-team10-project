@@ -87,13 +87,13 @@ public class CompletedRoutesController extends Controller implements Initializab
         findStatistics(Main.hu);
         loadGraph();
 
-        //Initialise routes completed table.
-        routeListObservable.addAll(Main.hu.currentCyclist.getTakenRoutes());
         startLocation.setCellValueFactory(new PropertyValueFactory<>("StartAddress"));
         endLocation.setCellValueFactory(new PropertyValueFactory<>("EndAddress"));
         distance.setCellValueFactory(new PropertyValueFactory<>("Distance"));
+
+        //Initialise routes completed table.
+        routeListObservable.addAll(Main.hu.currentCyclist.getTakenRoutes());
         tableCompletedRoutes.setItems(routeListObservable);
-        tableCompletedRoutes.getColumns().setAll(completedRoutes);
     }
 
     /**
@@ -137,7 +137,7 @@ public class CompletedRoutesController extends Controller implements Initializab
 
         TakenRoutes t = new TakenRoutes(Main.getDB());
         List<String> recentRoutes = t.findFiveRecentRoutes(Main.hu);
-        XYChart.Series<String,Number> series1 = new XYChart.Series();
+        XYChart.Series<String,Number> series1 = new XYChart.Series<>();
 
         if (recentRoutes.size() >= 3) {
             //Adds the data
@@ -161,7 +161,7 @@ public class CompletedRoutesController extends Controller implements Initializab
                     currentDate = "5th";
                 }
                 currentDistance = Double.parseDouble(currentData[1]);
-                series1.getData().add(new XYChart.Data(currentDate, currentDistance));
+                series1.getData().add(new XYChart.Data<>(currentDate, currentDistance));
             }
         } else {
             //Does not add the data as there is not enough routes in completed routes.
@@ -172,11 +172,10 @@ public class CompletedRoutesController extends Controller implements Initializab
 
         graph.getData().clear();
         graph.layout();
-        graph.getData().addAll(series1);
+        graph.getData().add(series1);
 
         //Sets the colour
-        series1.getData().forEach(d->
-                d.getNode().setStyle("-fx-bar-fill: navy;"));
+        series1.getData().forEach(data-> data.getNode().setStyle("-fx-bar-fill: navy;"));
 
         graph.setLegendVisible(false);
     }

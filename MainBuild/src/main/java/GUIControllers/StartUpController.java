@@ -28,7 +28,7 @@ public class StartUpController extends Controller implements Initializable {
     @FXML
     private ComboBox<String> comboBox;
     @FXML
-    private ComboBox userday, usermonth, useryear;
+    private ComboBox<Integer> userday, usermonth, useryear;
     @FXML
     private ComboBox<String> usergender;
 
@@ -43,20 +43,16 @@ public class StartUpController extends Controller implements Initializable {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        for(int day = 0; day <31;){
-            day++;
+        for (int day = 1; day <= 31; day++) {
             userday.getItems().add(day);
         }
-        for(int mon = 0; mon < 12;){
-            mon++;
+        for (int mon = 1; mon <= 12; mon++) {
             usermonth.getItems().add(mon);
         }
-        for(int year = 2017; year > 1900;){
-            year--;
+        for (int year = 2019; year > 1900; year--) {
             useryear.getItems().add(year);
         }
     }
-
 
 
     /**
@@ -126,7 +122,6 @@ public class StartUpController extends Controller implements Initializable {
             changeToPlanRouteScene(event);
         }
     }
-
 
 
     /**

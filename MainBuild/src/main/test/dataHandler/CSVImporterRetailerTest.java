@@ -26,7 +26,7 @@ public class CSVImporterRetailerTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         Main.initDB();
 
         String home = System.getProperty("user.home");

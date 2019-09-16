@@ -24,7 +24,7 @@ public class CSVImporterWifiTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         Main.initDB();
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "testdatabase.db");

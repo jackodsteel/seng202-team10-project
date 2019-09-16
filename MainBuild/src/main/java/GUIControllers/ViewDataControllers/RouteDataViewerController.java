@@ -137,7 +137,6 @@ public class RouteDataViewerController extends DataViewerController implements A
         StartTime.setCellValueFactory(new PropertyValueFactory<>("StartTime"));
         EndTime.setCellValueFactory(new PropertyValueFactory<>("StopTime"));
         tableView.setItems(routeList);
-        tableView.getColumns().setAll(StartLocation, EndLocation, Distance, Date, StartTime, EndTime);
 
         startLocationInputListener();
         endLocationInputListener();

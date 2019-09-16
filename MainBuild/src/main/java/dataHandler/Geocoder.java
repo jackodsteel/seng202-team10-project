@@ -57,7 +57,8 @@ public class Geocoder {
      */
     public static boolean testConnection() {
         try {
-            return (addressToLatLon("123 Fake St") != null);
+            addressToLatLon("123 Fake St");
+            return true;
         } catch (ApiException | IOException | InterruptedException e) {
             return false;
         }
