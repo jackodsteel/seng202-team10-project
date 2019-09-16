@@ -4,7 +4,6 @@ package dataHandler;
 import javafx.concurrent.Task;
 import main.Main;
 import org.junit.*;
-import org.junit.rules.ExpectedException;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;

@@ -1,8 +1,5 @@
 package dataHandler;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 /**
  * A fake RetailerDataHandler that overrides the process line function to remove the geocoder for unit tests
  */

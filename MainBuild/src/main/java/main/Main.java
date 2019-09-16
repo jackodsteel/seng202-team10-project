@@ -1,7 +1,8 @@
 package main;
 
-import dataHandler.*;
-import dataManipulation.FindNearbyLocations;
+import dataHandler.DatabaseUser;
+import dataHandler.Geocoder;
+import dataHandler.SQLiteDB;
 import dataManipulation.UpdateData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

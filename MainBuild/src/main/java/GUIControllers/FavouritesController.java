@@ -1,12 +1,12 @@
 package GUIControllers;
 
 
-import dataObjects.RetailLocation;
-import dataObjects.Route;
-import dataObjects.WifiLocation;
 import dataHandler.FavouriteRetailData;
 import dataHandler.FavouriteRouteData;
 import dataHandler.FavouriteWifiData;
+import dataObjects.RetailLocation;
+import dataObjects.Route;
+import dataObjects.WifiLocation;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

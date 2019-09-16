@@ -2,11 +2,10 @@ package GUIControllers.ViewDataControllers;
 
 import com.jfoenix.controls.JFXTextField;
 import customExceptions.FilterByTimeException;
-import dataObjects.Route;
 import dataHandler.SQLiteDB;
 import dataManipulation.AddRouteCallback;
-import dataManipulation.DataFilterer;
 import dataManipulation.RouteFiltererTask;
+import dataObjects.Route;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +31,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static javafx.scene.paint.Color.*;
+import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.RED;
 
 
 /**

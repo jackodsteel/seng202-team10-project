@@ -1,8 +1,8 @@
 package main;
 
+import dataHandler.SQLiteDB;
 import dataObjects.Cyclist;
 import dataObjects.Route;
-import dataHandler.SQLiteDB;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

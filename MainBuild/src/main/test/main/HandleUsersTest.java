@@ -1,10 +1,10 @@
 package main;
 
+import dataHandler.*;
 import dataObjects.Cyclist;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import dataHandler.*;
 import org.junit.*;
 
 import java.nio.file.Files;

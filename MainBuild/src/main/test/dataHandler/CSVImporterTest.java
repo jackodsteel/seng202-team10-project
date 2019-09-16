@@ -6,8 +6,6 @@ import org.junit.rules.ExpectedException;
 
 import java.nio.file.Files;
 
-import org.junit.runner.RunWith;
-
 
 public class CSVImporterTest {
 

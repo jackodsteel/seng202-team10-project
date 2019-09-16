@@ -1,15 +1,14 @@
 package dataHandler;
 
 
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.GeocodingResult;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**

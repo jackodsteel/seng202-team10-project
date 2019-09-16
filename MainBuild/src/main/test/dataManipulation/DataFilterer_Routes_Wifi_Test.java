@@ -1,19 +1,23 @@
 package dataManipulation;
 
+import dataHandler.*;
 import dataObjects.Cyclist;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import dataHandler.*;
 import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 
 ////////////////////////ROUTE FILTERING TESTS\\\\\\\\\\\\\\\\\\\\\

@@ -1,7 +1,7 @@
 package dataHandler;
 
-import dataObjects.Cyclist;
 import dataManipulation.AddRouteCallback;
+import dataObjects.Cyclist;
 import javafx.concurrent.Task;
 import main.HandleUsers;
 import org.junit.*;
@@ -11,7 +11,7 @@ import org.mockito.Captor;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Testing class for the DatabaseUser.

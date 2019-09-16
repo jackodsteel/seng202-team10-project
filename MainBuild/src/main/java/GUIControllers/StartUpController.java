@@ -4,14 +4,8 @@ import com.jfoenix.controls.JFXTextField;
 import dataHandler.SQLiteDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import main.HelperFunctions;
 import main.Main;
 

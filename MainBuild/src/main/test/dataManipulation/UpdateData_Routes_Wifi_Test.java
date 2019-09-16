@@ -1,16 +1,21 @@
 package dataManipulation;
 
-import dataHandler.*;
+import dataHandler.CSVImporter;
+import dataHandler.RouteDataHandler;
+import dataHandler.SQLiteDB;
+import dataHandler.WifiDataHandler;
 import javafx.concurrent.Task;
 import main.Main;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class UpdateData_Routes_Wifi_Test {
 

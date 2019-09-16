@@ -1,11 +1,11 @@
 package main;
 
+import dataHandler.DatabaseUser;
+import dataHandler.SQLiteDB;
 import dataObjects.Cyclist;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import dataHandler.DatabaseUser;
-import dataHandler.SQLiteDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

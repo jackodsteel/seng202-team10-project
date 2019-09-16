@@ -1,17 +1,15 @@
 package dataHandler;
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.sql.ResultSet;
-import static org.mockito.Mockito.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by jes143 on 25/09/17.

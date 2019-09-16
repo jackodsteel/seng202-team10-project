@@ -8,7 +8,7 @@ import org.junit.*;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test for the FavouriteRouteData database table when adding data. Note that error

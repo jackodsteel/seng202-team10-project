@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class TakenRoutesTest {

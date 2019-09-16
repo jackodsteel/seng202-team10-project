@@ -1,14 +1,13 @@
 package dataHandler;
 
-import javafx.concurrent.Task;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 

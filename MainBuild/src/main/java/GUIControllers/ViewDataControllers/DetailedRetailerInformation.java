@@ -2,10 +2,10 @@ package GUIControllers.ViewDataControllers;
 
 
 import com.jfoenix.controls.JFXTextField;
-import dataObjects.RetailLocation;
 import dataHandler.ListDataHandler;
 import dataHandler.SQLiteDB;
 import dataManipulation.DeleteData;
+import dataObjects.RetailLocation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

@@ -1,18 +1,20 @@
 package dataManipulation;
 
-import dataObjects.Cyclist;
 import dataHandler.*;
+import dataObjects.Cyclist;
 import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Testing class for DeleteData class

@@ -1,8 +1,10 @@
 package dataManipulation;
 
+import dataHandler.RetailerDataHandler;
+import dataHandler.SQLiteDB;
+import dataHandler.WifiDataHandler;
 import dataObjects.RetailLocation;
 import dataObjects.WifiLocation;
-import dataHandler.*;
 import main.HelperFunctions;
 import main.Main;
 import org.junit.AfterClass;
@@ -14,7 +16,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 /**

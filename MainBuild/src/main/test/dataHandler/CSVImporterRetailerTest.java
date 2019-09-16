@@ -1,24 +1,15 @@
 package dataHandler;
 
-import GUIControllers.ProgressPopupController;
 import javafx.concurrent.Task;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.Main;
-import org.hamcrest.Matchers;
 import org.junit.*;
-import org.junit.rules.ExpectedException;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
-import java.util.regex.Matcher;
 
-import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Using fake retailerdatahandler as mocks were really complicated as Geocoder is static

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="230.0" style="-fx-background-color: lightGrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SidePanelController">
    <children>
       <Button fx:id="planRouteButton" mnemonicParsing="false" onAction="#changeToPlanRouteScene" prefHeight="85.0" prefWidth="275.0" text="Route Planner" />

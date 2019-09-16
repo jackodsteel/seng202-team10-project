@@ -1,10 +1,10 @@
 package GUIControllers.ViewDataControllers;
 
 import com.jfoenix.controls.JFXTextField;
-import dataObjects.WifiLocation;
 import dataHandler.ListDataHandler;
 import dataHandler.SQLiteDB;
 import dataManipulation.DeleteData;
+import dataObjects.WifiLocation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

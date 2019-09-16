@@ -1,7 +1,6 @@
 package dataHandler;
 
 import main.HandleUsers;
-import main.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

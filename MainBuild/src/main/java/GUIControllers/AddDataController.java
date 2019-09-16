@@ -3,10 +3,10 @@ package GUIControllers;
 import com.google.maps.errors.ApiException;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import dataHandler.*;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
-import dataHandler.*;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static dataObjects.Cyclist.name;
-import static java.lang.Integer.parseInt;
 
 
 /**

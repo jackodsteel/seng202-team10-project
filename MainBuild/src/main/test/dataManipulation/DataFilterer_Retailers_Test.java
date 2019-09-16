@@ -1,13 +1,15 @@
 package dataManipulation;
 
 
+import dataHandler.*;
 import dataObjects.Cyclist;
 import dataObjects.RetailLocation;
-import dataHandler.*;
 import javafx.concurrent.Task;
 import main.HandleUsers;
 import main.Main;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.nio.file.Files;

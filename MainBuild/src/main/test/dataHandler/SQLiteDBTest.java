@@ -1,12 +1,15 @@
 package dataHandler;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import static org.junit.Assert.*;
 
 
 /**

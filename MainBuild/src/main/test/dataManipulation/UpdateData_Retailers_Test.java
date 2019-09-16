@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class UpdateData_Retailers_Test {
 
