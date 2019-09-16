@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class UpdateData_Routes_Wifi_Test {
 
@@ -64,7 +64,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT tripduration FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int duration = rs.getInt("tripduration");
-        assertTrue(duration == 500);
+        assertEquals(500, duration);
     }
 
 
@@ -74,7 +74,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT tripduration FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int duration = rs.getInt("tripduration");
-        assertTrue(duration == 0);
+        assertEquals(0, duration);
     }
 
 
@@ -84,7 +84,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_year FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endYear = rs.getString("end_year");
-        assertTrue(endYear.equals("2040"));
+        assertEquals("2040", endYear);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_year FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endYear = rs.getString("end_year");
-        assertTrue(endYear.equals("0000"));
+        assertEquals("0000", endYear);
     }
 
 
@@ -103,7 +103,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_month FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endMonth = rs.getString("end_month");
-        assertTrue(endMonth.equals("12"));
+        assertEquals("12", endMonth);
     }
 
 
@@ -113,7 +113,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_month FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endMonth = rs.getString("end_month");
-        assertTrue(endMonth.equals("00"));
+        assertEquals("00", endMonth);
     }
 
 
@@ -123,7 +123,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_day FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endDay = rs.getString("end_day");
-        assertTrue(endDay.equals("25"));
+        assertEquals("25", endDay);
     }
 
 
@@ -133,7 +133,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_day FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endDay = rs.getString("end_day");
-        assertTrue(endDay.equals("00"));
+        assertEquals("00", endDay);
     }
 
 
@@ -143,7 +143,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_station_id FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String startID = rs.getString("start_station_id");
-        assertTrue(startID.equals("234543"));
+        assertEquals("234543", startID);
     }
 
 
@@ -153,7 +153,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_station_id FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String startID = rs.getString("start_station_id");
-        assertTrue(startID.equals("0"));
+        assertEquals("0", startID);
     }
 
 
@@ -163,7 +163,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_station_id FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endID = rs.getString("end_station_id");
-        assertTrue(endID.equals("234543"));
+        assertEquals("234543", endID);
     }
 
 
@@ -173,7 +173,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_station_id FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endID = rs.getString("end_station_id");
-        assertTrue(endID.equals("0"));
+        assertEquals("0", endID);
     }
 
 
@@ -183,7 +183,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_station_name FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String startName = rs.getString("start_station_name");
-        assertTrue(startName.equals("12 Foo Street"));
+        assertEquals("12 Foo Street", startName);
     }
 
 
@@ -193,7 +193,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_station_name FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String startName = rs.getString("start_station_name");
-        assertTrue(startName.equals(""));
+        assertEquals("", startName);
 
     }
 
@@ -204,7 +204,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_station_name FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endName = rs.getString("end_station_name");
-        assertTrue(endName.equals("12 Foo Street"));
+        assertEquals("12 Foo Street", endName);
     }
 
 
@@ -214,7 +214,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_station_name FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String endName = rs.getString("end_station_name");
-        assertTrue(endName.equals(""));
+        assertEquals("", endName);
     }
 
 
@@ -224,7 +224,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLat = rs.getDouble("start_latitude");
-        assertTrue(startLat == 50.123456789);
+        assertEquals(50.123456789, startLat, 0.0);
     }
 
 
@@ -234,7 +234,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLat = rs.getDouble("start_latitude");
-        assertTrue(startLat == -50.123456789);
+        assertEquals(startLat, -50.123456789, 0.0);
     }
 
 
@@ -244,7 +244,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLat = rs.getDouble("start_latitude");
-        assertTrue(startLat == 0.0);
+        assertEquals(0.0, startLat, 0.0);
     }
 
 
@@ -254,7 +254,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLong = rs.getDouble("start_longitude");
-        assertTrue(startLong == 50.123456789);
+        assertEquals(50.123456789, startLong, 0.0);
     }
 
 
@@ -264,7 +264,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLong = rs.getDouble("start_longitude");
-        assertTrue(startLong == -50.123456789);
+        assertEquals(startLong, -50.123456789, 0.0);
     }
 
 
@@ -274,7 +274,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT start_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double startLong = rs.getDouble("start_longitude");
-        assertTrue(startLong == 0.0);
+        assertEquals(0.0, startLong, 0.0);
     }
 
 
@@ -284,7 +284,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLat = rs.getDouble("end_latitude");
-        assertTrue(endLat == 50.123456789);
+        assertEquals(50.123456789, endLat, 0.0);
     }
 
 
@@ -294,7 +294,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLat = rs.getDouble("end_latitude");
-        assertTrue(endLat == -50.123456789);
+        assertEquals(endLat, -50.123456789, 0.0);
     }
 
 
@@ -304,7 +304,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_latitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLat = rs.getDouble("end_latitude");
-        assertTrue(endLat == 0.0);
+        assertEquals(0.0, endLat, 0.0);
     }
 
 
@@ -314,7 +314,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLong = rs.getDouble("end_longitude");
-        assertTrue(endLong == 50.123456789);
+        assertEquals(50.123456789, endLong, 0.0);
     }
 
 
@@ -324,7 +324,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLong = rs.getDouble("end_longitude");
-        assertTrue(endLong == -50.123456789);
+        assertEquals(endLong, -50.123456789, 0.0);
     }
 
 
@@ -334,7 +334,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT end_longitude FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         double endLong = rs.getDouble("end_longitude");
-        assertTrue(endLong == 0.0);
+        assertEquals(0.0, endLong, 0.0);
     }
 
 
@@ -344,7 +344,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT usertype FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String type = rs.getString("usertype");
-        assertTrue(type.equals("foo"));
+        assertEquals("foo", type);
     }
 
 
@@ -354,7 +354,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT usertype FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         String type = rs.getString("usertype");
-        assertTrue(type.equals(""));
+        assertEquals("", type);
     }
 
 
@@ -364,7 +364,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT birth_year FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int year = rs.getInt("birth_year");
-        assertTrue(year == 2040);
+        assertEquals(2040, year);
     }
 
 
@@ -374,7 +374,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT birth_year FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int year = rs.getInt("birth_year");
-        assertTrue(year == 0);
+        assertEquals(0, year);
     }
 
 
@@ -384,7 +384,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT gender FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int gender = rs.getInt("gender");
-        assertTrue(gender == 0);
+        assertEquals(0, gender);
     }
 
 
@@ -394,7 +394,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT gender FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int gender = rs.getInt("gender");
-        assertTrue(gender == 1);
+        assertEquals(1, gender);
     }
 
 
@@ -404,7 +404,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT gender FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int gender = rs.getInt("gender");
-        assertTrue(gender == 2);
+        assertEquals(2, gender);
     }
 
 
@@ -414,7 +414,7 @@ public class UpdateData_Routes_Wifi_Test {
         ResultSet rs = db.executeQuerySQL("SELECT gender FROM route_information WHERE bikeid = '22285' AND " +
                 "start_year = '2016' AND start_month = '01' AND start_day = '01' AND start_time = '00:00:41'");
         int gender = rs.getInt("gender");
-        assertTrue(gender == 3);
+        assertEquals(3, gender);
     }
 
 
@@ -423,7 +423,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("cost", "foo", "998");
         ResultSet rs = db.executeQuerySQL("SELECT cost FROM wifi_location WHERE wifi_id = '998'");
         String cost = rs.getString("cost");
-        assertTrue(cost.equals("foo"));
+        assertEquals("foo", cost);
     }
 
 
@@ -432,7 +432,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("cost", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT cost FROM wifi_location WHERE wifi_id = '998'");
         String cost = rs.getString("cost");
-        assertTrue(cost.equals(""));
+        assertEquals("", cost);
     }
 
 
@@ -441,7 +441,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("provider", "foo", "998");
         ResultSet rs = db.executeQuerySQL("SELECT provider FROM wifi_location WHERE wifi_id = '998'");
         String provider = rs.getString("provider");
-        assertTrue(provider.equals("foo"));
+        assertEquals("foo", provider);
     }
 
 
@@ -450,7 +450,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("provider", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT provider FROM wifi_location WHERE wifi_id = '998'");
         String provider = rs.getString("provider");
-        assertTrue(provider.equals(""));
+        assertEquals("", provider);
     }
 
 
@@ -459,7 +459,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("address", "12 Foo Street", "998");
         ResultSet rs = db.executeQuerySQL("SELECT address FROM wifi_location WHERE wifi_id = '998'");
         String address = rs.getString("address");
-        assertTrue(address.equals("12 Foo Street"));
+        assertEquals("12 Foo Street", address);
     }
 
 
@@ -468,7 +468,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("address", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT address FROM wifi_location WHERE wifi_id = '998'");
         String address = rs.getString("address");
-        assertTrue(address.equals(""));
+        assertEquals("", address);
     }
 
 
@@ -477,7 +477,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lat", "50.123456789", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM wifi_location WHERE wifi_id = '998'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == 50.123456789);
+        assertEquals(50.123456789, lat, 0.0);
     }
 
 
@@ -486,7 +486,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lat", "-50.123456789", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM wifi_location WHERE wifi_id = '998'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == -50.123456789);
+        assertEquals(lat, -50.123456789, 0.0);
     }
 
 
@@ -495,7 +495,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lat", "0", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM wifi_location WHERE wifi_id = '998'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == 0.0);
+        assertEquals(0.0, lat, 0.0);
     }
 
 
@@ -504,7 +504,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lon", "50.123456789", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lon FROM wifi_location WHERE wifi_id = '998'");
         double lon = rs.getDouble("lon");
-        assertTrue(lon == 50.123456789);
+        assertEquals(50.123456789, lon, 0.0);
     }
 
 
@@ -513,7 +513,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lon", "-50.123456789", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lon FROM wifi_location WHERE wifi_id = '998'");
         double lon = rs.getDouble("lon");
-        assertTrue(lon == -50.123456789);
+        assertEquals(lon, -50.123456789, 0.0);
     }
 
 
@@ -522,7 +522,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("lon", "0", "998");
         ResultSet rs = db.executeQuerySQL("SELECT lon FROM wifi_location WHERE wifi_id = '998'");
         double lon = rs.getDouble("lon");
-        assertTrue(lon == 0.0);
+        assertEquals(0.0, lon, 0.0);
     }
 
 
@@ -531,7 +531,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("remarks", "The quick brown fox jumped over the lazy dog", "998");
         ResultSet rs = db.executeQuerySQL("SELECT remarks FROM wifi_location WHERE wifi_id = '998'");
         String remark = rs.getString("remarks");
-        assertTrue(remark.equals("The quick brown fox jumped over the lazy dog"));
+        assertEquals("The quick brown fox jumped over the lazy dog", remark);
     }
 
 
@@ -540,7 +540,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("remarks", "very short", "998");
         ResultSet rs = db.executeQuerySQL("SELECT remarks FROM wifi_location WHERE wifi_id = '998'");
         String remark = rs.getString("remarks");
-        assertTrue(remark.equals("very short"));
+        assertEquals("very short", remark);
     }
 
 
@@ -549,7 +549,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("remarks", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT remarks FROM wifi_location WHERE wifi_id = '998'");
         String remark = rs.getString("remarks");
-        assertTrue(remark.equals(""));
+        assertEquals("", remark);
     }
 
 
@@ -558,7 +558,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("city", "foovile", "998");
         ResultSet rs = db.executeQuerySQL("SELECT city FROM wifi_location WHERE wifi_id = '998'");
         String city = rs.getString("city");
-        assertTrue(city.equals("foovile"));
+        assertEquals("foovile", city);
     }
 
 
@@ -567,7 +567,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("city", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT city FROM wifi_location WHERE wifi_id = '998'");
         String city = rs.getString("city");
-        assertTrue(city.equals(""));
+        assertEquals("", city);
     }
 
 
@@ -576,7 +576,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("ssid", "foo", "998");
         ResultSet rs = db.executeQuerySQL("SELECT ssid FROM wifi_location WHERE wifi_id = '998'");
         String SSID = rs.getString("ssid");
-        assertTrue(SSID.equals("foo"));
+        assertEquals("foo", SSID);
     }
 
 
@@ -585,7 +585,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("ssid", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT ssid FROM wifi_location WHERE wifi_id = '998'");
         String SSID = rs.getString("ssid");
-        assertTrue(SSID.equals(""));
+        assertEquals("", SSID);
     }
 
 
@@ -594,7 +594,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("suburb", "foo", "998");
         ResultSet rs = db.executeQuerySQL("SELECT suburb FROM wifi_location WHERE wifi_id = '998'");
         String suburb = rs.getString("suburb");
-        assertTrue(suburb.equals("foo"));
+        assertEquals("foo", suburb);
     }
 
 
@@ -603,7 +603,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("suburb", "", "998");
         ResultSet rs = db.executeQuerySQL("SELECT suburb FROM wifi_location WHERE wifi_id = '998'");
         String suburb = rs.getString("suburb");
-        assertTrue(suburb.equals(""));
+        assertEquals("", suburb);
     }
 
 
@@ -612,7 +612,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("zip", "99999999", "998");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM wifi_location WHERE wifi_id = '998'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 99999999);
+        assertEquals(99999999, zip);
     }
 
 
@@ -621,7 +621,7 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("zip", "43256", "998");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM wifi_location WHERE wifi_id = '998'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 43256);
+        assertEquals(43256, zip);
     }
 
 
@@ -630,6 +630,6 @@ public class UpdateData_Routes_Wifi_Test {
         UpdateData.updateWifiField("zip", "0", "998");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM wifi_location WHERE wifi_id = '998'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 0);
+        assertEquals(0, zip);
     }
 }

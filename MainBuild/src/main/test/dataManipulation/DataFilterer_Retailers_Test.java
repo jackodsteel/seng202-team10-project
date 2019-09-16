@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -61,7 +62,7 @@ public class DataFilterer_Retailers_Test {
 
         List<RetailLocation> retailLocations = dataFilterer.filterRetailers("pizza", null, null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 2);
+        assertEquals(2, size);
     }
 
 
@@ -70,7 +71,7 @@ public class DataFilterer_Retailers_Test {
         DataFilterer dataFilterer = new DataFilterer(db);
         List<RetailLocation> retailLocations = dataFilterer.filterRetailers("", null, null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 50);
+        assertEquals(50, size);
     }
 
 
@@ -79,7 +80,7 @@ public class DataFilterer_Retailers_Test {
         DataFilterer dataFilterer = new DataFilterer(db);
         List<RetailLocation> retailLocations = dataFilterer.filterRetailers(null, "broad", null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 8);
+        assertEquals(8, size);
     }
 
 
@@ -89,7 +90,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "a", null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 38);
+        assertEquals(38, size);
     }
 
 
@@ -99,7 +100,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "q", null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 1);
+        assertEquals(1, size);
     }
 
 
@@ -109,7 +110,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, "", null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 50);
+        assertEquals(50, size);
     }
 
 
@@ -123,7 +124,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, null, "Nightlife", -1, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -143,7 +144,7 @@ public class DataFilterer_Retailers_Test {
         List<String> retailName = new ArrayList<>();
         retailLocations = dataFilterer.filterRetailers(null, null, "", -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 50);
+        assertEquals(50, size);
     }
 
 
@@ -160,7 +161,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, null, null, 10005, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -171,7 +172,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, 10038, null);
         int size = retailLocations.size();
-        assertTrue(size == 24);
+        assertEquals(24, size);
     }
 
 
@@ -183,7 +184,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, null, null, 99999999, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -196,7 +197,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, null, null, 0, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -207,7 +208,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "foo");
         int size = retailLocations.size();
-        assertTrue(size == 0);
+        assertEquals(0, size);
     }
 
 
@@ -217,7 +218,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "test list");
         int size = retailLocations.size();
-        assertTrue(size == 50);
+        assertEquals(50, size);
     }
 
 
@@ -227,7 +228,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers(null, null, null, -1, "");
         int size = retailLocations.size();
-        assertTrue(size == 0);
+        assertEquals(0, size);
     }
 
 
@@ -240,7 +241,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers("soup", null, null, 10005, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -251,7 +252,7 @@ public class DataFilterer_Retailers_Test {
         List<RetailLocation> retailLocations;
         retailLocations = dataFilterer.filterRetailers("cafe", "broad", null, -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 2);
+        assertEquals(2, size);
     }
 
 
@@ -264,7 +265,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers("burrito", null, "Casual Eating & Takeout", -1, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -281,7 +282,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, "broad", "Casual Eating & Takeout", -1, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -299,7 +300,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, "b", null, 10004, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 
@@ -314,7 +315,7 @@ public class DataFilterer_Retailers_Test {
         retailLocations = dataFilterer.filterRetailers(null, null, "Shopping", 10007, null);
         int size = retailName.size();
         for (int i = 0; i < size; i++){
-            assertTrue(retailName.get(i).equals(retailLocations.get(i).getName()));
+            assertEquals(retailName.get(i), retailLocations.get(i).getName());
         }
     }
 }

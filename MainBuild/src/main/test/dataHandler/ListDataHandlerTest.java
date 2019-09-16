@@ -10,8 +10,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 import static main.Main.hu;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * tests for ListDataHandler
@@ -56,8 +55,8 @@ public class ListDataHandlerTest {
         String list1 = ListDataHandler.getListName();
         ListDataHandler.setListName(string2);
         String list2 = ListDataHandler.getListName();
-        assertTrue(list1.equals(string1));
-        assertTrue(list2.equals(string2));
+        assertEquals(list1, string1);
+        assertEquals(list2, string2);
     }
 
 
@@ -89,7 +88,7 @@ public class ListDataHandlerTest {
     public void checkListName_created_by_current_user() {
         listDataHandler.addList("check list name");
         boolean result = listDataHandler.checkListName("check list name");
-        assertTrue(!result);
+        assertFalse(result);
     }
 
 

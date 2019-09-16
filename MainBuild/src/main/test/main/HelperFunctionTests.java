@@ -68,10 +68,10 @@ public class HelperFunctionTests {
         String[] date4Arr = HelperFunctions.convertDates(date4);
         String[] date5Arr = HelperFunctions.convertDates(date5);
         assertTrue(date1Arr[0].equals("2017") &&date1Arr[1].equals("12") || date1Arr[2].equals("25"));
-        assertTrue(date2Arr == null);
-        assertTrue(date3Arr == null);
-        assertTrue(date4Arr == null);
-        assertTrue(date5Arr == null);
+        assertNull(date2Arr);
+        assertNull(date3Arr);
+        assertNull(date4Arr);
+        assertNull(date5Arr);
 
     }
 
@@ -101,9 +101,9 @@ public class HelperFunctionTests {
                 "2017", "02", "01", "00:00:00");
         int february = HelperFunctions.getDuration("2017", "02", "01", "00:00:00",
                 "2017", "03", "01", "00:00:00");
-        assertTrue(oneSecond == 1);
-        assertTrue(negativeOneSecond == -1);
-        assertTrue(oneDay == 86400); //60*60*24
+        assertEquals(1, oneSecond);
+        assertEquals(negativeOneSecond, -1);
+        assertEquals(86400, oneDay); //60*60*24
         assertTrue(janurary > february);
     }
 
@@ -114,11 +114,11 @@ public class HelperFunctionTests {
         String oneHour = HelperFunctions.secondsToString(3600);
         String oneDay = HelperFunctions.secondsToString(86400);
         String oneOfEach = HelperFunctions.secondsToString(90061);
-        assertTrue(oneSecond.equals("1s"));
-        assertTrue(oneMinute.equals("1m, 0s"));
-        assertTrue(oneHour.equals("1h, 0m, 0s"));
-        assertTrue(oneDay.equals("1d, 0h, 0m, 0s"));
-        assertTrue(oneOfEach.equals("1d, 1h, 1m, 1s"));
+        assertEquals("1s", oneSecond);
+        assertEquals("1m, 0s", oneMinute);
+        assertEquals("1h, 0m, 0s", oneHour);
+        assertEquals("1d, 0h, 0m, 0s", oneDay);
+        assertEquals("1d, 1h, 1m, 1s", oneOfEach);
     }
 
     @Test

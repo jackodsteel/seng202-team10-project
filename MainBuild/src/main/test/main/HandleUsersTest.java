@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.sql.ResultSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 public class HandleUsersTest {
@@ -229,7 +230,7 @@ public class HandleUsersTest {
         hu.logIn(testName); // Logging into a new user called "Another Tester".
 
         hu.logOutOfUser(); // Logging out of "Another Tester"'s account.
-        assertEquals(null, hu.currentCyclist);
+        assertNull(hu.currentCyclist);
     }
 
     /**

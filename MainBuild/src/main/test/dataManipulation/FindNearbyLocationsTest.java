@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -133,8 +133,8 @@ public class FindNearbyLocationsTest {
         List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
-        assertTrue(wifiDistances.equals(sortedWifi));
-        assertTrue(retailDistance.equals(sortedRetail));
+        assertEquals(wifiDistances, sortedWifi);
+        assertEquals(retailDistance, sortedRetail);
     }
 
 
@@ -152,8 +152,8 @@ public class FindNearbyLocationsTest {
         List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
-        assertTrue(wifiDistances.equals(sortedWifi));
-        assertTrue(retailDistance.equals(sortedRetail));
+        assertEquals(wifiDistances, sortedWifi);
+        assertEquals(retailDistance, sortedRetail);
     }
 
 
@@ -171,8 +171,8 @@ public class FindNearbyLocationsTest {
         List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
-        assertTrue(wifiDistances.equals(sortedWifi));
-        assertTrue(retailDistance.equals(sortedRetail));
+        assertEquals(wifiDistances, sortedWifi);
+        assertEquals(retailDistance, sortedRetail);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class FindNearbyLocationsTest {
         List<Double> sortedRetail = new ArrayList<>(retailDistance);
         Collections.sort(sortedRetail);
 
-        assertTrue(wifiDistances.equals(sortedWifi));
-        assertTrue(retailDistance.equals(sortedRetail));
+        assertEquals(wifiDistances, sortedWifi);
+        assertEquals(retailDistance, sortedRetail);
     }
 }

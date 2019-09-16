@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.nio.file.Files;
 import java.sql.ResultSet;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class UpdateData_Retailers_Test {
 
@@ -41,7 +41,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("lat", "50.123456789", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == 50.123456789);
+        assertEquals(50.123456789, lat, 0.0);
     }
 
 
@@ -50,7 +50,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("lat", "-50.123456789", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == -50.123456789);
+        assertEquals(lat, -50.123456789, 0.0);
     }
 
 
@@ -59,7 +59,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("lat", "0", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT lat FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lat = rs.getDouble("lat");
-        assertTrue(lat == 0.0);
+        assertEquals(0.0, lat, 0.0);
     }
 
 
@@ -68,7 +68,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("long", "50.123456789", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT long FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lon = rs.getDouble("long");
-        assertTrue(lon == 50.123456789);
+        assertEquals(50.123456789, lon, 0.0);
     }
 
 
@@ -77,7 +77,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("long", "-50.123456789", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT long FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lon = rs.getDouble("long");
-        assertTrue(lon == -50.123456789);
+        assertEquals(lon, -50.123456789, 0.0);
     }
 
 
@@ -86,7 +86,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("long", "0", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT long FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         double lon = rs.getDouble("long");
-        assertTrue(lon == 0.0);
+        assertEquals(0.0, lon, 0.0);
     }
 
 
@@ -95,7 +95,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("city", "foovile", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT city FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String city = rs.getString("city");
-        assertTrue(city.equals("foovile"));
+        assertEquals("foovile", city);
     }
 
 
@@ -104,7 +104,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("city", "", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT city FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String city = rs.getString("city");
-        assertTrue(city.equals(""));
+        assertEquals("", city);
     }
 
 
@@ -113,7 +113,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("state", "FOO", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT state FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String state = rs.getString("state");
-        assertTrue(state.equals("FOO"));
+        assertEquals("FOO", state);
     }
 
     @Test
@@ -121,7 +121,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("state", "", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT state FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String state = rs.getString("state");
-        assertTrue(state.equals(""));
+        assertEquals("", state);
     }
 
 
@@ -130,7 +130,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("zip", "99999999", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 99999999);
+        assertEquals(99999999, zip);
     }
 
 
@@ -139,7 +139,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("zip", "46754", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 46754);
+        assertEquals(46754, zip);
     }
 
 
@@ -148,7 +148,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("zip", "0", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT zip FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         int zip = rs.getInt("zip");
-        assertTrue(zip == 0);
+        assertEquals(0, zip);
     }
 
 
@@ -157,7 +157,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("main_type", "Personal and Professional Services", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT main_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String mainType = rs.getString("main_type");
-        assertTrue(mainType.equals("Personal and Professional Services"));
+        assertEquals("Personal and Professional Services", mainType);
     }
 
 
@@ -166,7 +166,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("main_type", "Shopping", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT main_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String mainType = rs.getString("main_type");
-        assertTrue(mainType.equals("Shopping"));
+        assertEquals("Shopping", mainType);
     }
 
 
@@ -175,7 +175,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("main_type", "", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT main_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String mainType = rs.getString("main_type");
-        assertTrue(mainType.equals(""));
+        assertEquals("", mainType);
     }
 
 
@@ -184,7 +184,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("secondary_type", "P-Banks and Check Cashing", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT secondary_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String secondaryType = rs.getString("secondary_type");
-        assertTrue(secondaryType.equals("P-Banks and Check Cashing"));
+        assertEquals("P-Banks and Check Cashing", secondaryType);
     }
 
 
@@ -193,7 +193,7 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("secondary_type", "F-Deli", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT secondary_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String secondaryType = rs.getString("secondary_type");
-        assertTrue(secondaryType.equals("F-Deli"));
+        assertEquals("F-Deli", secondaryType);
     }
 
 
@@ -202,6 +202,6 @@ public class UpdateData_Retailers_Test {
         UpdateData.updateRetailerField("secondary_type", "", "Starbucks Coffee", "3 New York Plaza");
         ResultSet rs = db.executeQuerySQL("SELECT secondary_type FROM retailer WHERE retailer_name = 'Starbucks Coffee' AND address = '3 New York Plaza'");
         String secondaryType = rs.getString("secondary_type");
-        assertTrue(secondaryType.equals(""));
+        assertEquals("", secondaryType);
     }
 }
