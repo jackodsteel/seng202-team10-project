@@ -105,7 +105,7 @@ public class HelperFunctions {
      * @param date String of the form yyyy-MM-dd
      */
     public static String[] convertDates(String date) {
-        String dateInts[] = new String[3];
+        String[] dateInts = new String[3];
         if (date == null || date.length() != 10 || date.charAt(4) != '-' || date.charAt(7) != '-') {
             return null;
         }
@@ -157,8 +157,7 @@ public class HelperFunctions {
      * @return the total distance the cyclist has travelled
      */
     public static double calculateDistanceCycled(Cyclist cyclist) {
-        List<Route> takenList = new ArrayList<>();
-        takenList.addAll(cyclist.getTakenRoutes());
+        List<Route> takenList = new ArrayList<>(cyclist.getTakenRoutes());
         double distanceCycled = 0;
         for (Route route : takenList) {
             distanceCycled += route.getDistance();
@@ -174,8 +173,7 @@ public class HelperFunctions {
      * @return average distance travelled
      */
     public static double cacluateAverageDistance(Cyclist cyclist, HandleUsers hu) {
-        List<Route> takenList = new ArrayList<>();
-        takenList.addAll(hu.currentCyclist.getTakenRoutes());
+        List<Route> takenList = new ArrayList<>(hu.currentCyclist.getTakenRoutes());
         double averageDistance = 0;
         if (takenList.size() == 0) { // Avoid divide by 0 error.
             averageDistance = 0;
@@ -193,8 +191,7 @@ public class HelperFunctions {
      * @return shortest distance out of all taken routes
      */
     public static double calculateShortestRoute(Cyclist cyclist) {
-        List<Route> takenList = new ArrayList<>();
-        takenList.addAll(cyclist.getTakenRoutes());
+        List<Route> takenList = new ArrayList<>(cyclist.getTakenRoutes());
         double shortestDistance = 9999999; // No routes will be of a size greater than this.
         for (int i = 0; i < cyclist.getTakenRoutes().size(); i++) {
             if (takenList.get(i).getDistance() < shortestDistance) {
@@ -212,8 +209,7 @@ public class HelperFunctions {
      * @return shortest distance out of all taken routes
      */
     public static double calculateLongestRoute(Cyclist cyclist) {
-        List<Route> takenList = new ArrayList<>();
-        takenList.addAll(cyclist.getTakenRoutes());
+        List<Route> takenList = new ArrayList<>(cyclist.getTakenRoutes());
         double longestDistance = -1;
         for (Route route : takenList) {
             if (route.getDistance() > longestDistance) {

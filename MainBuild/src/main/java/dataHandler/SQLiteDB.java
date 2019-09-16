@@ -55,13 +55,13 @@ public class SQLiteDB {
      */
     public boolean addTable(String tableName, String[] fields, String primaryKey) {
         try {
-            String fieldsText = "";
-            fieldsText += fields[0];
+            StringBuilder fieldsText = new StringBuilder();
+            fieldsText.append(fields[0]);
             for (int i = 1; i < fields.length; i++) {
-                fieldsText += ", " + fields[i];
+                fieldsText.append(", ").append(fields[i]);
             }
             String addTable = "CREATE TABLE %s(%s, PRIMARY KEY(%s))";
-            String f = String.format(addTable, tableName, fieldsText, primaryKey);
+            String f = String.format(addTable, tableName, fieldsText.toString(), primaryKey);
             stmt.execute(f);
             return true;
         } catch (SQLException e) {

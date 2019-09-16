@@ -29,10 +29,7 @@ import netscape.javascript.JSObject;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Controller for the plan route scene.
@@ -386,9 +383,7 @@ public class MapController extends Controller implements Initializable, MapCompo
         if (wifiLocations == null) {
             return;
         }
-        for (WifiLocation location : wifiLocations) {
-            this.wifiLocations.add(location);
-        }
+        this.wifiLocations.addAll(Arrays.asList(wifiLocations));
     }
 
     /**
@@ -407,9 +402,7 @@ public class MapController extends Controller implements Initializable, MapCompo
         if (retailLocations == null) {
             return;
         }
-        for (RetailLocation location : retailLocations) {
-            this.retailLocations.add(location);
-        }
+        this.retailLocations.addAll(Arrays.asList(retailLocations));
     }
 
     /**
@@ -429,9 +422,7 @@ public class MapController extends Controller implements Initializable, MapCompo
         if (routes == null) {
             return;
         }
-        for (Route route : routes) {
-            this.routes.add(route);
-        }
+        this.routes.addAll(Arrays.asList(routes));
     }
 
     /**

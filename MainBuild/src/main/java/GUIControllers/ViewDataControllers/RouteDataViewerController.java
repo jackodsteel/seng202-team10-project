@@ -402,7 +402,7 @@ public class RouteDataViewerController extends DataViewerController implements A
     @FXML
     public void viewOnMap(ActionEvent event) throws IOException {
         //called when GUI button view on map button is pressed.
-        changeToPlanRouteScene(event, null, null, routeList.toArray(new Route[routeList.size()]));
+        changeToPlanRouteScene(event, null, null, routeList.toArray(new Route[0]));
     }
 
     /**

@@ -138,7 +138,7 @@ public class WifiDataViewerController extends DataViewerController {
      */
     @FXML
     void displayDataOnMap(ActionEvent event) throws IOException {
-        changeToPlanRouteScene(event, wifiList.toArray(new WifiLocation[wifiList.size()]), null, null);
+        changeToPlanRouteScene(event, wifiList.toArray(new WifiLocation[0]), null, null);
     }
 
     /**

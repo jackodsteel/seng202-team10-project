@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 public class DataFilterer_Retailers_Test {
@@ -134,7 +133,7 @@ public class DataFilterer_Retailers_Test {
         DataFilterer dataFilterer = new DataFilterer(db);
         List<RetailLocation> retailLocations = dataFilterer.filterRetailers(null, null, "Casual Eating & Takeout", -1, null);
         int size = retailLocations.size();
-        assertTrue(size == 19);
+        assertEquals(19, size);
     }
 
     @Test

@@ -69,8 +69,7 @@ public abstract class Controller {
     }
 
     /**
-     * Makes a confirmation dialogue box and returns yes as true, no as false.
-     * Assumes that if dialogue is exited, result is no.
+     * Makes a success dialogue box that doesn't care about the result.
      *
      * @param message String that provides the message for the dialogue box.
      * @param details String that provides the details for the dialogue box.
@@ -80,10 +79,6 @@ public abstract class Controller {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, details, ButtonType.OK);
         alert.setHeaderText(message);
         alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.OK) {
-            System.out.println("");
-        }
     }
 
     public Stage getCurrentStage() {
@@ -139,7 +134,7 @@ public abstract class Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/planRoute.fxml"));
         Scene planRouteScene = new Scene(loader.load());
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        MapController controller = loader.<MapController>getController();
+        MapController controller = loader.getController();
         controller.addWifiLocations(wifiLocations);
         controller.addRetailLocations(retailLocations);
         controller.addRoutes(routes);

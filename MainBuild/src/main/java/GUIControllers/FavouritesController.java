@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -125,7 +124,7 @@ public class FavouritesController extends Controller implements Initializable {
     @FXML
     void showFavourites(ActionEvent event) throws IOException {
         //called when GUI button view on map button is pressed.
-        changeToPlanRouteScene(event, wifiList.toArray(new WifiLocation[wifiList.size()]), retailerList.toArray(new RetailLocation[retailerList.size()]), routeList.toArray(new Route[routeList.size()]));
+        changeToPlanRouteScene(event, wifiList.toArray(new WifiLocation[0]), retailerList.toArray(new RetailLocation[0]), routeList.toArray(new Route[0]));
     }
 
 

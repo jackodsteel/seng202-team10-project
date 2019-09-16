@@ -137,7 +137,7 @@ public class RetailerDataViewerController extends DataViewerController {
     @FXML
     void displayDataOnMap(ActionEvent event) throws IOException {
         //Called when GUI button View on map is pressed.
-        changeToPlanRouteScene(event, null, retailList.toArray(new RetailLocation[retailList.size()]), null);
+        changeToPlanRouteScene(event, null, retailList.toArray(new RetailLocation[0]), null);
     }
 
     /**
