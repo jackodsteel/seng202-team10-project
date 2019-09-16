@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,10 +20,6 @@ import java.io.IOException;
 
 public abstract class DataViewerController extends Controller implements Initializable {
 
-
-    @FXML
-    private AnchorPane content;
-
     /**
      * Changes the current scene to view route data.
      *
@@ -33,15 +28,8 @@ public abstract class DataViewerController extends Controller implements Initial
      */
     @FXML
     void showRoutes(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent routeViewerParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/routeViewData.fxml"));
-        Scene routeViewerScene = new Scene(routeViewerParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(routeViewerScene);
+        showPage("/FXML/DataViewerFXMLs/routeViewData.fxml", event);
     }
-
-
-
 
     /**
      * Changes the current scene to wifi location viewer.
@@ -51,11 +39,7 @@ public abstract class DataViewerController extends Controller implements Initial
      */
     @FXML
     void showWifiLocations(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent wifiViewerParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/wifiViewData.fxml"));
-        Scene wifiViewerScene = new Scene(wifiViewerParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(wifiViewerScene);
+        showPage("/FXML/DataViewerFXMLs/wifiViewData.fxml", event);
     }
 
     /**
@@ -66,11 +50,15 @@ public abstract class DataViewerController extends Controller implements Initial
      */
     @FXML
     void showRetailers(ActionEvent event) throws IOException {
+        showPage("/FXML/DataViewerFXMLs/retailerViewData.fxml", event);
+    }
+
+    private void showPage(String fxmlLocation, ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent retailerViewerParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/retailerViewData.fxml"));
-        Scene retailerViewerScene = new Scene(retailerViewerParent);
+        Parent parent = FXMLLoader.load(getClass().getResource(fxmlLocation));
+        Scene scene = new Scene(parent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(retailerViewerScene);
+        currentStage.setScene(scene);
     }
 
 }
