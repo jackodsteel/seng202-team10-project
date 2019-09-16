@@ -301,7 +301,7 @@ public class RetailerDataViewerController extends DataViewerController {
             popup.setResizable(false);
             popup.initModality(Modality.APPLICATION_MODAL);
             popup.initOwner(((Node) event.getSource()).getScene().getWindow());
-            Parent popupParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/detailedRetailerInformation.fxml"));
+            Parent popupParent = FXMLLoader.load(getClass().getResource("/FXML/DataViewerFXMLs/detailedRetailerInformation.fxml"));
             Scene popupScene = new Scene(popupParent);
             popup.setScene(popupScene);
             popup.show();

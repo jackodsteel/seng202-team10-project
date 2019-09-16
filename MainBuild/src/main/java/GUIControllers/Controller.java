@@ -93,7 +93,7 @@ public abstract class Controller {
      */
     @FXML
     private void openDrawer() throws IOException {
-        VBox box = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/SidePanel.fxml"));
+        VBox box = FXMLLoader.load(getClass().getResource("/FXML/SidePanel.fxml"));
         drawer.setSidePane(box);
 
         if (drawer.isShown()) {
@@ -112,7 +112,7 @@ public abstract class Controller {
     @FXML
     public void changeToPlanRouteScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent planRouteParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/planRoute.fxml"));
+        Parent planRouteParent = FXMLLoader.load(getClass().getResource("/FXML/planRoute.fxml"));
         Scene planRouteScene = new Scene(planRouteParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(planRouteScene);
@@ -131,7 +131,7 @@ public abstract class Controller {
     @FXML
     public void changeToPlanRouteScene(ActionEvent event, WifiLocation[] wifiLocations, RetailLocation[] retailLocations, Route[] routes) throws IOException {
         doOnSceneChange();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/planRoute.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/planRoute.fxml"));
         Scene planRouteScene = new Scene(loader.load());
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         MapController controller = loader.getController();
@@ -150,7 +150,7 @@ public abstract class Controller {
     @FXML
     public void changeToFavouritesScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/favourites.fxml"));
+        Parent homeParent = FXMLLoader.load(getClass().getResource("/FXML/favourites.fxml"));
         Scene homeScene = new Scene(homeParent);
         currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(homeScene);
@@ -165,7 +165,7 @@ public abstract class Controller {
     @FXML
     public void changeToAddDataScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent routeEntryParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/routeManualEntry.fxml"));
+        Parent routeEntryParent = FXMLLoader.load(getClass().getResource("/FXML/routeManualEntry.fxml"));
         Scene routeEntryScene = new Scene(routeEntryParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(routeEntryScene);
@@ -182,7 +182,7 @@ public abstract class Controller {
     @FXML
     void changeToAddDataScene(ActionEvent event, String startAddress, String endAddress) throws IOException {
         doOnSceneChange();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/routeManualEntry.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/routeManualEntry.fxml"));
         Scene routeManualEntryScene = new Scene(loader.load());
 
         AddDataController controller = loader.getController();
@@ -201,7 +201,7 @@ public abstract class Controller {
     @FXML
     public void changeToViewDataScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent viewDataParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/routeViewData.fxml"));
+        Parent viewDataParent = FXMLLoader.load(getClass().getResource("/FXML/DataViewerFXMLs/routeViewData.fxml"));
         Scene viewDataScene = new Scene(viewDataParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(viewDataScene);
@@ -216,7 +216,7 @@ public abstract class Controller {
     @FXML
     public void changeToProfileScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent profileParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/profile.fxml"));
+        Parent profileParent = FXMLLoader.load(getClass().getResource("/FXML/profile.fxml"));
         Scene profileScene = new Scene(profileParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(profileScene);
@@ -231,7 +231,7 @@ public abstract class Controller {
     @FXML
     public void changeToCompletedRoutesScene(ActionEvent event) throws IOException {
         doOnSceneChange();
-        Parent completedRoutesParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/statistics.fxml"));
+        Parent completedRoutesParent = FXMLLoader.load(getClass().getResource("/FXML/statistics.fxml"));
         Scene completedRoutesScene = new Scene(completedRoutesParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(completedRoutesScene);
@@ -266,7 +266,7 @@ public abstract class Controller {
         popup.setResizable(false);
         popup.initModality(Modality.WINDOW_MODAL);
         popup.initOwner(((Node) event.getSource()).getScene().getWindow());
-        Parent popupParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/help.fxml"));
+        Parent popupParent = FXMLLoader.load(getClass().getResource("/FXML/help.fxml"));
         Scene popupScene = new Scene(popupParent);
         popup.setScene(popupScene);
         popup.show();

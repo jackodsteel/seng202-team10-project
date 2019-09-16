@@ -445,7 +445,7 @@ public class AddDataController extends Controller implements Initializable {
                 listDataHandler.addList(currentList);
                 initListComboboxes();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/progressPopup.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/progressPopup.fxml"));
                 Parent progressParent = loader.load();
                 ProgressPopupController controller = loader.getController();
                 Scene progressScene = new Scene(progressParent);
@@ -514,7 +514,7 @@ public class AddDataController extends Controller implements Initializable {
                 listDataHandler.addList(currentList);
                 initListComboboxes();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/progressPopup.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/progressPopup.fxml"));
                 Parent progressParent = loader.load();
                 ProgressPopupController controller = loader.getController();
                 Scene progressScene = new Scene(progressParent);
@@ -580,7 +580,7 @@ public class AddDataController extends Controller implements Initializable {
                 listDataHandler.addList(currentList);
                 initListComboboxes();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/progressPopup.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/progressPopup.fxml"));
                 Parent progressParent = loader.load();
                 ProgressPopupController controller = loader.getController();
                 Scene progressScene = new Scene(progressParent);
@@ -613,7 +613,7 @@ public class AddDataController extends Controller implements Initializable {
      */
     @FXML
     void changeToRouteEntryScene(ActionEvent event) throws IOException {
-        Parent manualEntryParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/routeManualEntry.fxml"));
+        Parent manualEntryParent = FXMLLoader.load(getClass().getResource("/FXML/routeManualEntry.fxml"));
         Scene manualEntryScene = new Scene(manualEntryParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(manualEntryScene);
@@ -627,7 +627,7 @@ public class AddDataController extends Controller implements Initializable {
      */
     @FXML
     void changeToWifiEntryScene(ActionEvent event) throws IOException {
-        Parent manualEntryParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/wifiManualEntry.fxml"));
+        Parent manualEntryParent = FXMLLoader.load(getClass().getResource("/FXML/wifiManualEntry.fxml"));
         Scene manualEntryScene = new Scene(manualEntryParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(manualEntryScene);
@@ -641,7 +641,7 @@ public class AddDataController extends Controller implements Initializable {
      */
     @FXML
     void changeToRetailerEntryScene(ActionEvent event) throws IOException {
-        Parent manualEntryParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/retailerManualEntry.fxml"));
+        Parent manualEntryParent = FXMLLoader.load(getClass().getResource("/FXML/retailerManualEntry.fxml"));
         Scene manualEntryScene = new Scene(manualEntryParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(manualEntryScene);

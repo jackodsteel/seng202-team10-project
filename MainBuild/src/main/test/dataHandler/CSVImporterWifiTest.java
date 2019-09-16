@@ -43,7 +43,7 @@ public class CSVImporterWifiTest {
 
     @Test
     public void processCSVIncorrectFormat() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
                 .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
         assertEquals(0, rs.getInt(1));
@@ -59,7 +59,7 @@ public class CSVImporterWifiTest {
 
     @Test
     public void processCSVValid() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
                 .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
         assertEquals(50, rs.getInt(1));
@@ -67,9 +67,9 @@ public class CSVImporterWifiTest {
 
     @Test
     public void processCSVValidTwice() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
                 .enableTestMode().call();
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
                 .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
         assertEquals(50, rs.getInt(1));
@@ -78,7 +78,7 @@ public class CSVImporterWifiTest {
     @Ignore
     @Test
     public void testImportSpeed() throws Exception {
-        CSVImporter task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/NYC_Free_Public_WiFi_03292017.csv").getFile(), handler)
+        CSVImporter task = new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017.csv").getFile(), handler)
                 .enableTestMode();
         long startTime = System.currentTimeMillis();
         task.call();

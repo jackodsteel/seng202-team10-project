@@ -133,7 +133,7 @@ public class ProfileController extends Controller implements Initializable {
      * @throws IOException
      */
     private void navigateToStartUp(ActionEvent event) throws IOException {
-        Parent logInParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/startUp.fxml"));
+        Parent logInParent = FXMLLoader.load(getClass().getResource("/FXML/startUp.fxml"));
         Scene logInScene = new Scene(logInParent);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(logInScene);

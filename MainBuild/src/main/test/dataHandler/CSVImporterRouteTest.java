@@ -43,7 +43,7 @@ public class CSVImporterRouteTest {
 
     @Test
     public void processCSVIncorrectFormat() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
                 .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(0, rs.getInt(1));
@@ -59,7 +59,7 @@ public class CSVImporterRouteTest {
 
     @Test
     public void processCSVValid() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
                 .enableTestMode().call();
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
         assertEquals(50, rs.getInt(1));
@@ -67,10 +67,10 @@ public class CSVImporterRouteTest {
 
     @Test
     public void processCSVValidTwice() throws Exception {
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
                 .enableTestMode().call();
 
-        new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
+        new CSVImporter(db, getClass().getResource("/CSV/201601-citibike-tripdata-test.csv").getFile(), handler)
                 .enableTestMode().call();
 
         ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM route_information");
@@ -80,7 +80,7 @@ public class CSVImporterRouteTest {
     @Ignore
     @Test
     public void testImportSpeed() throws Exception {
-        CSVImporter task = new CSVImporter(db, getClass().getClassLoader().getResource("CSV/201601-citibike-tripdata.csv").getFile(), handler).enableTestMode();
+        CSVImporter task = new CSVImporter(db, getClass().getResource("/CSV/201601-citibike-tripdata.csv").getFile(), handler).enableTestMode();
         long startTime = System.currentTimeMillis();
         task.call();
 

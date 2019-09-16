@@ -26,7 +26,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -97,15 +96,8 @@ public class RouteDataViewerController extends DataViewerController implements A
 
     private ObservableList<Route> routeList = FXCollections.observableArrayList();
 
-    private List<Route> routes = new ArrayList<>();
-
     static public Route getRoute() {
         return route;
-    }
-
-
-    private int getRank() {
-        return 0;
     }
 
     /**
@@ -288,8 +280,7 @@ public class RouteDataViewerController extends DataViewerController implements A
             timeLower = null;
             timeUpper = null;
         }
-        String[] times = {timeLower, timeUpper};
-        return times;
+        return new String[]{timeLower, timeUpper};
     }
 
 
@@ -442,7 +433,7 @@ public class RouteDataViewerController extends DataViewerController implements A
             popup.setResizable(false);
             popup.initModality(Modality.APPLICATION_MODAL);
             popup.initOwner(((Node) event.getSource()).getScene().getWindow());
-            Parent popupParent = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/DataViewerFXMLs/detailedRouteInformation.fxml"));
+            Parent popupParent = FXMLLoader.load(getClass().getResource("/FXML/DataViewerFXMLs/detailedRouteInformation.fxml"));
             Scene popupScene = new Scene(popupParent);
             popup.setScene(popupScene);
             popup.show();

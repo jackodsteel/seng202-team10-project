@@ -21,9 +21,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         initDB();
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/startUp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/startUp.fxml"));
 
-        String url = getClass().getClassLoader().getResource("Images/bicycleIcon.png").toString();
+        String url = getClass().getResource("/Images/bicycleIcon.png").toString();
         primaryStage.getIcons().add(new Image(url));
 
 
