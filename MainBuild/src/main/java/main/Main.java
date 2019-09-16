@@ -26,6 +26,7 @@ public class Main extends Application {
         hu = new HandleUsers();
         hu.init(db);
         UpdateData.init(db);
+        new DatabaseUser(db);
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXML/startUp.fxml"));
 
