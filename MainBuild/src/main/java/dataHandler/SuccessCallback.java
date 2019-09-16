@@ -1,6 +1,6 @@
 package dataHandler;
 
-public interface Callback {
+public interface SuccessCallback {
     void result(boolean result);
 }
 

@@ -45,9 +45,9 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
      * To add support for a new format, just add some extra checks, and if there is a different number of fields, add that number to the fieldCounts list
      *
      * @param record   A string array of object corresponding to the CSV
-     * @param callback The callback function to return the success value to
+     * @param successCallback The callback function to return the success value to
      */
-    public void processLine(String[] record, Callback callback) {
+    public void processLine(String[] record, SuccessCallback successCallback) {
         if (record.length == 18 && !record[10].equals("")) {
             double lat;
             double lon;
@@ -55,19 +55,19 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
                 lat = Double.parseDouble(record[10]);
                 lon = Double.parseDouble(record[11]);
             } catch (NumberFormatException e) {
-                callback.result(false);
+                successCallback.result(false);
                 return;
             }
-            callback.result(addSingleEntry(record[0], record[1], lat, lon, record[3], record[4], record[5], record[7], record[8]));
+            successCallback.result(addSingleEntry(record[0], record[1], lat, lon, record[3], record[4], record[5], record[7], record[8]));
         } else if (record.length == 9 || record.length == 18) {
             if (inDatabase(record[0], record[1])) {
-                callback.result(false);
+                successCallback.result(false);
                 return;
             }
-            GeocodeOutcome outcome = new GeocodeOutcome(record, callback, this);
+            GeocodeOutcome outcome = new GeocodeOutcome(record, successCallback, this);
             Geocoder.addressToLatLonAsync(record[1] + ", " + record[3] + ", " + record[4] + ", " + record[5] + ", ", outcome);
         } else {
-            callback.result(false);
+            successCallback.result(false);
         }
     }
 
@@ -130,11 +130,11 @@ public class RetailerDataHandler implements DataHandler, GeoCallback {
     }
 
     @Override
-    public void result(String[] record, double[] latlon, Callback callback) {
+    public void result(String[] record, double[] latlon, SuccessCallback successCallback) {
         System.out.println("5");
         System.out.println(latlon[0]);
         System.out.println(latlon[1]);
-        callback.result(addSingleEntry(record[0], record[1], latlon[0], latlon[1], record[3], record[4], record[5], record[7], record[8]));
+        successCallback.result(addSingleEntry(record[0], record[1], latlon[0], latlon[1], record[3], record[4], record[5], record[7], record[8]));
     }
 
     @Override

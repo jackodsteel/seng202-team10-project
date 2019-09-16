@@ -10,7 +10,7 @@ public class RetailerDataHandlerFake extends RetailerDataHandler {
         super(db);
     }
     @Override
-    public void processLine(String[] record, Callback callback) {
+    public void processLine(String[] record, SuccessCallback successCallback) {
         System.out.println("here");
         if (record.length == 18 && !record[10].equals("")) {
             double lat;
@@ -19,14 +19,14 @@ public class RetailerDataHandlerFake extends RetailerDataHandler {
                 lat = Double.parseDouble(record[10]);
                 lon = Double.parseDouble(record[11]);
             } catch (NumberFormatException e) {
-                callback.result(false);
+                successCallback.result(false);
                 return;
             }
-            callback.result(addSingleEntry(record[0], record[1], lat, lon, record[3], record[4], record[5], record[7], record[8]));
+            successCallback.result(addSingleEntry(record[0], record[1], lat, lon, record[3], record[4], record[5], record[7], record[8]));
         } else if (record.length == 9 || record.length == 18) {
-            callback.result(addSingleEntry(record[0], record[1], 0.0, 0.0, record[3], record[4], record[5], record[7], record[8]));
+            successCallback.result(addSingleEntry(record[0], record[1], 0.0, 0.0, record[3], record[4], record[5], record[7], record[8]));
         } else {
-            callback.result(false);
+            successCallback.result(false);
         }
     }
 }

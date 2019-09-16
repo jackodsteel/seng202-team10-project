@@ -43,19 +43,19 @@ public class WifiDataHandler implements DataHandler {
      * Processes a CSV line and adds to the database if valid.
      *
      * @param record   A string array of object corresponding to the CSV
-     * @param callback Used to callback a bool stating the success state of the process.
+     * @param successCallback Used to callback a bool stating the success state of the process.
      */
-    public void processLine(String[] record, Callback callback) {
+    public void processLine(String[] record, SuccessCallback successCallback) {
         try {
             double lat = Double.parseDouble(record[7]);
             double lon = Double.parseDouble(record[8]);
-            callback.result(addSingleEntry(record[0], record[3], record[4], record[6], lat, lon, record[12], record[13], record[14], record[18], record[22]));
+            successCallback.result(addSingleEntry(record[0], record[3], record[4], record[6], lat, lon, record[12], record[13], record[14], record[18], record[22]));
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Incorrect string array size");
-            callback.result(false);
+            successCallback.result(false);
         } catch (NumberFormatException e) {
-            callback.result(false);
+            successCallback.result(false);
         }
     }
 

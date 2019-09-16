@@ -2,7 +2,7 @@ package dataHandler;
 
 public interface DataHandler {
 
-    void processLine(String[] record, Callback callback);
+    void processLine(String[] record, SuccessCallback successCallback);
 
     boolean canProcess(int columnCount);
 

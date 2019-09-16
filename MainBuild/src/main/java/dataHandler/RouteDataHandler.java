@@ -56,7 +56,7 @@ public class RouteDataHandler implements DataHandler {
      *
      * @param record A string array of object corresponding to the CSV
      */
-    public void processLine(String[] record, Callback callback) {
+    public void processLine(String[] record, SuccessCallback successCallback) {
         try {
             int duration = Integer.parseInt(record[0]);
 
@@ -88,13 +88,13 @@ public class RouteDataHandler implements DataHandler {
                 birth_year = Integer.parseInt(record[13]);
             }
 
-            callback.result(addSingleEntry(
+            successCallback.result(addSingleEntry(
                     duration, start_year, start_month, start_day, start_time, end_year,
                     end_month, end_day, end_time, record[3], record[4], start_lat, start_lon, record[7],
                     record[8], end_lat, end_lon, record[11], record[12], birth_year, gender));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Incorrect string array size");
-            callback.result(false);
+            successCallback.result(false);
         }
     }
 

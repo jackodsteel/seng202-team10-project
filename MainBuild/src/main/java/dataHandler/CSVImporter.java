@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-public class CSVImporter extends Task<Void> implements Callback {
+public class CSVImporter extends Task<Void> implements SuccessCallback {
 
     private final String url;
     private SQLiteDB db;
