@@ -4,17 +4,13 @@
 <?import javafx.scene.layout.VBox?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="230.0" style="-fx-background-color: lightGrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SidePanelController">
    <children>
-      <Button fx:id="planRouteButton" mnemonicParsing="false" onAction="#changeToPlanRouteScene" prefHeight="85.0" prefWidth="275.0" text="Route Planner" />
-      <Button fx:id="addDataButton" mnemonicParsing="false" onAction="#changeToAddDataScene" prefHeight="85.0" prefWidth="275.0" text="Data Adder" />
-      <Button fx:id="viewDataButton" mnemonicParsing="false" onAction="#changeToViewDataScene" prefHeight="85.0" prefWidth="275.0" text="Data Viewer" />
-      <Button fx:id="homeButton" mnemonicParsing="false" onAction="#changeToFavouritesScene" prefHeight="85.0" prefWidth="275.0" text="Favourites" />
-      <VBox prefHeight="85.0" prefWidth="230.0">
-         <children>
-            <Button fx:id="viewDataButton1" mnemonicParsing="false" onAction="#changeToCompletedRoutesScene" prefHeight="85.0" prefWidth="275.0" text="Completed Routes" />
-         </children></VBox>
-      <VBox prefHeight="46.0" prefWidth="230.0" />
-      <VBox prefHeight="57.0" prefWidth="230.0" />
-      <Button fx:id="profileButton" mnemonicParsing="false" onAction="#changeToProfileScene" prefHeight="60.0" prefWidth="230.0" text="Profile" />
-      <Button fx:id="helpButton" mnemonicParsing="false" onAction="#openHelpStage" prefHeight="60.0" prefWidth="230.0" text="Help" />
+      <Button mnemonicParsing="false" onAction="#changeToPlanRouteScene" prefHeight="85.0" prefWidth="275.0" text="Route Planner" />
+      <Button mnemonicParsing="false" onAction="#changeToAddDataScene" prefHeight="85.0" prefWidth="275.0" text="Data Adder" />
+      <Button mnemonicParsing="false" onAction="#changeToViewDataScene" prefHeight="85.0" prefWidth="275.0" text="Data Viewer" />
+      <Button mnemonicParsing="false" onAction="#changeToFavouritesScene" prefHeight="85.0" prefWidth="275.0" text="Favourites" />
+      <Button mnemonicParsing="false" onAction="#changeToCompletedRoutesScene" prefHeight="85.0" prefWidth="275.0" text="Completed Routes" />
+      <VBox prefHeight="103.0" prefWidth="275.0" />
+      <Button fx:id="profileButton" mnemonicParsing="false" onAction="#changeToProfileScene" prefHeight="60.0" prefWidth="275.0" text="Profile" />
+      <Button mnemonicParsing="false" onAction="#openHelpStage" prefHeight="60.0" prefWidth="275.0" text="Help" />
    </children>
 </VBox>

@@ -151,8 +151,6 @@ public class MapController extends Controller implements Initializable, MapCompo
 
     }
     private void makeDirectionsError() {
-
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Could not get directions");
@@ -175,7 +173,6 @@ public class MapController extends Controller implements Initializable, MapCompo
         nearbyRetailerButton.setDisable(false);
         nearbyWifiButton.setDisable(false);
         System.out.println(results.getRoutes().size());
-        results.getRoutes().get(0).getLegs().get(0);
         DirectionsLeg leg = results.getRoutes().get(0).getLegs().get(0);
         double midLat = (leg.getStartLocation().getLatitude() + leg.getEndLocation().getLatitude()) / 2;
         double midLon = (leg.getStartLocation().getLongitude() + leg.getEndLocation().getLongitude()) / 2;

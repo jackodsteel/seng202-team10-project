@@ -1,7 +1,6 @@
 package GUIControllers;
 
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
@@ -13,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.layout.VBox;
@@ -22,34 +20,17 @@ import javafx.stage.Stage;
 import main.Main;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public abstract class Controller {
 
     @FXML
     private JFXDrawer drawer;
 
-    @FXML
-    private Button addDataButton;
-
-    @FXML
-    private Button viewDataButton;
-
-    @FXML
-    private Button planRouteButton;
-
-    @FXML
-    private Button homeButton;
-
-    @FXML
-    private JFXHamburger hamburger;
-
-    private Stage currentStage;
-
     protected Task<Void> dataViewTask;
-
 
     /**
      * Creates a dialogue box over current scene with two strings that explain to the user why the dialogue box has popped up.
@@ -81,10 +62,6 @@ public abstract class Controller {
         alert.showAndWait();
     }
 
-    public Stage getCurrentStage() {
-        return currentStage;
-    }
-
     /**
      * Should be called every time the jfoenix hamburger is clicked. It will open the side panel if it
      * is currently closed, or close it if it is currently open.
@@ -111,11 +88,7 @@ public abstract class Controller {
      */
     @FXML
     public void changeToPlanRouteScene(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent planRouteParent = FXMLLoader.load(getClass().getResource("/FXML/planRoute.fxml"));
-        Scene planRouteScene = new Scene(planRouteParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(planRouteScene);
+        changeToGivenScene("/FXML/planRoute.fxml", event);
     }
 
     /**
@@ -130,15 +103,11 @@ public abstract class Controller {
      */
     @FXML
     public void changeToPlanRouteScene(ActionEvent event, WifiLocation[] wifiLocations, RetailLocation[] retailLocations, Route[] routes) throws IOException {
-        doOnSceneChange();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/planRoute.fxml"));
-        Scene planRouteScene = new Scene(loader.load());
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        MapController controller = loader.getController();
-        controller.addWifiLocations(wifiLocations);
-        controller.addRetailLocations(retailLocations);
-        controller.addRoutes(routes);
-        currentStage.setScene(planRouteScene);
+        changeToGivenScene("/FXML/planRoute.fxml", event,  (MapController controller) -> {
+            controller.addWifiLocations(wifiLocations);
+            controller.addRetailLocations(retailLocations);
+            controller.addRoutes(routes);
+        });
     }
 
     /**
@@ -149,11 +118,7 @@ public abstract class Controller {
      */
     @FXML
     public void changeToFavouritesScene(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent homeParent = FXMLLoader.load(getClass().getResource("/FXML/favourites.fxml"));
-        Scene homeScene = new Scene(homeParent);
-        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(homeScene);
+        changeToGivenScene("/FXML/favourites.fxml", event);
     }
 
     /**
@@ -164,11 +129,7 @@ public abstract class Controller {
      */
     @FXML
     public void changeToAddDataScene(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent routeEntryParent = FXMLLoader.load(getClass().getResource("/FXML/routeManualEntry.fxml"));
-        Scene routeEntryScene = new Scene(routeEntryParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(routeEntryScene);
+        changeToGivenScene("/FXML/routeManualEntry.fxml", event);
     }
 
     /**
@@ -181,15 +142,9 @@ public abstract class Controller {
      */
     @FXML
     void changeToAddDataScene(ActionEvent event, String startAddress, String endAddress) throws IOException {
-        doOnSceneChange();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/routeManualEntry.fxml"));
-        Scene routeManualEntryScene = new Scene(loader.load());
-
-        AddDataController controller = loader.getController();
-        controller.setRouteVals(startAddress, endAddress);
-
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(routeManualEntryScene);
+        changeToGivenScene("/FXML/routeManualEntry.fxml", event, (AddDataController c) -> {
+            c.setRouteVals(startAddress, endAddress);
+        });
     }
 
     /**
@@ -200,11 +155,7 @@ public abstract class Controller {
      */
     @FXML
     public void changeToViewDataScene(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent viewDataParent = FXMLLoader.load(getClass().getResource("/FXML/DataViewerFXMLs/routeViewData.fxml"));
-        Scene viewDataScene = new Scene(viewDataParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(viewDataScene);
+        changeToGivenScene("/FXML/DataViewerFXMLs/routeViewData.fxml", event);
     }
 
     /**
@@ -215,11 +166,7 @@ public abstract class Controller {
      */
     @FXML
     public void changeToProfileScene(ActionEvent event) throws IOException {
-        doOnSceneChange();
-        Parent profileParent = FXMLLoader.load(getClass().getResource("/FXML/profile.fxml"));
-        Scene profileScene = new Scene(profileParent);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(profileScene);
+        changeToGivenScene("/FXML/profile.fxml", event);
     }
 
     /**
@@ -230,11 +177,23 @@ public abstract class Controller {
      */
     @FXML
     public void changeToCompletedRoutesScene(ActionEvent event) throws IOException {
+        changeToGivenScene("/FXML/statistics.fxml", event);
+    }
+
+    private void changeToGivenScene(String fxmlLocation, ActionEvent event) throws IOException {
+        changeToGivenScene(fxmlLocation, event, x -> {});
+    }
+
+    private <T> void changeToGivenScene(String fxmlLocation, ActionEvent event, Consumer<T> doOnLoad) throws IOException {
         doOnSceneChange();
-        Parent completedRoutesParent = FXMLLoader.load(getClass().getResource("/FXML/statistics.fxml"));
-        Scene completedRoutesScene = new Scene(completedRoutesParent);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
+
+        T controller = loader.getController();
+        doOnLoad.accept(controller);
+
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(completedRoutesScene);
+        Scene scene = new Scene(loader.load());
+        currentStage.setScene(scene);
     }
 
     /**
@@ -279,12 +238,7 @@ public abstract class Controller {
      */
     @FXML
     public void openRouteRankStage(Route routeToAdd, String name) {
-        List<Integer> a = new ArrayList<>();
-        a.add(5);
-        a.add(4);
-        a.add(3);
-        a.add(2);
-        a.add(1);
+        List<Integer> a = Arrays.asList(5, 4, 3, 2, 1);
         ChoiceDialog<Integer> c = new ChoiceDialog<>(5, a);
         c.setTitle("Rank this route!");
         c.setHeaderText("Rank this route!");

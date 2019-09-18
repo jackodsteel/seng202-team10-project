@@ -17,21 +17,6 @@ import java.util.ResourceBundle;
 public class SidePanelController extends Controller implements Initializable {
 
     @FXML
-    private Button addDataButton;
-
-    @FXML
-    private Button viewDataButton;
-
-    @FXML
-    private Button planRouteButton;
-
-    @FXML
-    private Button homeButton;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
     private Button profileButton;
 
     /**
