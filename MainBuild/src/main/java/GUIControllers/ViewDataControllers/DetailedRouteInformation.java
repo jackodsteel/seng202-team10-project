@@ -536,9 +536,7 @@ public class DetailedRouteInformation extends RouteDataViewerController {
         if (makeConfirmationDialogueBox("Are you sure you want to delete this retailer?", "This cannot be undone.")) {
 
             DeleteData deleteData = new DeleteData(db, Main.hu.currentCyclist.getName());
-            DeleteData.DeletionStatus deleteStatus = deleteData.checkRouteDeletionStatus(currentRoute.getStartTime(),
-                    currentRoute.getStartDay(), currentRoute.getStartMonth(), currentRoute.getStartYear(),
-                    currentRoute.getBikeID());
+            DeleteData.DeletionStatus deleteStatus = deleteData.checkRouteDeletionStatus(currentRoute);
             switch (deleteStatus) {
                 case IN_ANOTHER_USERS_LIST:
                     makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
@@ -554,9 +552,7 @@ public class DetailedRouteInformation extends RouteDataViewerController {
                     break;
                 case CAN_BE_DELETED:
                     System.out.println("OK to delete");
-                    deleteData.deleteRoute(currentRoute.getStartTime(),
-                            currentRoute.getStartDay(), currentRoute.getStartMonth(), currentRoute.getStartYear(),
-                            currentRoute.getBikeID());
+                    deleteData.deleteRoute(currentRoute);
                     break;
             }
 

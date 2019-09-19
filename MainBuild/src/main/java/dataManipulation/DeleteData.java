@@ -1,6 +1,7 @@
 package dataManipulation;
 
 import dataHandler.SQLiteDB;
+import dataObjects.Route;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,13 +39,9 @@ public class DeleteData {
      * and completed routes tables. Prevents deletion if another user has the route in their favourite routes,
      * completed routes or a list they created.
      *
-     * @param startTime The start time of a route
-     * @param startDay The start day of a route
-     * @param startMonth The start month of a route
-     * @param startYear The start year of a route
-     * @param bikeID The bike ID of a route
+     * @param route The route to be deleted
      */
-    public void deleteRoute(String startTime, String startDay, String startMonth, String startYear, String bikeID) {
+    public void deleteRoute(Route route) {
         int numLists = 3;
         String deleteRouteString = "DELETE FROM route_information WHERE bikeid = ? AND start_time = ? AND " +
                 "start_day = ? AND start_month = ? AND start_year = ?;";
@@ -58,11 +55,11 @@ public class DeleteData {
             for (int i = 0; i < numLists; i++) {
                 System.out.println(deleteCommands[i]);
                 PreparedStatement pstmt = db.getPreparedStatement(deleteCommands[i]);
-                pstmt.setString(1, bikeID);
-                pstmt.setString(2, startTime);
-                pstmt.setString(3, startDay);
-                pstmt.setString(4, startMonth);
-                pstmt.setString(5, startYear);
+                pstmt.setString(1, route.getBikeID());
+                pstmt.setString(2, route.getStartTime());
+                pstmt.setString(3, route.getStartDay());
+                pstmt.setString(4, route.getStartMonth());
+                pstmt.setString(5, route.getStartYear());
                 if (i > 0) {
                     pstmt.setString(6, userName);
                 }
@@ -79,15 +76,10 @@ public class DeleteData {
     /**
      * Checks if another user has the route in their favourite routes, completed routes or a list they created.
      *
-     * @param startTime The start time of a route
-     * @param startDay The start day of a route
-     * @param startMonth The start month of a route
-     * @param startYear The start year of a route
-     * @param bikeID The bike ID of a route
+     * @param route The route to be deleted
      * @return DeletionStatus advising if the record can be deleted, or if not, for what reason
      */
-    public DeletionStatus checkRouteDeletionStatus(String startTime, String startDay, String startMonth, String startYear,
-                                        String bikeID) {
+    public DeletionStatus checkRouteDeletionStatus(Route route) {
         String listName;
         int count;
 
@@ -101,11 +93,11 @@ public class DeleteData {
 
         try {
             PreparedStatement pstmt = db.getPreparedStatement(findRouteList);
-            pstmt.setString(1, bikeID);
-            pstmt.setString(2, startTime);
-            pstmt.setString(3, startDay);
-            pstmt.setString(4, startMonth);
-            pstmt.setString(5, startYear);
+            pstmt.setString(1, route.getBikeID());
+            pstmt.setString(2, route.getStartTime());
+            pstmt.setString(3, route.getStartDay());
+            pstmt.setString(4, route.getStartMonth());
+            pstmt.setString(5, route.getStartYear());
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.getString(1) != null) {
@@ -121,11 +113,11 @@ public class DeleteData {
             }
 
             pstmt = db.getPreparedStatement(findRouteFavourite);
-            pstmt.setString(1, bikeID);
-            pstmt.setString(2, startTime);
-            pstmt.setString(3, startDay);
-            pstmt.setString(4, startMonth);
-            pstmt.setString(5, startYear);
+            pstmt.setString(1, route.getBikeID());
+            pstmt.setString(2, route.getStartTime());
+            pstmt.setString(3, route.getStartDay());
+            pstmt.setString(4, route.getStartMonth());
+            pstmt.setString(5, route.getStartYear());
             pstmt.setString(6, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
@@ -133,11 +125,11 @@ public class DeleteData {
             }
 
             pstmt = db.getPreparedStatement(findRouteCompleted);
-            pstmt.setString(1, bikeID);
-            pstmt.setString(2, startTime);
-            pstmt.setString(3, startDay);
-            pstmt.setString(4, startMonth);
-            pstmt.setString(5, startYear);
+            pstmt.setString(1, route.getBikeID());
+            pstmt.setString(2, route.getStartTime());
+            pstmt.setString(3, route.getStartDay());
+            pstmt.setString(4, route.getStartMonth());
+            pstmt.setString(5, route.getStartYear());
             pstmt.setString(6, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
