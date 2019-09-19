@@ -536,23 +536,28 @@ public class DetailedRouteInformation extends RouteDataViewerController {
         if (makeConfirmationDialogueBox("Are you sure you want to delete this retailer?", "This cannot be undone.")) {
 
             DeleteData deleteData = new DeleteData(db, Main.hu.currentCyclist.getName());
-            int deleteStatus = deleteData.checkRouteDeletionStatus(currentRoute.getStartTime(),
+            DeleteData.DeletionStatus deleteStatus = deleteData.checkRouteDeletionStatus(currentRoute.getStartTime(),
                     currentRoute.getStartDay(), currentRoute.getStartMonth(), currentRoute.getStartYear(),
                     currentRoute.getBikeID());
-            if (deleteStatus == 1) {
-                makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
-                        "in a list they created.");
-            } else if (deleteStatus == 2) {
-                makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
-                        "in their favourite\nroutes list.");
-            } else if (deleteStatus == 3) {
-                makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
-                        "in their completed\nroutes list.");
-            } else {
-                System.out.println("OK to delete");
-                deleteData.deleteRoute(currentRoute.getStartTime(),
-                        currentRoute.getStartDay(), currentRoute.getStartMonth(), currentRoute.getStartYear(),
-                        currentRoute.getBikeID());
+            switch (deleteStatus) {
+                case IN_ANOTHER_USERS_LIST:
+                    makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
+                            "in a list they created.");
+                    break;
+                case IN_ANOTHER_USERS_FAVOURITES:
+                    makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
+                            "in their favourite\nroutes list.");
+                    break;
+                case IN_ANOTHER_USERS_COMPLETED_ROUTES:
+                    makeErrorDialogueBox("Failed to delete route", "Another user has this route " +
+                            "in their completed\nroutes list.");
+                    break;
+                case CAN_BE_DELETED:
+                    System.out.println("OK to delete");
+                    deleteData.deleteRoute(currentRoute.getStartTime(),
+                            currentRoute.getStartDay(), currentRoute.getStartMonth(), currentRoute.getStartYear(),
+                            currentRoute.getBikeID());
+                    break;
             }
 
             //Closes popup

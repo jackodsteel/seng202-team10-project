@@ -7,8 +7,6 @@ import main.Main;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 
 import java.nio.file.Files;
 
@@ -86,44 +84,39 @@ public class DeleteDataTest {
         favouriteRetailData.addFavouriteRetail("Tester2", "WirelessRUS", "200 Water Street");
     }
 
-
-    @Captor
-    ArgumentCaptor<AddRouteCallback> callbackCaptor;
-
-
     @Test
     public void checkRouteDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
-        int deletionStatus = deleteData.checkRouteDeletionStatus("18:02:29", "03", "01",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("18:02:29", "03", "01",
                 "2016", "18702");
-        assertEquals(1, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_LIST, deletionStatus);
     }
 
 
     @Test
     public void checkRouteDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkRouteDeletionStatus("00:00:41", "01", "01",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("00:00:41", "01", "01",
                 "2016", "22285");
-        assertEquals(2, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_FAVOURITES, deletionStatus);
     }
 
 
     @Test
     public void checkRouteDeletionStatus_in_other_user_completed() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkRouteDeletionStatus("00:26:55", "01", "01",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("00:26:55", "01", "01",
                 "2016", "16498");
-        assertEquals(3, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_COMPLETED_ROUTES, deletionStatus);
     }
 
 
     @Test
     public void checkRouteDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkRouteDeletionStatus("18:15:55", "03", "01",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("18:15:55", "03", "01",
                 "2016", "21416");
-        assertEquals(0, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.CAN_BE_DELETED, deletionStatus);
     }
 
 
@@ -151,24 +144,24 @@ public class DeleteDataTest {
     @Test
     public void checkWifiDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
-        int deletionStatus = deleteData.checkWifiDeletionStatus("3");
-        assertEquals(1, deletionStatus);
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkWifiDeletionStatus("3");
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_LIST, deletionStatus);
     }
 
 
     @Test
     public void checkWifiDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkWifiDeletionStatus("998");
-        assertEquals(2, deletionStatus);
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkWifiDeletionStatus("998");
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_FAVOURITES, deletionStatus);
     }
 
 
     @Test
     public void checkWifiDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkWifiDeletionStatus("1020");
-        assertEquals(0, deletionStatus);
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkWifiDeletionStatus("1020");
+        assertEquals(DeleteData.DeletionStatus.CAN_BE_DELETED, deletionStatus);
     }
 
 
@@ -190,27 +183,27 @@ public class DeleteDataTest {
     @Test
     public void checkRetailDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
-        int deletionStatus = deleteData.checkRetailDeletionStatus("Yip's Oriental Express",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRetailDeletionStatus("Yip's Oriental Express",
                 "136 William Street");
-        assertEquals(1, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_LIST, deletionStatus);
     }
 
 
     @Test
     public void checkRetailDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkRetailDeletionStatus("Starbucks Coffee",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRetailDeletionStatus("Starbucks Coffee",
                 "3 New York Plaza");
-        assertEquals(2, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_FAVOURITES, deletionStatus);
     }
 
 
     @Test
     public void checkRetailDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
-        int deletionStatus = deleteData.checkRetailDeletionStatus("WirelessRUS",
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRetailDeletionStatus("WirelessRUS",
                 "200 Water Street");
-        assertEquals(0, deletionStatus);
+        assertEquals(DeleteData.DeletionStatus.CAN_BE_DELETED, deletionStatus);
     }
 
 

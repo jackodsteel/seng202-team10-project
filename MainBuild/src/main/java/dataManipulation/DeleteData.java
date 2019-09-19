@@ -11,6 +11,13 @@ import java.sql.SQLException;
  */
 public class DeleteData {
 
+    public enum DeletionStatus {
+        CAN_BE_DELETED,
+        IN_ANOTHER_USERS_LIST,
+        IN_ANOTHER_USERS_FAVOURITES,
+        IN_ANOTHER_USERS_COMPLETED_ROUTES
+    }
+
     private SQLiteDB db;
     private String userName;
 
@@ -72,17 +79,14 @@ public class DeleteData {
     /**
      * Checks if another user has the route in their favourite routes, completed routes or a list they created.
      *
-     * Returns 0 if the route is clear to be deleted, 1 if the route is part of another users list, 2 if the route is
-     * part of another users favourites routes or 3 if the route is part of another users completed routes.
-     *
      * @param startTime The start time of a route
      * @param startDay The start day of a route
      * @param startMonth The start month of a route
      * @param startYear The start year of a route
      * @param bikeID The bike ID of a route
-     * @return count of type int. The result of the check, see method description for more details
+     * @return DeletionStatus advising if the record can be deleted, or if not, for what reason
      */
-    public int checkRouteDeletionStatus(String startTime, String startDay, String startMonth, String startYear,
+    public DeletionStatus checkRouteDeletionStatus(String startTime, String startDay, String startMonth, String startYear,
                                         String bikeID) {
         String listName;
         int count;
@@ -112,7 +116,7 @@ public class DeleteData {
                 rs = pstmt.executeQuery();
                 count = rs.getInt(1);
                 if (count != 0) {
-                    return 1;
+                    return DeletionStatus.IN_ANOTHER_USERS_LIST;
                 }
             }
 
@@ -125,7 +129,7 @@ public class DeleteData {
             pstmt.setString(6, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
-                return 2;
+                return DeletionStatus.IN_ANOTHER_USERS_FAVOURITES;
             }
 
             pstmt = db.getPreparedStatement(findRouteCompleted);
@@ -137,12 +141,12 @@ public class DeleteData {
             pstmt.setString(6, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
-                return 3;
+                return DeletionStatus.IN_ANOTHER_USERS_COMPLETED_ROUTES;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return 0;
+        return DeletionStatus.CAN_BE_DELETED;
     }
 
 
@@ -173,17 +177,13 @@ public class DeleteData {
         }
     }
 
-
     /**
      * Checks if another user has the wifi location in their favourite wifi or a list they created.
      *
-     * Returns 0 if the wifi location is clear to be deleted, 1 if the wifi location is part of another users list or
-     * 2 if the wifi location is part of another users favourites wifi locations.
-     *
      * @param wifiID the ID number for a wifiLocation
-     * @return count of type int. The result of the check, see method description for more details
+     * @return DeletionStatus advising if the record can be deleted, or if not, for what reason
      */
-    public int checkWifiDeletionStatus(String wifiID) {
+    public DeletionStatus checkWifiDeletionStatus(String wifiID) {
         String listName;
         int count;
 
@@ -204,7 +204,7 @@ public class DeleteData {
                 rs = pstmt.executeQuery();
                 count = rs.getInt(1);
                 if (count != 0) {
-                    return 1;
+                    return DeletionStatus.IN_ANOTHER_USERS_LIST;
                 }
             }
 
@@ -213,13 +213,13 @@ public class DeleteData {
             pstmt.setString(2, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
-                return 2;
+                return DeletionStatus.IN_ANOTHER_USERS_FAVOURITES;
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return 0;
+        return DeletionStatus.CAN_BE_DELETED;
     }
 
 
@@ -257,14 +257,11 @@ public class DeleteData {
     /**
      * Checks if another user has the retail location in their favourite retailers or a list they created.
      *
-     * Returns 0 if the retailer is clear to be deleted, 1 if the retailer is part of another users list or
-     * 2 if the retailer is part of another users favourites retail locations.
-     *
      * @param retailName the name of a retail location
      * @param address the address of a retail location
-     * @return count of type int. The result of the check, see method description for more details
+     * @return DeletionStatus advising if the record can be deleted, or if not, for what reason
      */
-    public int checkRetailDeletionStatus(String retailName, String address) {
+    public DeletionStatus checkRetailDeletionStatus(String retailName, String address) {
         String listName;
         int count;
 
@@ -287,7 +284,7 @@ public class DeleteData {
                 rs = pstmt.executeQuery();
                 count = rs.getInt(1);
                 if (count != 0) {
-                    return 1;
+                    return DeletionStatus.IN_ANOTHER_USERS_LIST;
                 }
             }
 
@@ -297,12 +294,12 @@ public class DeleteData {
             pstmt.setString(3, userName);
             rs = pstmt.executeQuery();
             if (rs.getInt(1) != 0) {
-                return 2;
+                return DeletionStatus.IN_ANOTHER_USERS_FAVOURITES;
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return 0;
+        return DeletionStatus.CAN_BE_DELETED;
     }
 }

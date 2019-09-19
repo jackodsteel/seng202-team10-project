@@ -300,17 +300,21 @@ public class DetailedRetailerInformation extends DataViewerController {
     void deleteRetailer(ActionEvent event)  throws IOException{
         if (makeConfirmationDialogueBox("Are you sure you want to delete this retailer?", "This cannot be undone.")) {
             DeleteData deleteData = new DeleteData(db, Main.hu.currentCyclist.getName());
-            int deleteStatus = deleteData.checkRetailDeletionStatus(currentRetailer.getName(),
+            DeleteData.DeletionStatus deleteStatus = deleteData.checkRetailDeletionStatus(currentRetailer.getName(),
                     currentRetailer.getAddress());
-            if (deleteStatus == 1) {
-                makeErrorDialogueBox("Failed to delete retailer", "Another user has this " +
-                        "retail location in a list\nthey created.");
-            } else if (deleteStatus == 2) {
-                makeErrorDialogueBox("Failed to delete retailer", "Another user has this " +
-                        "retail location in their\nfavourite retail list.");
-            } else {
-                System.out.println("OK to delete");
-                deleteData.deleteRetailer(currentRetailer.getName(), currentRetailer.getAddress());
+            switch (deleteStatus) {
+                case IN_ANOTHER_USERS_LIST:
+                    makeErrorDialogueBox("Failed to delete retailer", "Another user has this " +
+                            "retail location in a list\nthey created.");
+                    break;
+                case IN_ANOTHER_USERS_FAVOURITES:
+                    makeErrorDialogueBox("Failed to delete retailer", "Another user has this " +
+                            "retail location in their\nfavourite retail list.");
+                    break;
+                case CAN_BE_DELETED:
+                    System.out.println("OK to delete");
+                    deleteData.deleteRetailer(currentRetailer.getName(), currentRetailer.getAddress());
+                    break;
             }
 
             //Closes popup
