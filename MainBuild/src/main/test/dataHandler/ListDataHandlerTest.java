@@ -19,7 +19,6 @@ public class ListDataHandlerTest {
     private static ListDataHandler listDataHandler;
     private static SQLiteDB db;
 
-
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
         String home = System.getProperty("user.home");

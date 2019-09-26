@@ -1,11 +1,8 @@
 package dataHandler;
 
-import dataManipulation.AddRouteCallback;
 import dataObjects.Cyclist;
 import main.HandleUsers;
 import org.junit.*;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
@@ -51,10 +48,6 @@ public class DatabaseUserTest {
     public void init() {
         databaseUser = new DatabaseUser(db);
     }
-
-
-    @Captor
-    ArgumentCaptor<AddRouteCallback> callbackCaptor;
 
     @Test
     public void addUser() throws Exception {

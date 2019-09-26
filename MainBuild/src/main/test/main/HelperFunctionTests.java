@@ -243,7 +243,7 @@ public class HelperFunctionTests {
     public void calculateShortestRoute1() {
         Cyclist cyclist = new Cyclist("Tester");
         double distance = HelperFunctions.calculateShortestRoute(cyclist);
-        assertEquals(9999999.0, distance, 0.001); // Arbitrarily large number.
+        assertEquals(Double.MAX_VALUE, distance, 0.001);
     }
 
     @Test

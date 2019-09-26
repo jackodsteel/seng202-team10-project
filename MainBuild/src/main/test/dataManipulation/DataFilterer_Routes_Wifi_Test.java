@@ -59,11 +59,11 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
 
         ClassLoader loader = DataFilterer_Routes_Wifi_Test.class.getClassLoader();
 
-        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), wifiDataHandler)
-                .enableTestMode().call();
+        new CSVImporter(db, loader.getResource("CSV/NYC_Free_Public_WiFi_03292017-test.csv")
+                .getFile(), wifiDataHandler).enableTestMode().call();
 
-        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv").getFile(), routeDataHandler)
-                .enableTestMode().call();
+        new CSVImporter(db, loader.getResource("CSV/201601-citibike-tripdata-test.csv")
+                .getFile(), routeDataHandler).enableTestMode().call();
 
         db.executeQuerySQL("select count(*) from route_information").getInt(1);
     }
@@ -724,34 +724,12 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
         }
     }
 
-
-    @Test
-    public void filterWifiTestSuburb__() {
-        List<String> wifiID = new ArrayList<>();
-        wifiLocations = dataFilterer.filterWifi(null, "", null, null, null);
-        for (int i = 0; i < wifiID.size(); i++) {
-            assertEquals(wifiID.get(i), (wifiLocations.get(i).getWifiID()));
-        }
-    }
-
-
     @Test
     public void filterWifiTestType_Free_() {
         wifiLocations = dataFilterer.filterWifi(null, null, "free", null, null);
         int size = wifiLocations.size();
         assertEquals(size, 42);
     }
-
-
-    @Test
-    public void filterWifiTestType__() {
-        List<String> wifiID = new ArrayList<>();
-        wifiLocations = dataFilterer.filterWifi(null, null, "", null, null);
-        for (int i = 0; i < wifiID.size(); i++) {
-            assertEquals(wifiID.get(i), (wifiLocations.get(i).getWifiID()));
-        }
-    }
-
 
     @Test
     public void filterWifiTestProvider_nycha_() {
@@ -763,17 +741,6 @@ public class DataFilterer_Routes_Wifi_Test implements AddRouteCallback {
             assertEquals(wifiID.get(i), (wifiLocations.get(i).getWifiID()));
         }
     }
-
-
-    @Test
-    public void filterWifiTestProvider_foo_() {
-        List<String> wifiID = new ArrayList<>();
-        wifiLocations = dataFilterer.filterWifi(null, null, null, "foo", null);
-        for (int i = 0; i < wifiID.size(); i++) {
-            assertEquals(wifiID.get(i), (wifiLocations.get(i).getWifiID()));
-        }
-    }
-
 
     @Test
     public void filterWifiTestProvider_l_() {

@@ -5,7 +5,7 @@ import main.Main;
 import org.junit.*;
 
 import java.nio.file.Files;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,24 +45,21 @@ public class CSVImporterWifiTest {
     public void processCSVIncorrectFormat() throws Exception {
         new CSVImporter(db, getClass().getResource("/CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
                 .enableTestMode().call();
-        ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
-        assertEquals(0, rs.getInt(1));
+        assertEquals(0, getCurrentWifiCount());
     }
 
     @Test
     public void processCSVInvalidFile() throws Exception {
         new CSVImporter(db, "NotARealFile.csv", handler)
                 .enableTestMode().call();
-        ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
-        assertEquals(0, rs.getInt(1));
+        assertEquals(0, getCurrentWifiCount());
     }
 
     @Test
     public void processCSVValid() throws Exception {
         new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
                 .enableTestMode().call();
-        ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
-        assertEquals(50, rs.getInt(1));
+        assertEquals(50, getCurrentWifiCount());
     }
 
     @Test
@@ -71,25 +68,29 @@ public class CSVImporterWifiTest {
                 .enableTestMode().call();
         new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017-test.csv").getFile(), handler)
                 .enableTestMode().call();
-        ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location");
-        assertEquals(50, rs.getInt(1));
+        assertEquals(50, getCurrentWifiCount());
     }
 
     @Ignore
     @Test
     public void testImportSpeed() throws Exception {
-        CSVImporter task = new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017.csv").getFile(), handler)
-                .enableTestMode();
+        int REQUIRED_RECORDS_IMPORTED_PER_SECOND = 40;
+
+        CSVImporter task = new CSVImporter(db, getClass().getResource("/CSV/NYC_Free_Public_WiFi_03292017.csv").getFile(), handler).enableTestMode();
         long startTime = System.currentTimeMillis();
         task.call();
 
         long endTime = System.currentTimeMillis();
-        long timeTaken = endTime - startTime;
-        long average = 2566 / timeTaken;
-        long expectedAverage = 10000 / 500;
-        System.out.println(timeTaken);
-        System.out.println(average);
-        System.out.println(expectedAverage);
-        assertTrue(average > expectedAverage);
+        long timeTakenInMillis = endTime - startTime;
+        double timeTakenInSeconds = timeTakenInMillis / 1000.0;
+
+        int recordsImported = getCurrentWifiCount();
+
+        double recordsImportedPerSecond = recordsImported / timeTakenInSeconds;
+        assertTrue(recordsImportedPerSecond > REQUIRED_RECORDS_IMPORTED_PER_SECOND);
+    }
+
+    private int getCurrentWifiCount() throws SQLException {
+        return db.executeQuerySQL("SELECT COUNT(*) FROM wifi_location").getInt(1);
     }
 }

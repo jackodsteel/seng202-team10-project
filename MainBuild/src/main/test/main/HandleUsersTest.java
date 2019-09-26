@@ -68,14 +68,14 @@ public class HandleUsersTest {
      */
     @Test
     public void logIn() {
-        RouteDataHandler rdh = new RouteDataHandler(db);
-        WifiDataHandler wdh = new WifiDataHandler(db);
-        RetailerDataHandler rDh = new RetailerDataHandler(db);
-        FavouriteRouteData frd = new FavouriteRouteData(db);
-        FavouriteWifiData fwd = new FavouriteWifiData(db);
-        FavouriteRetailData fRd = new FavouriteRetailData(db);
-        DatabaseUser d = new DatabaseUser(db);
-        TakenRoutes t = new TakenRoutes(db);
+        new RouteDataHandler(db);
+        new WifiDataHandler(db);
+        new RetailerDataHandler(db);
+        new FavouriteRouteData(db);
+        new FavouriteWifiData(db);
+        new FavouriteRetailData(db);
+        new DatabaseUser(db);
+        new TakenRoutes(db);
 
         String testName = "Another Tester";
         hu.logIn(testName); // Logging into a new user called "Another Tester".
@@ -85,7 +85,7 @@ public class HandleUsersTest {
 
     @Test
     public void getUserDetailsBirthDetails() {
-        DatabaseUser d = new DatabaseUser(db);
+        new DatabaseUser(db);
         Cyclist testCyclist = new Cyclist();
         testCyclist.setBirthday(0, 0, 0);
         testCyclist.setGender(0);
@@ -96,7 +96,7 @@ public class HandleUsersTest {
 
     @Test
     public void getUserDetailsGender() {
-        DatabaseUser d = new DatabaseUser(db);
+        new DatabaseUser(db);
         Cyclist testCyclist = new Cyclist();
         testCyclist.setBirthday(0, 0, 0);
         testCyclist.setGender(0);
@@ -111,7 +111,6 @@ public class HandleUsersTest {
      */
     @Test
     public void getUserTakenRoutes() {
-
         RouteDataHandler rdh = new RouteDataHandler(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
@@ -139,7 +138,6 @@ public class HandleUsersTest {
      */
     @Test
     public void getUserRouteFavourites() {
-
         RouteDataHandler rdh = new RouteDataHandler(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
@@ -194,7 +192,6 @@ public class HandleUsersTest {
      */
     @Test
     public void getUserRetailFavourites() {
-
         // Init RetailerDataHandler and add an entry.
         RetailerDataHandler rdh = new RetailerDataHandler(db);
         RetailLocation testRetail = new RetailLocation("Test Shop", "1 Test Street", "NY",

@@ -1,7 +1,6 @@
 package dataHandler;
 
 import org.junit.*;
-import org.junit.rules.ExpectedException;
 
 import java.nio.file.Files;
 import java.sql.ResultSet;
@@ -15,9 +14,6 @@ import static org.mockito.Mockito.verify;
  * Created by jes143 on 25/09/17.
  */
 public class WifiDataHandlerTest {
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     private static SQLiteDB db;
     private static WifiDataHandler wifiDataHandler;

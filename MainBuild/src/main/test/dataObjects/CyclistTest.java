@@ -52,13 +52,12 @@ public class CyclistTest {
 
     @Test
     public void addFavouriteRoute() throws Exception {
-        RouteDataHandler rdh = new RouteDataHandler(db);
-        FavouriteRouteData frd = new FavouriteRouteData(db);
+        new RouteDataHandler(db);
+        new FavouriteRouteData(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",
                 "Test2 Street", "10000", 1, "Subscriber", 0, "20");
-        //hu.currentCyclist = testCyclist;
         testCyclist.addFavouriteRoute(testRoute, testCyclist.getName(), 1, db, hu);
         ResultSet rs;
 
@@ -70,8 +69,8 @@ public class CyclistTest {
 
     @Test
     public void addTakenRoute() throws Exception {
-        RouteDataHandler rdh = new RouteDataHandler(db);
-        TakenRoutes t = new TakenRoutes(db);
+        new RouteDataHandler(db);
+        new TakenRoutes(db);
         Route testRoute = new Route(10, "00:00:00", "00:00:00", "01", "01", "2016",
                 "01", "01", "2016", 0.0, 0.0,
                 0.0, 0.0, 1, 2, "Test Street",
@@ -131,7 +130,7 @@ public class CyclistTest {
 
     @Test
     public void addFavouriteRetail() throws Exception {
-        FavouriteRetailData frd = new FavouriteRetailData(db);
+        new FavouriteRetailData(db);
         RetailLocation testRetail = new RetailLocation("Test Shop", "1 Test Street", "NY",
                 "Casual Eating", "F-Pizza", "NY", 10000, 0.0, 0.0, null);
         testCyclist.addFavouriteRetail(testRetail, db);
@@ -144,7 +143,7 @@ public class CyclistTest {
 
     @Test
     public void addFavouriteWifi() throws Exception {
-        FavouriteWifiData fwd = new FavouriteWifiData(db);
+        new FavouriteWifiData(db);
         WifiLocation testWifi = new WifiLocation("1", 0.0, 0.0, "1 Test Street", "Guest",
                 "Free", "BPL", "free", "NY", "Manhattan",
                 10000, null);

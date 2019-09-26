@@ -49,8 +49,8 @@ public class DataFilterer_Retailers_Test {
         databaseUser.addUser("Tester", 1, 1, 2017, 1);
 
         RetailerDataHandlerFake handler = new RetailerDataHandlerFake(db);
-        new CSVImporter(db, DataFilterer_Retailers_Test.class.getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv").getFile(), handler)
-                .enableTestMode().call();
+        new CSVImporter(db, DataFilterer_Retailers_Test.class.getClassLoader().getResource("CSV/Lower_Manhattan_Retailers-test.csv")
+                .getFile(), handler).enableTestMode().call();
 }
 
     @Test
@@ -171,33 +171,6 @@ public class DataFilterer_Retailers_Test {
         int size = retailLocations.size();
         assertEquals(24, size);
     }
-
-
-    @Test
-    public void filterRetailersTestZip_99999999_() {
-        DataFilterer dataFilterer = new DataFilterer(db);
-        List<RetailLocation> retailLocations;
-        List<String> retailName = new ArrayList<>();
-        retailLocations = dataFilterer.filterRetailers(null, null, null, 99999999, null);
-        int size = retailName.size();
-        for (int i = 0; i < size; i++){
-            assertEquals(retailName.get(i), retailLocations.get(i).getName());
-        }
-    }
-
-
-    @Test
-    public void filterRetailersTestZip_0_() {
-        DataFilterer dataFilterer = new DataFilterer(db);
-        List<RetailLocation> retailLocations;
-        List<String> retailName = new ArrayList<>();
-        retailLocations = dataFilterer.filterRetailers(null, null, null, 0, null);
-        int size = retailName.size();
-        for (int i = 0; i < size; i++){
-            assertEquals(retailName.get(i), retailLocations.get(i).getName());
-        }
-    }
-
 
     @Test
     public void filterRetailersTestList_foo() {

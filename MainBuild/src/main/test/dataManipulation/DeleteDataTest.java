@@ -2,6 +2,7 @@ package dataManipulation;
 
 import dataHandler.*;
 import dataObjects.Cyclist;
+import dataObjects.Route;
 import main.HandleUsers;
 import main.Main;
 import org.junit.AfterClass;
@@ -87,8 +88,7 @@ public class DeleteDataTest {
     @Test
     public void checkRouteDeletionStatus_in_other_user_list() {
         deleteData = new DeleteData(db, "Tester1");
-        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("18:02:29", "03", "01",
-                "2016", "18702");
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus(new Route("18702", "18:02:29", "03", "01", "2016"));
         assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_LIST, deletionStatus);
     }
 
@@ -96,8 +96,7 @@ public class DeleteDataTest {
     @Test
     public void checkRouteDeletionStatus_in_other_user_fav() {
         deleteData = new DeleteData(db, "Tester2");
-        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("00:00:41", "01", "01",
-                "2016", "22285");
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus(new Route("22285", "00:00:41", "01", "01", "2016"));
         assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_FAVOURITES, deletionStatus);
     }
 
@@ -105,8 +104,7 @@ public class DeleteDataTest {
     @Test
     public void checkRouteDeletionStatus_in_other_user_completed() {
         deleteData = new DeleteData(db, "Tester2");
-        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("00:26:55", "01", "01",
-                "2016", "16498");
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus(new Route("16498", "00:26:55", "01", "01", "2016"));
         assertEquals(DeleteData.DeletionStatus.IN_ANOTHER_USERS_COMPLETED_ROUTES, deletionStatus);
     }
 
@@ -114,8 +112,7 @@ public class DeleteDataTest {
     @Test
     public void checkRouteDeletionStatus_clear_to_delete() {
         deleteData = new DeleteData(db, "Tester2");
-        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus("18:15:55", "03", "01",
-                "2016", "21416");
+        DeleteData.DeletionStatus deletionStatus = deleteData.checkRouteDeletionStatus(new Route("21416", "18:15:55", "03", "01", "2016"));
         assertEquals(DeleteData.DeletionStatus.CAN_BE_DELETED, deletionStatus);
     }
 
@@ -123,8 +120,7 @@ public class DeleteDataTest {
     @Test
     public void deleteRoute() throws Exception {
         deleteData = new DeleteData(db, "Tester2");
-        deleteData.deleteRoute("18:15:55", "03", "01",
-                "2016", "21416");
+        deleteData.deleteRoute(new Route("21416", "18:15:55", "03", "01", "2016"));
         int resultRoute = db.executeQuerySQL("SELECT count(*) FROM route_information WHERE start_time = '18:15:55'" +
                 "AND start_day = '03' AND start_month = '01' AND start_year = '2016' AND " +
                 "bikeid = '21416';").getInt(1);

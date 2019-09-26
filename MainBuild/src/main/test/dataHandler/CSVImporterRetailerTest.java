@@ -103,20 +103,23 @@ public class CSVImporterRetailerTest {
     @Ignore
     @Test
     public void testImportSpeed() throws Exception {
+        int REQUIRED_RECORDS_IMPORTED_PER_SECOND = 40;
+
         CSVImporter task = new CSVImporter(db, getClass().getResource("/CSV/Lower_Manhattan_Retailers.csv").getFile(), handler)
                 .enableTestMode();
         long startTime = System.currentTimeMillis();
         task.call();
 
         long endTime = System.currentTimeMillis();
-        long timeTaken = endTime - startTime;
-        long average = 772 / timeTaken;
-        long expectedAverage = 10000 / 500;
-        System.out.println(timeTaken);
-        System.out.println(average);
-        System.out.println(expectedAverage);
-        ResultSet rs = db.executeQuerySQL("SELECT COUNT(*) FROM retailer");
-        System.out.println(rs.getInt(1));
-        assertTrue(average > expectedAverage);
+        long timeTakenInMillis = endTime - startTime;
+        double timeTakenInSeconds = timeTakenInMillis / 1000.0;
+
+        int recordsImported = db.executeQuerySQL("SELECT COUNT(*) FROM retailer").getInt(1);
+
+        double recordsImportedPerSecond = recordsImported / timeTakenInSeconds;
+        System.out.println(timeTakenInMillis);
+        System.out.println(timeTakenInSeconds);
+        System.out.println(recordsImportedPerSecond);
+        assertTrue(recordsImportedPerSecond > REQUIRED_RECORDS_IMPORTED_PER_SECOND);
     }
 }
