@@ -192,7 +192,7 @@ public class HelperFunctions {
      */
     public static double calculateShortestRoute(Cyclist cyclist) {
         List<Route> takenList = new ArrayList<>(cyclist.getTakenRoutes());
-        double shortestDistance = 9999999; // No routes will be of a size greater than this.
+        double shortestDistance = Double.MAX_VALUE;
         for (int i = 0; i < cyclist.getTakenRoutes().size(); i++) {
             if (takenList.get(i).getDistance() < shortestDistance) {
                 shortestDistance = takenList.get(i).getDistance();

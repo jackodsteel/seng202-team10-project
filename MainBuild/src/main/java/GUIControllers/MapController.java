@@ -10,6 +10,7 @@ import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.shapes.Polyline;
 import com.lynden.gmapsfx.shapes.PolylineOptions;
 import dataManipulation.FindNearbyLocations;
+import dataObjects.Location;
 import dataObjects.RetailLocation;
 import dataObjects.Route;
 import dataObjects.WifiLocation;
@@ -24,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.util.Duration;
 import main.HelperFunctions;
 import main.Main;
-import netscape.javascript.JSObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -124,7 +124,6 @@ public class MapController extends Controller implements Initializable, MapCompo
     }
 
 
-
     /**
      * Called when enter key is pressed from inside the address textfields or the search button is pressed. Requests a
      * route and loads it on the map.
@@ -142,7 +141,7 @@ public class MapController extends Controller implements Initializable, MapCompo
         currentEnd = endAddress.get();
 
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
-        delay.setOnFinished( e -> {
+        delay.setOnFinished(e -> {
             if (!hasResulted) {
                 makeDirectionsError();
             }
@@ -150,6 +149,7 @@ public class MapController extends Controller implements Initializable, MapCompo
         delay.play();
 
     }
+
     private void makeDirectionsError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -182,31 +182,15 @@ public class MapController extends Controller implements Initializable, MapCompo
     }
 
     private void renderWifiMarker(WifiLocation location) {
-        MarkerOptions options = new MarkerOptions();
-        LatLong latLong = new LatLong(location.getLatitude(), location.getLongitude());
-        options.position(latLong)
-                .title(location.getName())
-                .visible(true)
-                .icon("https://i.imgur.com/4WWeG4S.png");
-        Marker marker = new Marker(options);
-        wifiMarkers.add(marker);
-        map.addMarker(marker);
-
-        map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> {
-            nearbyRetailerButton.setDisable(false);
-            nearbyWifiButton.setDisable(false);
-            System.out.println("Clicked");
-            InfoWindowOptions infoWindowOptions = new InfoWindowOptions()
-                    .content(
-                            "SSID: " + location.getSSID() + "<br>" +
-                                    "Provider: " + location.getProvider() + "<br>" +
-                                    "Address: " + location.getAddress() + "<br>" +
-                                    "Extra Info: " + location.getRemarks());
-            currentInfoWindow.close();
-            currentInfoWindow = new InfoWindow(infoWindowOptions);
-            currentInfoWindow.open(map, marker);
-            currentPoint = latLong;
-        });
+        String infoWindowHtmlContent =
+                new StringJoiner("<br>")
+                        .add("SSID: " + location.getSSID())
+                        .add("Provider: " + location.getProvider())
+                        .add("Address: " + location.getAddress())
+                        .add("Extra Info: " + location.getRemarks())
+                        .toString();
+        String iconUrl = "https://i.imgur.com/4WWeG4S.png"; // TODO: fix this broken URL
+        renderMarker(location, wifiMarkers, iconUrl, infoWindowHtmlContent);
     }
 
     /**
@@ -214,40 +198,38 @@ public class MapController extends Controller implements Initializable, MapCompo
      * Initially removes all current wifiMarkers, then renders each one from the HashSet
      */
     private void renderWifiMarkers() {
-        for (Marker marker : wifiMarkers) {
-            map.removeMarker(marker);
-        }
+        wifiMarkers.forEach(marker -> map.removeMarker(marker));
         wifiMarkers.clear();
-
-        for (WifiLocation location : wifiLocations) {
-            renderWifiMarker(location);
-        }
+        wifiLocations.forEach(this::renderWifiMarker);
     }
 
     private void renderRetailerMarker(RetailLocation location) {
-        MarkerOptions options = new MarkerOptions();
-        LatLong latLong = new LatLong(location.getLatitude(), location.getLongitude());
-        options.position(latLong)
-                .title(location.getName())
-                .visible(true)
-                .icon("https://i.imgur.com/nPCouZN.png");
-        Marker marker = new Marker(options);
-        retailerMarkers.add(marker);
-        map.addMarker(marker);
-        System.out.println("Added");
-        System.out.println(location.getLatitude());
-        System.out.println(location.getLongitude());
+        String infoWindowHtmlContent =
+                new StringJoiner("<br>")
+                        .add("Name: " + location.getName())
+                        .add("Address: " + location.getAddress())
+                        .add("Category: " + location.getMainType())
+                        .add("Extra Info: " + location.getSecondaryType())
+                        .toString();
+        String iconUrl = "https://i.imgur.com/nPCouZN.png"; // TODO: fix this broken URL
+        renderMarker(location, retailerMarkers, iconUrl, infoWindowHtmlContent);
+    }
 
-        map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> {
+    private void renderMarker(LatLong latLong, String name, List<Marker> markers, String iconUrl, String infoWindowHtmlContent) {
+        Marker marker = new Marker(
+                new MarkerOptions()
+                        .position(latLong)
+                        .title(name)
+                        .visible(true)
+                        .icon(iconUrl)
+        );
+        markers.add(marker);
+        map.addMarker(marker);
+        map.addUIEventHandler(marker, UIEventType.click, jsObject -> {
             nearbyRetailerButton.setDisable(false);
             nearbyWifiButton.setDisable(false);
-            System.out.println("Clicked");
             InfoWindowOptions infoWindowOptions = new InfoWindowOptions()
-                    .content(
-                            "Name: " + location.getName() + "<br>" +
-                                    "Address: " + location.getAddress() + "<br>" +
-                                    "Category: " + location.getMainType() + "<br>" +
-                                    "Extra Info: " + location.getSecondaryType());
+                    .content(infoWindowHtmlContent);
             currentInfoWindow.close();
             currentInfoWindow = new InfoWindow(infoWindowOptions);
             currentInfoWindow.open(map, marker);
@@ -255,19 +237,19 @@ public class MapController extends Controller implements Initializable, MapCompo
         });
     }
 
+    private void renderMarker(Location location, List<Marker> markers, String iconUrl, String infoWindowHtmlContent) {
+        LatLong latLong = new LatLong(location.getLatitude(), location.getLongitude());
+        renderMarker(latLong, location.getName(), markers, iconUrl, infoWindowHtmlContent);
+    }
+
     /**
      * Renders the CurrentStates retailerMarkers HashSet on the map.
      * Initially removes all current retailerMarkers, then renders each one from the HashSet
      */
     private void renderRetailerMarkers() {
-        for (Marker marker : retailerMarkers) {
-            map.removeMarker(marker);
-        }
+        retailerMarkers.forEach(marker -> map.removeMarker(marker));
         retailerMarkers.clear();
-
-        for (RetailLocation location : retailLocations) {
-            renderRetailerMarker(location);
-        }
+        retailLocations.forEach(this::renderRetailerMarker);
     }
 
     /**
@@ -303,65 +285,32 @@ public class MapController extends Controller implements Initializable, MapCompo
         } else {
 
             for (Route route : routes) {
-                MarkerOptions options = new MarkerOptions();
-                System.out.println(route.getStartLatitude());
-                System.out.println(route.getStartLongitude());
-                LatLong latLong = new LatLong(route.getStartLatitude(), route.getStartLongitude());
-                options.position(latLong)
-                        .title(route.getName())
-                        .visible(true)
-                        .icon("https://i.imgur.com/pxqx0G9.png");
-                Marker marker = new Marker(options);
+                LatLong startLatLong = new LatLong(route.getStartLatitude(), route.getStartLongitude());
+                String startInfoWindowHtmlContent =
+                        new StringJoiner("<br>")
+                                .add("Start Address: " + route.getStartAddress())
+                                .add("Start Date: " + route.getStartDate())
+                                .add("Start Time: " + route.getStartTime())
+                                .add("Duration: " + HelperFunctions.secondsToString(route.getDuration()))
+                                .add("Distance: " + numberFormat.format(route.getDistance()) + "km")
+                                .toString();
+                String startIconUrl = "https://i.imgur.com/pxqx0G9.png"; // TODO: fix this broken URL
+                renderMarker(startLatLong, route.getName(), tripMarkers, startIconUrl, startInfoWindowHtmlContent);
 
-                tripMarkers.add(marker);
-                map.addMarker(marker);
-                map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> {
-                    nearbyRetailerButton.setDisable(false);
-                    nearbyWifiButton.setDisable(false);
-                    System.out.println("Clicked");
-                    InfoWindowOptions infoWindowOptions = new InfoWindowOptions()
-                            .content(
-                                    "Start Address: " + route.getStartAddress() + "<br>" +
-                                            "Start Date: " + route.getStartDate() + "<br>" +
-                                            "Start Time: " + route.getStartTime() + "<br>" +
-                                            "Duration: " + HelperFunctions.secondsToString(route.getDuration()) + "<br>" +
-                                            "Distance: " + numberFormat.format(route.getDistance()) + "km");
-                    currentInfoWindow.close();
-                    currentInfoWindow = new InfoWindow(infoWindowOptions);
-                    currentInfoWindow.open(map, marker);
-                    currentPoint = latLong;
-                });
 
-                MarkerOptions options2 = new MarkerOptions();
-                LatLong latLong2 = new LatLong(route.getEndLatitude(), route.getEndLongitude());
-                options2.position(latLong2)
-                        .title(route.getName())
-                        .visible(true)
-                        .icon("https://i.imgur.com/Ha4m8R6.png");
-                Marker marker2 = new Marker(options2);
+                LatLong endLatLong = new LatLong(route.getEndLatitude(), route.getEndLongitude());
+                String endInfoWindowHtmlContent =
+                        new StringJoiner("<br>")
+                                .add("End Address: " + route.getEndAddress())
+                                .add("End Date: " + route.getStopDate())
+                                .add("End Time: " + route.getStopTime())
+                                .add("Duration: " + HelperFunctions.secondsToString(route.getDuration()))
+                                .add("Distance: " + numberFormat.format(route.getDistance()) + "km")
+                                .toString();
+                String endIconUrl = "https://i.imgur.com/Ha4m8R6.png"; // TODO: fix this broken URL
+                renderMarker(startLatLong, route.getName(), tripMarkers, endIconUrl, endInfoWindowHtmlContent);
 
-                tripMarkers.add(marker2);
-                map.addMarker(marker2);
-
-                map.addUIEventHandler(marker2, UIEventType.click, (JSObject obj) -> {
-                    nearbyRetailerButton.setDisable(false);
-                    nearbyWifiButton.setDisable(false);
-                    System.out.println("Clicked");
-                    InfoWindowOptions infoWindowOptions = new InfoWindowOptions()
-                            .content(
-                                    "End Address: " + route.getEndAddress() + "<br>" +
-                                            "End Date: " + route.getStopDate() + "<br>" +
-                                            "End Time: " + route.getStopTime() + "<br>" +
-                                            "Duration: " + HelperFunctions.secondsToString(route.getDuration()) + "<br>" +
-                                            "Distance: " + numberFormat.format(route.getDistance()) + "km");
-                    currentInfoWindow.close();
-                    currentInfoWindow = new InfoWindow(infoWindowOptions);
-                    currentInfoWindow.open(map, marker2);
-                    currentPoint = latLong2;
-                });
-
-                LatLong[] ary = new LatLong[]{latLong, latLong2};
-                MVCArray mvc = new MVCArray(ary);
+                MVCArray mvc = new MVCArray(new LatLong[]{startLatLong, endLatLong});
                 PolylineOptions polylineOptions = new PolylineOptions().path(mvc).strokeColor("red").strokeWeight(2);
                 Polyline polyline = new Polyline(polylineOptions);
 
@@ -445,22 +394,21 @@ public class MapController extends Controller implements Initializable, MapCompo
     @FXML
     public void showNearbyWifi() {
         //Called by GUI when show nearby wifi button is pressed.
-        System.out.println("called");
         if (currentPoint == null) {
             makeErrorDialogueBox("Error", "Please select a point");
-        } else {
-            boolean newPoint = false;
-            List<WifiLocation> locations = nearbyFinder.findNearbyWifi(currentPoint.getLatitude(), currentPoint.getLongitude());
-            for (WifiLocation location : locations) {
-                if (wifiLocations.add(location)) {
-                    renderWifiMarker(location);
-                    newPoint = true;
-                    break;
-                }
+            return;
+        }
+        boolean newPoint = false;
+        List<WifiLocation> locations = nearbyFinder.findNearbyWifi(currentPoint.getLatitude(), currentPoint.getLongitude());
+        for (WifiLocation location : locations) {
+            if (wifiLocations.add(location)) {
+                renderWifiMarker(location);
+                newPoint = true;
+                break;
             }
-            if (!newPoint) {
-                makeErrorDialogueBox("Error", "There aren't any more points nearby");
-            }
+        }
+        if (!newPoint) {
+            makeErrorDialogueBox("Error", "There aren't any more points nearby");
         }
     }
 
@@ -470,22 +418,20 @@ public class MapController extends Controller implements Initializable, MapCompo
      */
     @FXML
     public void showNearbyRetailers() {
-        //Called by GUI when show nearby retails button is pressed.
         if (currentPoint == null) {
             makeErrorDialogueBox("Error", "Please select a point.");
-        } else {
-            boolean newPoint = false;
-            List<RetailLocation> locations = nearbyFinder.findNearbyRetail(currentPoint.getLatitude(), currentPoint.getLongitude());
-            for (RetailLocation location : locations) {
-                if (retailLocations.add(location)) {
-                    renderRetailerMarker(location);
-                    newPoint = true;
-                    break;
-                }
+        }
+        boolean newPoint = false;
+        List<RetailLocation> locations = nearbyFinder.findNearbyRetail(currentPoint.getLatitude(), currentPoint.getLongitude());
+        for (RetailLocation location : locations) {
+            if (retailLocations.add(location)) {
+                renderRetailerMarker(location);
+                newPoint = true;
+                break;
             }
-            if (!newPoint) {
-                makeErrorDialogueBox("Error", "There aren't any more points nearby.");
-            }
+        }
+        if (!newPoint) {
+            makeErrorDialogueBox("Error", "There aren't any more points nearby.");
         }
     }
 
